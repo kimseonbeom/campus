@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 public class AdminLTEController {
 
-	@GetMapping("/starter")
+	@GetMapping("/student")
 	public void starter() {}
 	
+	@GetMapping("/adminmenu")
+		public void adminmenu() {}
+	@GetMapping("/empmenu")
+		public void empmenu() {}
 }

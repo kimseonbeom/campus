@@ -7,5 +7,6 @@ import com.camp_us.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService service;
+	
 
 }

@@ -115,6 +115,58 @@
 .nav-link:hover .mes-img-icon {
   background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/mes_hv.png');
 }
+.key-img-icon {
+  display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/key.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s;
+}
+
+.nav-link:hover .key-img-icon {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/key_hv.png');
+}
+.log-img-icon {
+  display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/log.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s;
+}
+
+.nav-link:hover .log-img-icon {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/log_hv.png');
+}
+.poli-img-icon {
+  display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/poli.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s;
+}
+
+.nav-link:hover .poli-img-icon {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/poli_hv.png');
+}
+.psad-img-icon {
+  display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/psad.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s;
+}
+
+.nav-link:hover .psad-img-icon {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/psad_hv.png');
+}
 .nav-link:hover p {
   color: #2ec4b6;
   font-weight: bold;
@@ -138,6 +190,17 @@
   max-height: none !important;
   height: 60px; /* 원하는 크기 */
 }
+  .custom-select.my-border {
+    border: 2px solid #2ec4b6;
+  }
+
+  .custom-select.my-border:focus {
+    border-color: #2ec4b6;
+  }
+  .sidebar-mini.sidebar-collapse .main-sidebar .nav-link p {
+  display: none !important;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+

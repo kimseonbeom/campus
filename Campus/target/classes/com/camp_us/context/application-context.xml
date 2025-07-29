@@ -3,6 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- member.picture -->
+	<bean id="picturePath" 
+		  class="java.lang.String"
+		  c:value="${savePath.member.picture}" 		
+	/>		
 	<bean id="memberDAO"
 	      class="com.camp_us.dao.MemberDAOImpl"
 	      c:session-ref="sqlSession"
@@ -15,6 +20,10 @@
 		  class="com.camp_us.dao.LecClassDAOImpl"
 		  c:session-ref="sqlSession"
 		  />
+		  <bean id="unsubmitHomeworkDAO"
+		  class="com.camp_us.dao.UnsubmitHomeworkDAOImpl"
+		  c:session-ref="sqlSession"
+	      />
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -26,6 +35,10 @@
 	<bean id="lecClassService"
 		  class="com.camp_us.service.LecClassServiceImpl"
 		  c:lecClassDAO-ref="lecClassDAO"
+		  />
+		  <bean id="unsubmitHomeworkService"
+		  class="com.camp_us.service.UnsubmitHomeworkServiceImpl"
+		  c:unsubmithomeworkDAO-ref="unsubmitHomeworkDAO"
 		  />
 </beans>
 

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AdminLTE 3 | Dashboard</title>
-
+<title><decorator:title default="Kim's System"/></title>
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jsgrid/jsgrid-theme.min.css">
 <!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap">
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
@@ -35,8 +36,13 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
-<link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
+
 <style>
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+i{}
 .custom-img-icon {
   display: inline-block;
   width: 18px;   /* 이미지 크기 조절 */
@@ -200,7 +206,16 @@
   .sidebar-mini.sidebar-collapse .main-sidebar .nav-link p {
   display: none !important;
 }
+.custom-icon-message {
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/mail.png'); /* 이미지 경로 */
+  background-size: 100% 100%;
+  vertical-align: middle;
+}
 </style>
+<decorator:head />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 

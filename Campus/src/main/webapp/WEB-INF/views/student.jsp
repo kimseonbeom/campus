@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/module/header.jsp" %> 
+    pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="wrapper">
   <!-- Preloader -->
@@ -9,7 +8,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="height:70px;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -21,31 +20,12 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
-
+  
+       
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
+          <span class="custom-icon-message"></span>
           <span class="badge badge-danger navbar-badge">3D</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -101,41 +81,18 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notificationsd</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+      <div class="ml-2"></div>
+      <button type="button" class="btn btn-block btn-info btn-flat mt-1" style="background-color:#79aaa4;border: none; width:100px;height:40px; border-radius:5px;">로그아웃</button>
+      <li>
+      <div class="row ml-4 mr-4">
+      mimi
+      </div>
+      <div class="row ml-4 mr-4">mimi</div>
+      </li>
+      <li>
+      <div class="image" style="cursor:pointer;" onclick="OpenWindow('mypage','글등록',800,700);">
+          <img src="<%=request.getContextPath() %>/member/getPicture?id=mimi" class="img-circle img-md" alt="User Image" style="width:45px; height:45px; object-fit:cover;">
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
       </li>
     </ul>
   </nav>
@@ -169,9 +126,9 @@
 </li>
    
           <li class="nav-item" >            
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" onclick='Iframe("<%=request.getContextPath()%>/lecture/main"); return false;'>
               <i class="nav-icon fas gang-img-icon"></i>
-              <p class="fas">&nbsp;
+              <p class="fas" >&nbsp;
                 강의실
                 <i class="right fas fa-angle-left"></i>
               </p>
@@ -183,6 +140,7 @@
             <div class="col-sm-8">
             <div class="form-group">
                         <select class="custom-select my-border" onchange="onLectureChange(this)" >
+                          <option>전공을 선택하세요.</option>
                           <option value="1">인문사회학</option>
                           <option value="2">혁신기초</option>
                           <option value="3">자연과학</option>
@@ -193,42 +151,42 @@
                       </div>
                       </div>
               <li class="nav-item">
-                <a href="#" class="nav-link" onclick="loadInIframe('<%=request.getContextPath()%>/adminmenu')">
+                <a href="#" class="nav-link" onclick="goSyllabus(); return false;">
                   <i class="far fas nav-icon" ></i>
                   <p>&nbsp;&nbsp;&nbsp;강의계획서</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+              <li class="nav-item menu" data-url="">
+                <a href="#" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;공지사항</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;실시간 강의</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;온라인 강의</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;출결</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;자료실</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;과제제출</p>
@@ -245,13 +203,13 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="./index.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="./index2.html" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;로드맵</p>
@@ -260,7 +218,7 @@
             </ul>
           </li>
           
-          <li class="nav-item">
+          <li class="nav-item" data-url="">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas post-img-icon"></i>
               <p class="fas">&nbsp;
@@ -268,7 +226,7 @@
               </p>
             </a>
           </li>
-		    <li class="nav-item">
+		    <li class="nav-item" data-url="">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas cal-img-icon"></i>
               <p class="fas">&nbsp;
@@ -276,7 +234,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">            
+          <li class="nav-item" data-url="">            
             <a href="#" class="nav-link">
               <i class="nav-icon fas mes-img-icon"></i>
               <p class="fas">&nbsp;
@@ -284,14 +242,14 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" data-url="">
               <li class="nav-item">
                 <a href="./index.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;공지사항</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-url="">
                 <a href="./index2.html" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;질의응답</p>
@@ -320,26 +278,42 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-<%@ include file="/WEB-INF/views/module/footer.jsp" %> 
 <script>
-  function loadInIframe(url) {
+  function Iframe(url) {
     document.getElementById('mainFrame').src = url;
   }
 </script>
 <script>
-function onLectureChange(select) {
-    const lecId = select.value;
+  let selectedLecId = null;
 
-    fetch('<c:url value="/lecture/changeMajor" />?lec_id=' + encodeURIComponent(lecId))
-        .then(response => response.json())
-        .then(data => {
-        	alert("선택된 강의명: " + data.lec_name);
-            
-            // 필요하다면 아래에 강의계획서 내용을 채우는 로직도 가능
-            // document.getElementById("lecTitle").textContent = data.lec_name;
-        });
-}
+  function onLectureChange(select) {
+    selectedLecId = select.value;
+
+    if (!selectedLecId) return;
+
+    // 선택된 전공 정보 불러오기 (필요시)
+    fetch('<%=request.getContextPath()%>/lecture/changeMajor?lec_id=' + encodeURIComponent(selectedLecId))
+      .then(response => response.json())
+      .then(data => {
+        console.log("선택된 강의 정보:", data);
+        // 이 시점에서는 iframe 이동 X → 버튼 누를 때 이동
+      })
+      .catch(err => {
+        console.error("강의 정보 로딩 실패:", err);
+      });
+  }
+
+  function goSyllabus() {
+    if (!selectedLecId) {
+      alert("전공을 먼저 선택하세요.");
+      return;
+    }
+
+    const syllabusUrl = '<%=request.getContextPath()%>/lecture/syllabus?lec_id=' + encodeURIComponent(selectedLecId);
+    document.getElementById("mainFrame").src = syllabusUrl;
+  }
 </script>
+<!-- commons.js -->
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
@@ -375,6 +349,22 @@ function onLectureChange(select) {
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/pages/dashboard.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script>
+$(".person-info").css({
+	"display":"block",
+	"width":"30px",
+	"height":"30px",
+	"border-radius":"10px"
+});
+document.querySelectorAll('.nav-item').forEach(menu => {
+	  menu.addEventListener('click', function (e) {
+	    e.preventDefault(); // <a> 링크 기본 동작 무조건 방지
+	    const url = this.getAttribute('data-url');
+	    if (url) parent.mainFrame.location.href = url;
+	  });
+	});
 
+</script>
 </body>
 </html>

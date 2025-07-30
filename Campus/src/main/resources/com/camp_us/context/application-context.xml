@@ -24,6 +24,10 @@
 		  class="com.camp_us.dao.UnsubmitHomeworkDAOImpl"
 		  c:session-ref="sqlSession"
 	      />
+	<bean id="projectDAO"
+		  class="com.camp_us.dao.ProjectDAOImpl"
+		  c:session-ref="sqlSession"
+		  />
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -36,9 +40,13 @@
 		  class="com.camp_us.service.LecClassServiceImpl"
 		  c:lecClassDAO-ref="lecClassDAO"
 		  />
-		  <bean id="unsubmitHomeworkService"
+	<bean id="unsubmitHomeworkService"
 		  class="com.camp_us.service.UnsubmitHomeworkServiceImpl"
 		  c:unsubmithomeworkDAO-ref="unsubmitHomeworkDAO"
+		  />
+	<bean id="projectService"
+		  class="com.camp_us.service.ProjectServiceImpl"
+		  c:projectDAO-ref="projectDAO"
 		  />
 </beans>
 

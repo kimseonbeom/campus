@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -99,7 +100,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-white-primary elevation-4">
+  <aside class="main-sidebar sidebar-white-primary" style="border:1px solid #dedede;background-color:#f5f5f5;">
     <!-- Brand Logo -->
    <a href="" class="brand-link">
   <img src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/Camp_usLogo.png"
@@ -113,8 +114,8 @@
 
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <nav class="mt-2" >
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
     <li class="nav-item">
@@ -137,7 +138,7 @@
             <div class="row">
             <div class="col-sm-2">
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-9">
             <div class="form-group">
                         <select class="custom-select my-border" onchange="onLectureChange(this)" >
                           <option>전공을 선택하세요.</option>
@@ -168,12 +169,14 @@
                   <p>&nbsp;&nbsp;&nbsp;실시간 강의</p>
                 </a>
               </li>
+              
               <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;온라인 강의</p>
                 </a>
               </li>
+             
               <li class="nav-item" data-url="">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
@@ -203,14 +206,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item" data-url="">
-                <a href="./index.html" class="nav-link">
+              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?stuId=1">
+                <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>
                 </a>
               </li>
               <li class="nav-item" data-url="">
-                <a href="./index2.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;로드맵</p>
                 </a>
@@ -219,7 +222,7 @@
           </li>
           
           <li class="nav-item" data-url="">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas post-img-icon"></i>
               <p class="fas">&nbsp;
                 게시판
@@ -244,13 +247,13 @@
             </a>
             <ul class="nav nav-treeview" data-url="">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;공지사항</p>
                 </a>
               </li>
               <li class="nav-item" data-url="">
-                <a href="./index2.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;질의응답</p>
                 </a>
@@ -264,7 +267,7 @@
   </aside>
 
   <div class="content-wrapper">
- <iframe id="mainFrame" name="ifr" frameborder="0" style="width:100%;height:85vh;"></iframe> 	 
+ <iframe id="mainFrame" name="ifr" frameborder="0" style="width:100%;height:100vh;"></iframe> 	 
     </div>
     <!-- /.content -->
   </div>
@@ -357,14 +360,35 @@ $(".person-info").css({
 	"height":"30px",
 	"border-radius":"10px"
 });
-document.querySelectorAll('.nav-item').forEach(menu => {
-	  menu.addEventListener('click', function (e) {
-	    e.preventDefault(); // <a> 링크 기본 동작 무조건 방지
-	    const url = this.getAttribute('data-url');
-	    if (url) parent.mainFrame.location.href = url;
+
+document.querySelectorAll('.nav-item > a').forEach(link => {
+	  link.addEventListener('click', function (e) {
+	    e.preventDefault();
+	    const url = this.closest('.nav-item').getAttribute('data-url');
+	    if (url) {
+	      location.hash = url;               // 주소창 해시(#) 변경
+	      document.getElementById('mainFrame').src = url;  // iframe src 변경
+	    }
 	  });
 	});
-
+window.addEventListener('DOMContentLoaded', () => {
+	  const hash = location.hash.substring(1); // # 뗀 나머지
+	  if (hash) {
+	    document.getElementById('mainFrame').src = hash;
+	  } else {
+	    // 기본 페이지 지정 (원하는 초기 URL)
+	    document.getElementById('mainFrame').src = '<%=request.getContextPath()%>/lecture/main';
+	  }
+	});
+function goSyllabus() {
+	  if (!selectedLecId) {
+	    alert("전공을 먼저 선택하세요.");
+	    return;
+	  }
+	  const syllabusUrl = '<%=request.getContextPath()%>/lecture/syllabus?lec_id=' + encodeURIComponent(selectedLecId);
+	  location.hash = syllabusUrl;    // 해시 변경
+	  document.getElementById("mainFrame").src = syllabusUrl;
+	}
 </script>
 </body>
 </html>

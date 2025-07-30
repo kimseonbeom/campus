@@ -173,9 +173,15 @@ i{}
 .nav-link:hover .psad-img-icon {
   background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/psad_hv.png');
 }
+*{
+	color:#212121;
+}
 .nav-link:hover p {
   color: #2ec4b6;
   font-weight: bold;
+}
+.nav-link:hover .fa-angle-left {
+  color: #2ec4b6;  /* 원하는 색상으로 변경 */
 }
 .brand-link {
   display: flex;
@@ -214,7 +220,32 @@ i{}
   background-size: 100% 100%;
   vertical-align: middle;
 }
+.main-sidebar {
+  overflow-x: hidden;
+  box-sizing: border-box; /* 혹은 필요에 따라 유지 */
+}
+.far.fa-minical {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/minical.png'); /* 이미지 경로 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 22px;
+  height: 15px;
+    vertical-align: middle;
+  background-position: center center;
+}
+.fas.fa-cpsearch {
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/search.png'); /* 이미지 경로 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+    vertical-align: middle;
+  background-position: center center;
+}
 </style>
+<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <decorator:head />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

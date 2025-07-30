@@ -11,9 +11,10 @@ public class AdminLTEController {
 
 	@GetMapping("/student")
 	public void starter() {}
-	@GetMapping("/mypage")
-	public ModelAndView mypage(ModelAndView mnv) throws Exception {
-		String url="/mypage";
+	
+	@GetMapping("/mail")
+	public ModelAndView mail(ModelAndView mnv) throws Exception {
+		String url="/mail";
 		mnv.setViewName(url);
 		return mnv;
 	}
@@ -21,4 +22,10 @@ public class AdminLTEController {
 		public void adminmenu() {}
 	@GetMapping("/empmenu")
 		public void empmenu() {}
+	@GetMapping("/mypage")
+	public ModelAndView mypage(ModelAndView mnv) throws Exception {
+		String url="/mypage";
+		mnv.setViewName(url);
+		return mnv;
+	}
 }

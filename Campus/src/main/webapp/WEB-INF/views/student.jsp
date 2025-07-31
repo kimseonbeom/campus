@@ -140,14 +140,14 @@
             </div>
             <div class="col-sm-9">
             <div class="form-group">
-                        <select class="custom-select my-border" onchange="onLectureChange(this)" >
-                          <option>전공을 선택하세요.</option>
-                          <option value="1">인문사회학</option>
-                          <option value="2">혁신기초</option>
-                          <option value="3">자연과학</option>
-                          <option value="4">데이터 과학·인공지능</option>
-                          <option value="5">비즈니스 혁신</option>
-                        </select>
+                       <select class="custom-select my-border" onchange="onLectureChange(this)">
+  <option value="">전공을 선택하세요.</option>
+  <c:forEach var="lec" items="${lectureList}">
+    <option value="${lec.lec_id}">${lec.lec_name}</option>
+    <c:out value="${lectureList}" />
+    
+</c:forEach>
+</select>
                       </div>
                       </div>
                       </div>

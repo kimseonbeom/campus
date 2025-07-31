@@ -28,6 +28,10 @@
 		  class="com.camp_us.dao.ProjectDAOImpl"
 		  c:session-ref="sqlSession"
 		  />
+	<bean id="stuLecDAO"
+		  class="com.camp_us.dao.StuLecDAOImpl"
+		  c:session-ref="sqlSession"
+		  />
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -47,6 +51,10 @@
 	<bean id="projectService"
 		  class="com.camp_us.service.ProjectServiceImpl"
 		  c:projectDAO-ref="projectDAO"
+		  />
+	<bean id="stuLecService"
+		  class="com.camp_us.service.StuLecServiceImpl"
+		  c:stuLecDAO-ref="stuLecDAO"
 		  />
 </beans>
 

@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #212121; font-size: 15px; width:1215px;">
+<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:1390px;">
 <div class="d-flex align-items-center" style="width: auto;">
   <span class="ml-3 mr-3">학기</span>
   <select style="width: 110px; font-size: 13px; padding: 2px 4px; border-radius:5px; border: 1px solid #ced4da;">
@@ -49,12 +49,13 @@
 </div>
 </div>
 <div class= "d-flex" style="widrh:100%; height:100%;">
-<div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 20px 50px 27px;">
-              <div class="card-header align-items-center" style="background-color:#2ec4b6;">
-                <h3 class="card-title" style="height:30px;">2025-2학기</h3>
+<div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 20px 50px 27px; border-radius: 0 !important;">
+              <div class="card-header d-flex align-items-center justify-content-between" 
+              style="background-color:#2ec4b6; height:60px; border-radius: 0 !important;">
+                <h3 class="card-title">2025-2학기</h3>
 
-                <div class="card-tools">
-                <span style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>
+                <div class="card-tools align-items-center">
+                <span class="ml-auto"style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>
                 </div>
               </div>
               <div class="card-body" style="width: 30%;">
@@ -64,8 +65,8 @@
               </div>
               <!-- /.card-body -->
             </div>
-            <div class="card card-primary" style="min-width: 20%%; width:30%; margin:30px 20px 50px 27px;">
-              <div class="card-header" style="background-color:#2ec4b6;">
+            <div class="card card-primary" style="min-width: 20%%; width:30%; margin:30px 20px 50px 27px; border-radius: 0 !important;">
+              <div class="card-header" style="background-color:#2ec4b6; border-radius: 0 !important;">
                 <h3 class="card-title" style="height:30px;">2025-2학기</h3>
 
                 <div class="card-tools">
@@ -78,8 +79,8 @@
               </div>
               <!-- /.card-body -->
             </div>
-            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 20px 50px 27px;">
-              <div class="card-header" style="background-color:#2ec4b6;">
+            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 20px 50px 27px; border-radius: 0 !important;">
+              <div class="card-header" style="background-color:#2ec4b6; border-radius: 0 !important;">
                 <h3 class="card-title" style="height:30px;">2025-2학기</h3>
 
                 <div class="card-tools">

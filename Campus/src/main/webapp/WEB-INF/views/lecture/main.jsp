@@ -2,13 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-.scroll-table-wrapper-w {
-    max-height: 165px;      /* 테이블 최대 높이 */
-    overflow-y: auto;       /* 세로 스크롤 */
-    border: 1px solid #ccc; /* 선택: 테두리 */
-  }
 
+<style>
+.scroll-table-wrapper-wu {
+	/* 테이블 최대 높이 */
+	overflow-y: auto; /* 세로 스크롤 */
+	/* 선택: 테두리 */
+}
+
+.scroll-table-wrapper-wc {
+	/* 테이블 최대 높이 */
+	overflow-y: auto; /* 세로 스크롤 */
+	/* 선택: 테두리 */
+}
 </style>
 
 <body>
@@ -30,33 +36,36 @@
 						<tr class="jsgrid-header-row">
 							<th
 								class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-								style="background-color: #ebebeb;">디데이</th>
+								style="background-color: #f5f5f5;">D-day</th>
 							<th
 								class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-								style="width: 20%; background-color: #ebebeb;">마감시간</th>
+								style="width: 20%; background-color: #f5f5f5;">마감일</th>
 							<th
 								class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-								style="width: 40%; background-color: #ebebeb;">과목명</th>
+								style="width: 40%; background-color: #f5f5f5;">과제명</th>
 							<th
 								class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-								style="width: 20%; background-color: #ebebeb;">교수명</th>
+								style="width: 20%; background-color: #f5f5f5;">과목명</th>
 							<th
 								class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-								style="width: 10%; background-color: #ebebeb;">과제명</th>
+								style="width: 10%; background-color: #f5f5f5;">교수명</th>
 						</tr>
 					</table>
 				</div>
-				<div class="jsgrid-body scroll-table-wrapper-w" style="height: 300px;">
-					<table class="jsgrid-table">
+				<div class="jsgrid-body " style="height: 124px;">
+					<table class="jsgrid-table scroll-table-wrapper-wu">
 						<tbody>
 							<c:forEach var="hw" items="${unsubmitList}">
-							<tr class="unsubmit jsgrid-row" style="width:100%; height: 100%;">
-								<td class="dday jsgrid-cell jsgrid-align-center" style="width: 10%;">D-${hw.d_day}</td>
-								<td class="enddate jsgrid-cell jsgrid-align-center" style="width: 20%;">${hw.hw_enddateStr}</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">${hw.hw_name}</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${hw.lec_name}</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">${hw.mem_name}</td>
-							</tr>
+								<tr class="unsubmit jsgrid-row"
+									style="width: 100%; height: 100%;">
+									<td class="dday jsgrid-cell jsgrid-align-center"
+										style="width: 10%;">D-${hw.d_day }</td>
+									<td class="enddate jsgrid-cell jsgrid-align-center"
+										style="width: 20%;">${hw.hw_enddateStr}</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">${hw.hw_name}</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${hw.lec_name}</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">${hw.mem_name}</td>
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -74,43 +83,17 @@
 			</div>
 			<div id="예정된 강의" class="jsgrid"
 				style="position: relative; height: 100%; width: 100%; border: 1px solid #b5b5b5; border-top: 3px solid #2EC4B6;">
-				<div class="jsgrid-body" style="height: 100%;">
-					<table class="jsgrid-table">
+				<div class="jsgrid-body" style="height: 205px;">
+					<table class="jsgrid-table scroll-table-wrapper-wc">
 						<tbody>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Rebecca</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">57</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">1819
-									Non Street</td>
-							</tr>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Ramona</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">43</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">Ap
-									#614-689</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Price
-									Watkins</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">35</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">832-7810
-									Nunc Rd.</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Price
-									Watkins</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">35</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">832-7810
-									Nunc Rd.</td>
-							</tr>
-
+							<c:forEach var="cl" items="${comingleclist}">
+								<tr class="jsgrid-row">
+									<td class="dday jsgrid-cell jsgrid-align-center"
+										style="width: 20%;">D-${cl.d_day }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">${cl.lec_name }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">${cl.mem_name }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -130,63 +113,37 @@
 							<tr class="jsgrid-header-row">
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 10%; background-color: #ebebeb;"> </th>
+									style="width: 10%; background-color: #f5f5f5;"></th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 20%; background-color: #ebebeb;">과목명</th>
+									style="width: 20%; background-color: #f5f5f5;">과목명</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 40%; background-color: #ebebeb;">제목</th>
+									style="width: 40%; background-color: #f5f5f5;">제목</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 10%; background-color: #ebebeb;">교수명</th>
+									style="width: 10%; background-color: #f5f5f5;">교수명</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 20%; background-color: #ebebeb;">등록일</th>
+									style="width: 20%; background-color: #f5f5f5;">등록일</th>
 							</tr>
 						</table>
 					</div>
-					<table class="jsgrid-table">
+					<div class="jsgrid-body" style="height: 164px;">
+					<table class="jsgrid-table" >
 						<tbody>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;"></td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">S{}</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">8655
-									Arcu. Road</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">8655</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">1819
-									Non Street</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-							</tr>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Rebecca</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">57</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">8655
-									Arcu. Road</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">8655</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">1819
-									Non Street</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-							</tr>
-
+							<c:forEach var="no" items="${noticeList}">
+								<tr class="jsgrid-row">
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">${no.inNew }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${no.subjectName}</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">${no.title }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">${no.professorName }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${no.regDateStr }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -213,33 +170,14 @@
 				<div class="jsgrid-body" style="height: 100%;">
 					<table class="jsgrid-table">
 						<tbody>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Rebecca</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">57</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">1819
-									Non Street</td>
-							</tr>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Ramona</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">43</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">Ap
-									#614-689</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">Price
-									Watkins</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 50%;">35</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 30%;">832-7810
-									Nunc Rd.</td>
-							</tr>
-
+							<c:forEach var="att" items="${attendenceList}">
+								<tr class="jsgrid-row">
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 25%;">${att.classDateStr }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 35%;">${att.subjectName }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${att.professorName }</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">${att.attendanceStatus }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -259,87 +197,75 @@
 							<tr class="jsgrid-header-row">
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 10%; background-color: #ebebeb;"></th>
+									style="width: 10%; background-color: #f5f5f5;"></th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 20%; background-color: #ebebeb;">과목명</th>
+									style="width: 20%; background-color: #f5f5f5;">과목명</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 40%; background-color: #ebebeb;">제목</th>
+									style="width: 40%; background-color: #f5f5f5;">제목</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 10%; background-color: #ebebeb;">교수명</th>
+									style="width: 10%; background-color: #f5f5f5;">교수명</th>
 								<th
 									class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-									style="width: 20%; background-color: #ebebeb;">등록일</th>
+									style="width: 20%; background-color: #f5f5f5;">등록일</th>
 							</tr>
 						</table>
 					</div>
 					<table class="jsgrid-table">
 						<tbody>
+							
+								<tr class="jsgrid-row">
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+								</tr>
 							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Rebecca</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">57</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">8655
-									Arcu. Road</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">8655</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">1819
-									Non Street</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-							</tr>
-							<tr class="jsgrid-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Rebecca</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">57</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">8655
-									Arcu. Road</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">8655</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">8655
-									Arcu. Road</td>
-							</tr>
-							<tr class="jsgrid-alt-row">
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">Randall
-									Reeves</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">1819
-									Non Street</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">44</td>
-								<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">44</td>
-							</tr>
-
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+								</tr><tr class="jsgrid-row">
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+								</tr><tr class="jsgrid-row">
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 40%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 10%;">zz</td>
+									<td class="jsgrid-cell jsgrid-align-center" style="width: 20%;">zz</td>
+								</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-<script>
-	document.querySelectorAll(".dday").forEach(td => {
-    const text = td.textContent.trim();
+	<script>
+document.querySelectorAll(".dday").forEach(td => {
+    let text = td.textContent.trim();
+
+    // D-0 → D-Day로 변경
     if (text === "D-0") {
       td.textContent = "D-Day";
+      text = "D-Day";
+    }
+
+    // D-Day인 경우, 해당 <tr> 배경색 변경
+    if (text === "D-Day") {
+      const tr = td.parentElement; // <td>의 부모인 <tr>
+      if (tr) {
+        tr.style.backgroundColor = "#ffefef";
+      }
     }
   });
 </script>
 
-<script>	
-	document.querySelectorAll(".dday").forEach(td => {
-	      const text = td.textContent.trim();
-	      
-	      if (text === "D-Day") {
-	        const tr = td.closest("tr.unsubmit");
-	        if (tr) {
-	          tr.style.backgroundColor = "#ffefef"; // 원하는 색상으로 지정
-	        }
-	      }
-    </script>
-
 </body>
-</html>

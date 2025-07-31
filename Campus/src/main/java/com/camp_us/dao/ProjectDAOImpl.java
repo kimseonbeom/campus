@@ -15,18 +15,18 @@ public class ProjectDAOImpl implements ProjectDAO{
     }
 
     @Override
-    public List<ProjectVO> selectProjectListByStuId(String stuId) throws SQLException {
-        return session.selectList("Project-Mapper.selectProjectListByStuId", stuId);
+    public List<ProjectVO> selectProjectListByStuId(String stu_id) throws SQLException {
+        return session.selectList("Project-Mapper.selectProjectListByStuId", stu_id);
     }
 
     @Override
-    public int selectOngoingProjectCountByStuId(String stuId) throws SQLException {
-        return session.selectOne("Project-Mapper.selectOngoingProjectCountByStuId", stuId);
+    public int selectOngoingProjectCountByStuId(String stu_id) throws SQLException {
+        return session.selectOne("Project-Mapper.selectOngoingProjectCountByStuId", stu_id);
     }
 
     @Override
-    public ProjectVO selectProjectById(String projectId) throws SQLException {
-        return session.selectOne("Project-Mapper.selectProjectById", projectId);
+    public ProjectVO selectProjectById(String project_id) throws SQLException {
+        return session.selectOne("Project-Mapper.selectProjectById", project_id);
     }
 
     @Override

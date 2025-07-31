@@ -7,13 +7,13 @@ import com.camp_us.dto.ProjectVO;
 
 public interface ProjectService {
     // 특정 학생이 속한 프로젝트 목록 조회
-    List<ProjectVO> listByStudentId(String stuId) throws SQLException;
+    List<ProjectVO> listByStudentId(String stu_id) throws SQLException;
 
     // 특정 학생이 참여 중인 진행 중 프로젝트 수 조회
-    int countOngoingByStudentId(String stuId) throws SQLException;
+    int countOngoingByStudentId(String stu_id) throws SQLException;
 
     // 프로젝트 상세 조회
-    ProjectVO detail(String projectId) throws SQLException;
+    ProjectVO detail(String project_id) throws SQLException;
 
     // 프로젝트 등록
     void regist(ProjectVO project) throws SQLException;

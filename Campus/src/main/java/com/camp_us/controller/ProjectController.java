@@ -25,15 +25,15 @@ public class ProjectController {
     
     // 프로젝트 목록 (특정 학생 ID 기준)
     @GetMapping("/list")
-    public void list(@RequestParam("stuId") String stuId, Model model) throws Exception {
-        List<ProjectVO> projectList = projectService.listByStudentId(stuId);
+    public void list(@RequestParam("stuId") String stu_id, Model model) throws Exception {
+        List<ProjectVO> projectList = projectService.listByStudentId(stu_id);
         model.addAttribute("projectList", projectList);
     }
 
     // 프로젝트 상세
     @GetMapping("/detail")
-    public void detail(@RequestParam("projectId") String projectId, Model model) throws Exception {
-        ProjectVO project = projectService.detail(projectId);
+    public void detail(@RequestParam("project_id") String project_id, Model model) throws Exception {
+        ProjectVO project = projectService.detail(project_id);
         model.addAttribute("project", project);
     }
 
@@ -52,8 +52,8 @@ public class ProjectController {
 
     // 프로젝트 수정 폼
     @GetMapping("/modify")
-    public void modifyForm(@RequestParam("projectId") String projectId, Model model) throws Exception {
-        ProjectVO project = projectService.detail(projectId);
+    public void modifyForm(@RequestParam("project_id") String project_id, Model model) throws Exception {
+        ProjectVO project = projectService.detail(project_id);
         model.addAttribute("project", project);
     }
 
@@ -61,13 +61,13 @@ public class ProjectController {
     @PostMapping("/modify")
     public String modifyPost(ProjectVO project) throws Exception {
         projectService.modify(project);
-        return "redirect:/project/detail?projectId=" + project.getProject_id();
+        return "redirect:/project/detail?project_id=" + project.getProject_id();
     }
 
     // 프로젝트 삭제
     @GetMapping("/remove")
-    public String remove(@RequestParam("projectId") String projectId) throws Exception {
-        projectService.remove(projectId);
+    public String remove(@RequestParam("project_id") String project_id) throws Exception {
+        projectService.remove(project_id);
         return "redirect:/project/list";  // 필요한 경우 학생 ID 등 추가 파라미터 포함
     }
 }

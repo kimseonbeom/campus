@@ -244,6 +244,20 @@ i{}
     vertical-align: middle;
   background-position: center center;
 }
+.custom-btn {
+  border: 1px solid #2ec4b6;
+  color: #2ec4b6;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  border-radius: 0px;
+}
+
+.custom-btn:hover {
+  background-color: #2ec4b6;
+  color: #ffffff;
+}
 </style>
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <decorator:head />

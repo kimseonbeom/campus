@@ -14,18 +14,18 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public List<ProjectVO> listByStudentId(String stuId) throws SQLException {
-        return projectDAO.selectProjectListByStuId(stuId);
+    public List<ProjectVO> listByStudentId(String stu_id) throws SQLException {
+        return projectDAO.selectProjectListByStuId(stu_id);
     }
 
     @Override
-    public int countOngoingByStudentId(String stuId) throws SQLException {
-        return projectDAO.selectOngoingProjectCountByStuId(stuId);
+    public int countOngoingByStudentId(String stu_id) throws SQLException {
+        return projectDAO.selectOngoingProjectCountByStuId(stu_id);
     }
 
     @Override
-    public ProjectVO detail(String projectId) throws SQLException {
-        return projectDAO.selectProjectById(projectId);
+    public ProjectVO detail(String project_id) throws SQLException {
+        return projectDAO.selectProjectById(project_id);
     }
 
     @Override
@@ -39,8 +39,8 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public void remove(String projectId) throws SQLException {
-        projectDAO.deleteProject(projectId);
+    public void remove(String project_id) throws SQLException {
+        projectDAO.deleteProject(project_id);
     }
 
 }

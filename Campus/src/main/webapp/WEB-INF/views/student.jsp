@@ -86,9 +86,11 @@
       <button type="button" class="btn btn-block btn-info btn-flat mt-1" style="background-color:#79aaa4;border: none; width:100px;height:40px; border-radius:5px;">로그아웃</button>
       <li>
       <div class="row ml-4 mr-4">
-      mimi
+      학번: ${member.mem_id }
       </div>
-      <div class="row ml-4 mr-4">mimi</div>
+      <div class="row ml-4 mr-4">
+      이름: ${member.mem_name }
+      </div>
       </li>
       <li>
       <div class="image" style="cursor:pointer;" onclick="OpenWindow('mypage','글등록',800,700);">

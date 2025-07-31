@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.camp_us.dto.LecClassVO;
+import com.camp_us.dto.StuLecVO;
 import com.camp_us.dto.UnsubmitHomeworkVO;
-import com.camp_us.service.LecClassService;
+import com.camp_us.service.StuLecService;
 import com.camp_us.service.UnsubmitHomeworkService;
 
 @Controller
@@ -23,7 +23,7 @@ import com.camp_us.service.UnsubmitHomeworkService;
 public class LecClassController {
     
     @Autowired
-    private LecClassService lecClassService;
+    private StuLecService stuLecService;
     
     @Autowired
     private UnsubmitHomeworkService unsubmitHomeworkService;
@@ -42,10 +42,8 @@ public class LecClassController {
 
     @GetMapping("/changeMajor")
     @ResponseBody
-    public LecClassVO getLectureInfo(@RequestParam("lec_id") String lec_id) throws SQLException {
-        return lecClassService.getLecClassById(lec_id);
-    
-    
+    public List<StuLecVO> getLectureInfo(@RequestParam("lec_id") String lec_id) throws SQLException {
+        return stuLecService.selectLectureListByStudentId(lec_id);
     }
     @GetMapping("/syllabus")
     public String syllabus(@RequestParam("lec_id") String lec_id, Model model) {

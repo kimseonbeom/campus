@@ -9,5 +9,4 @@
         from stu_lec
         where stu_id = #{stu_id}
     </select>
-
 </mapper>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -144,8 +143,8 @@
             <div class="form-group">
                        <select class="custom-select my-border" onchange="onLectureChange(this)">
   <option value="">전공을 선택하세요.</option>
-  <c:forEach var="lec" items="${lectureList}">
-    <option value="${lec.lec_id}">${lec.lec_name}</option>
+  <c:forEach var="stu_lec" items="${lectureList}">
+    <option value="${stu_lec.lec_id}">${stu_lec.lec_name}</option>
     <c:out value="${lectureList}" />
     
 </c:forEach>

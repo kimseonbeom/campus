@@ -7,6 +7,6 @@
     <select id="selectLectureListByStudentId" parameterType="str" resultType="stuLec">
         select *
         from stu_lec
-        where stu_id = #{stu_id}
+        where stu_id is not NULL and mem_id = #{mem_id}
     </select>
 </mapper>

@@ -208,7 +208,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?stuId=1">
+              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?stu_id=1">
                 <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>

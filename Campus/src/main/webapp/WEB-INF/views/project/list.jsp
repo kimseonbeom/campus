@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-<body style="font-size:10px;">
+<body style="width:100vw;">
 		<div class="card-header" style="border-bottom: none;">
   <h3 class="card-title ml-2 mt-2" style="font-size: 30px; font-weight: bold;">팀 목록</h3>
   <div class="card-tools">
@@ -64,9 +64,9 @@
                 </div>
               </div>
               <!-- /.card-body -->
-            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px; box-shadow: none;  border-radius: 0 !important;">
+            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px;border: 1px solid #e7e7e7;  box-shadow: none;  border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
-              style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none;border: 2px solid #2ec4b6; border-radius: 0 !important;">
+              style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none;border-radius: 0 !important;">
                 
                 <h3 class="card-title" style="font-size:18px; width:120px;">2025-2학기</h3>
 
@@ -74,7 +74,7 @@
                 <span style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>	
                 </div>
               </div>
-              <div class="card-body p-0" style="width: 100%; height:450px; border: 2px solid #ced4da; color:#707070;">
+              <div class="card-body p-0" style="width: 100%; height:450px; ;border: 1px solid #e7e7e7; color:#707070;">
 				<div class="row text-center p-2 mt-2">
 				<div class="col-6">
 				<h2 style="font-size:16px; font-weight:bold; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
@@ -115,7 +115,7 @@
 				
 				<div class="row mx-0">
 				<div class="col-12 px-0">
-					<hr style="height: 1px; background-color: #b5b5b5; border: none; width: 100%;">
+					<hr style="height: 1px; background-color: #E7E7E7; border: none; width: 100%;">
 					</div>
 					</div>
 				<div class="row pb-1 pl-1">
@@ -147,19 +147,86 @@
 				</div>
               </div>
               </div>
-            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px; box-shadow: none; border-radius: 0 !important;">
+                        <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px; box-shadow: none;border: 2px solid #E7E7E7;  border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
-              style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
+              style="background-color:#f5f5f5; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
                 
-                <h3 class="card-title" style="font-size:18px; width:120px;">2025-2학기</h3>
+                <h3 class="card-title" style="font-size:18px; width:120px;color:#707070;">2025-2학기</h3>
 
                 <div class="card-tools d-flex justify-content-end align-items-center" style="width:300px;">
-                <span style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>	
+                <span style="font-weight:bold; color:#707070;">Global Impact Studio</span>	
                 </div>
               </div>
-              <div class="card-body" style="width: 100%; height:450px;;border: 1px solid #ced4da;">
+              <div class="card-body p-0" style="width: 100%; height:450px;color:#707070;">
+				<div class="row text-center p-2 mt-2">
+				<div class="col-6">
+				<h2 style="font-size:16px; font-weight:bold; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
+				</div>
+				<div class="col-6">
+				<h2 style="font-size:16px; font-weight:bold; color:#707070;">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+				</div>
+				</div>
+				<div class="row text-center">
+				<div class="col-6">
+				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025-03-18</span>
+				</div>
+				<div class="col-6">
+				<span style="font-size:18px; color:#707070;">2025-03-18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-10 mx-auto">
+  <hr>
+</div>
+				</div>
+				<div class="row p-2">
+				<div class="col-12 pl-5">
+				<h3 style="font-size:16px; font-weight:bold; color:#707070;">금주 제출현황</h3>
+				</div>
+				</div>
+				<div class="row p-1">
+				<div class="col-6 pl-5">
+				<span style="color:#707070;">&nbsp;로드맵</span></div>
+				<div class="col-5 d-flex justify-content-end">
+				<span class=""style="font-weight:bold; color:#2ec4b6;">제출완료</span></div>
+				</div>
+				<div class="row p-1">
+				<div class="col-6 pl-5">
+				<span style="color:#707070;">&nbsp;피드백</span></div>
+				<div class="col-5 d-flex justify-content-end">
+				<span class="" style="font-weight:bold; color:#a6a6a6;">등록완료</span></div></div>
 				
-                </div>
+				<div class="row mx-0">
+				<div class="col-12 px-0">
+					<hr style="height: 1px; background-color: #E7E7E7; border: none; width: 100%;">
+					</div>
+					</div>
+				<div class="row pb-1 pl-1">
+				<div class="col-6 pl-5">
+				<h3 style="font-size:16px; font-weight:bold; color:#707070;">담당 교수</h3>
+				</div>
+				<div class="col-6 pr-5 text-right" style="color:#707070;">김형민</div>
+				</div>
+				<div class="row pb-1 pl-1">
+				<div class="col-6 pl-5">
+				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀장</h3>
+				</div>
+				<div class="col-6 pr-5 text-right" style="color:#707070;">김원희</div>
+				</div>
+				<div class="row pl-1 pb-3">
+				<div class="col-5 pl-5">
+				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀원</h3>
+				</div>
+				<div class="col-7 pr-5 text-right" style="color:#707070;">권오규 김민주 김선범<br>박종원 윤용선</div>
+				</div>
+				<div class="row pt-2">
+				<div class="col-1"></div>
+				<div class="col-10">
+				<button type="button" class="btn btn-block btn-secondary btn-flat">로드맵</button>
+				</div>
+				<div class="col-1"></div>
+				</div>
+              </div>
               </div>
  
             </div>

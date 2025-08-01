@@ -25,7 +25,7 @@ public class ProjectController {
     
     // 프로젝트 목록 (특정 학생 ID 기준)
     @GetMapping("/list")
-    public void list(@RequestParam("stuId") String stu_id, Model model) throws Exception {
+    public void list(@RequestParam("stu_id") String stu_id, Model model) throws Exception {
         List<ProjectVO> projectList = projectService.listByStudentId(stu_id);
         model.addAttribute("projectList", projectList);
     }

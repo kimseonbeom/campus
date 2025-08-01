@@ -97,7 +97,7 @@
 <body>
 <div class="container">
     <div class="logo-section">
-        <img src="${ctx}/resources/images/campusLogo.png" alt="Campus Logo">
+        <img src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/Camp_usLogo.png" alt="Campus Logo">
     </div>
     <div class="login-section">
         <h2>LOGIN</h2>

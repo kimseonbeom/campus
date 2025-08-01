@@ -45,10 +45,10 @@ public class LecClassController {
     public List<StuLecVO> getLectureInfo(@RequestParam("lec_id") String lec_id) throws SQLException {
         return stuLecService.selectLectureListByStudentId(lec_id);
     }
-    @GetMapping("/syllabus")
+    @GetMapping("/list")
     public String syllabus(@RequestParam("lec_id") String lec_id, Model model) {
         model.addAttribute("lec_id", lec_id);
-        return "lecture/syllabus";  
+        return "lecture/list";  
     }
     @GetMapping("/공지사항")
     public String 공지사항(@RequestParam("lec_id") String lec_id, Model model) {

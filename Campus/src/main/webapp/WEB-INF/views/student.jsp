@@ -82,18 +82,22 @@
       </li>
       <!-- Notifications Dropdown Menu -->
       <div class="ml-2"></div>
-      <button type="button" class="btn btn-block btn-info btn-flat mt-1" style="background-color:#79aaa4;border: none; width:100px;height:40px; border-radius:5px;">로그아웃</button>
+       <li>
+      <form action="${pageContext.request.contextPath}/logout" method="post">
+      <button type="submit" class="btn btn-block btn-info btn-flat mt-1" style="background-color:#79aaa4;border: none; width:100px;height:40px; border-radius:5px;">로그아웃</button>
+       </form>
+       </li>
       <li>
       <div class="row ml-4 mr-4">
-      학번: ${member.mem_id }
+      학번: ${loginUser.mem_id }
       </div>
       <div class="row ml-4 mr-4">
-      이름: ${member.mem_name }
+      이름: ${loginUser.mem_name }
       </div>
       </li>
       <li>
       <div class="image" style="cursor:pointer;" onclick="OpenWindow('mypage','글등록',800,700);">
-          <img src="<%=request.getContextPath() %>/member/getPicture?id=mimi" class="img-circle img-md" alt="User Image" style="width:45px; height:45px; object-fit:cover;">
+          <img src="<%=request.getContextPath() %>/member/getPicture?id=${loginUser.mem_id}" class="img-circle img-md" alt="User Image" style="width:45px; height:45px; object-fit:cover;">
         </div>
       </li>
     </ul>
@@ -109,7 +113,7 @@
        class="brand-image custom-logo" />
 </a>
 
-
+<!-- 디버깅용 -->
 
       <!-- SidebarSearch Form -->
 
@@ -313,8 +317,8 @@
       return;
     }
 
-    const syllabusUrl = '<%=request.getContextPath()%>/lecture/syllabus?lec_id=' + encodeURIComponent(selectedLecId);
-    document.getElementById("mainFrame").src = syllabusUrl;
+    const listUrl = '<%=request.getContextPath()%>/lecture/list?lec_id=' + encodeURIComponent(selectedLecId);
+    document.getElementById("mainFrame").src = listUrl;
   }
 </script>
 <!-- commons.js -->
@@ -386,9 +390,9 @@ function goSyllabus() {
 	    alert("전공을 먼저 선택하세요.");
 	    return;
 	  }
-	  const syllabusUrl = '<%=request.getContextPath()%>/lecture/syllabus?lec_id=' + encodeURIComponent(selectedLecId);
-	  location.hash = syllabusUrl;    // 해시 변경
-	  document.getElementById("mainFrame").src = syllabusUrl;
+	  const listUrl = '<%=request.getContextPath()%>/lecture/list?lec_id=' + encodeURIComponent(selectedLecId);
+	  location.hash = listUrl;    // 해시 변경
+	  document.getElementById("mainFrame").src = listUrl;
 	}
 </script>
 </body>

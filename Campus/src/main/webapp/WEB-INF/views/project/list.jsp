@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 
 
-<body style="width:100vw;">
+<body style="width:100%;">
 		<div class="card-header" style="border-bottom: none;">
   <h3 class="card-title ml-2 mt-2" style="font-size: 30px; font-weight: bold;">팀 목록</h3>
   <div class="card-tools">
-    <button type="button" class="btn btn-primary btn-lg mt-2 mr-3"  style="background-color:#2ec4b6; border:none;">
-    <span style="color: #ffffff;">팀 등록</span></button>
+    <a href="teamRegister.jsp" class="btn btn-primary btn-lg mt-2 mr-3" style="background-color:#2ec4b6; border:none;">
+  <span style="color: #ffffff;">팀 등록</span>
+</a>
   </div>
 </div>
 
@@ -139,9 +140,9 @@
 				<div class="row pt-2">
 				<div class="col-1"></div>
 				<div class="col-10">
-				<button type="button" class="btn btn-block custom-btn">
-				  수정 요청
-				</button>
+				<button type="button" class="btn btn-block custom-btn" data-toggle="modal" data-target="#modifyModal">
+  수정 요청
+</button>
 				</div>
 				<div class="col-1"></div>
 				</div>
@@ -222,7 +223,7 @@
 				<div class="row pt-2">
 				<div class="col-1"></div>
 				<div class="col-10">
-				<button type="button" class="btn btn-block btn-secondary btn-flat">로드맵</button>
+				<button type="button" class="btn btn-block btn-secondary btn-flat" style="background-color: #e7e7e7; color:#707070; font-weight:bold;">로드맵</button>
 				</div>
 				<div class="col-1"></div>
 				</div>
@@ -257,4 +258,15 @@
       });
     });
     </script>
+    <jsp:include page="modify.jsp" />
+<script>
+$(document).on('show.bs.modal', '.modal', function () {
+	  $('body').css('padding-right', '0px');
+	});
+	$(document).on('hidden.bs.modal', '.modal', function () {
+	  $('body').css('padding-right', '');
+	});
+</script>
+
+
 </body>

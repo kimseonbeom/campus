@@ -44,25 +44,25 @@ public class ProjectController {
     }
 
     // 프로젝트 등록 처리
-    @PostMapping("/regist")
-    public String registPost(ProjectVO project) throws Exception {
-        projectService.regist(project);
-        return "redirect:/project/list?stuId=" + project.getProfes_id(); // 혹은 적절한 리다이렉트 경로
-    }
-
+//    @PostMapping("/regist")
+//    public String registPost(ProjectVO project) throws Exception {
+//        projectService.regist(project);
+//        return "redirect:/project/list?stuId=" + project.getProfes_id(); // 혹은 적절한 리다이렉트 경로
+//    }
+//    @RequestParam("project_id") String project_id, Model model
     // 프로젝트 수정 폼
     @GetMapping("/modify")
-    public void modifyForm(@RequestParam("project_id") String project_id, Model model) throws Exception {
-        ProjectVO project = projectService.detail(project_id);
-        model.addAttribute("project", project);
+    public void modifyForm() throws Exception {
+//        ProjectVO project = projectService.detail(project_id);
+//        model.addAttribute("project", project);
     }
 
-    // 프로젝트 수정 처리
-    @PostMapping("/modify")
-    public String modifyPost(ProjectVO project) throws Exception {
-        projectService.modify(project);
-        return "redirect:/project/detail?project_id=" + project.getProject_id();
-    }
+//    // 프로젝트 수정 처리
+//    @PostMapping("/modify")
+//    public String modifyPost(ProjectVO project) throws Exception {
+//        projectService.modify(project);
+//        return "redirect:/project/detail?project_id=" + project.getProject_id();
+//    }
 
     // 프로젝트 삭제
     @GetMapping("/remove")

@@ -258,6 +258,34 @@ i{}
   background-color: #2ec4b6;
   color: #ffffff;
 }
+input[type="text"]:focus {
+  border: 2px solid #2ec4b6 !important;  /* 원하는 색상으로 변경 */
+  outline: none !important;  /* 기본 파란 테두리 제거 */
+  box-shadow: none !important; /* Bootstrap에서 자동 추가되는 그림자 제거 */
+}
+textarea:focus {
+  border: 2px solid #2ec4b6 !important;  /* 원하는 색상으로 변경 */
+  outline: none !important;  /* 기본 파란 테두리 제거 */
+  box-shadow: none !important; /* Bootstrap에서 자동 추가되는 그림자 제거 */
+}
+  .custom-textarea:focus {
+    border-color: #2ec4b6;
+    box-shadow: none;
+  }
+  .tempusdominus-widget {
+  z-index: 1060 !important;
+}
+ body.modal-open {
+    overflow-y: scroll !important; /* 스크롤바 항상 보이도록 */
+    padding-right: 0 !important;
+  }
+  html, body {
+    overflow-x: hidden;
+  }
+  body {
+  width: 100vw;
+  overflow-x: hidden;
+}
 </style>
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
 <decorator:head />

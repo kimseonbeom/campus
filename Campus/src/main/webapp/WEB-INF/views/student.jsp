@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -130,7 +131,7 @@
   <p class="fas">HOME</p>
 </a>
 </li>
-   
+   <sec:authorize access='hasAnyRole("ROLE_1")'>
           <li class="nav-item" >            
             <a href="#" class="nav-link" onclick='Iframe("<%=request.getContextPath()%>/lecture/main"); return false;'>
               <i class="nav-icon fas gang-img-icon"></i>
@@ -147,7 +148,7 @@
             <div class="form-group">
                        <select class="custom-select my-border" onchange="onLectureChange(this)">
   <option value="">전공을 선택하세요.</option>
-  <c:forEach var="stu_lec" items="${lectureList}">
+  <c:forEach var="stu_lec" items="${stulectureList}">
     <option value="${stu_lec.lec_id}">${stu_lec.lec_name}</option>
     <c:out value="${lectureList}" />
     
@@ -162,39 +163,39 @@
                   <p>&nbsp;&nbsp;&nbsp;강의계획서</p>
                 </a>
               </li>
-              <li class="nav-item menu" data-url="">
+              <li class="nav-item menu" data-url="" onclick="goSyllabus(); return false;">
                 <a href="#" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;공지사항</p>
                 </a>
               </li>
-              <li class="nav-item" data-url="">
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
                 <a href="" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;실시간 강의</p>
                 </a>
               </li>
               
-              <li class="nav-item" data-url="">
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;온라인 강의</p>
                 </a>
               </li>
              
-              <li class="nav-item" data-url="">
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;출결</p>
                 </a>
               </li>
-              <li class="nav-item" data-url="">
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;자료실</p>
                 </a>
               </li>
-              <li class="nav-item" data-url="">
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
                 <a href="" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;과제제출</p>
@@ -202,6 +203,80 @@
               </li>
             </ul>
           </li>
+          </sec:authorize>
+          <sec:authorize access='hasAnyRole("ROLE_2")'>
+          <li class="nav-item" >            
+            <a href="#" class="nav-link" onclick='Iframe("<%=request.getContextPath()%>/lecture/main"); return false;'>
+              <i class="nav-icon fas gang-img-icon"></i>
+              <p class="fas" >&nbsp;
+                강의실
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-9">
+            <div class="form-group">
+                       <select class="custom-select my-border" onchange="onLectureChange(this)">
+  <option value="">전공을 선택하세요.</option>
+  <c:forEach var="pro_lec" items="${prolectureList}">
+    <option value="${pro_lec.lec_id}">${pro_lec.lec_name}</option>
+    <c:out value="${prolectureList}" />
+    
+</c:forEach>
+</select>
+                      </div>
+                      </div>
+                      </div>
+              <li class="nav-item">
+                <a href="#" class="nav-link" onclick="goSyllabus(); return false;">
+                  <i class="far fas nav-icon" ></i>
+                  <p>&nbsp;&nbsp;&nbsp;강의계획서</p>
+                </a>
+              </li>
+              <li class="nav-item menu" data-url="" onclick="goSyllabus(); return false;">
+                <a href="#" class="nav-link">
+                  <i class="far fas nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;공지사항</p>
+                </a>
+              </li>
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link">
+                  <i class="far fas nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;실시간 강의</p>
+                </a>
+              </li>
+              
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;온라인 강의</p>
+                </a>
+              </li>
+             
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;출결</p>
+                </a>
+              </li>
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;자료실</p>
+                </a>
+              </li>
+              <li class="nav-item" data-url="" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link">
+                  <i class="far nav-icon"></i>
+                  <p>&nbsp;&nbsp;&nbsp;과제제출</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          </sec:authorize>
           <li class="nav-item">            
             <a href="#" class="nav-link">
               <i class="nav-icon fas pro-img-icon"></i>
@@ -211,7 +286,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?stu_id=1">
+              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?mem_id=${loginUser.mem_id }">
                 <a href="#" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>
@@ -272,7 +347,7 @@
   </aside>
 
   <div class="content-wrapper">
- <iframe id="mainFrame" name="ifr" frameborder="0" style="width:100%;height:100vh;"></iframe> 	 
+ <iframe id="mainFrame" name="ifr" frameborder="0" style="width:100%;height:90vh;"></iframe> 	 
     </div>
     <!-- /.content -->
   </div>
@@ -354,7 +429,6 @@
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/pages/dashboard.js"></script>
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>

@@ -3,46 +3,87 @@ package com.camp_us.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.camp_us.command.PageMaker;
 import com.camp_us.dao.ProjectDAO;
+import com.camp_us.dto.MemberVO;
+import com.camp_us.dto.ProjectListVO;
 import com.camp_us.dto.ProjectVO;
+import com.camp_us.dto.TeamMemberVO;
+import com.camp_us.dto.TeamVO;
 
-public class ProjectServiceImpl implements ProjectService{
-    private final ProjectDAO projectDAO;
+@Service
+public class ProjectServiceImpl implements ProjectService {
 
+    private ProjectDAO projectDAO;
+
+    @Autowired
     public ProjectServiceImpl(ProjectDAO projectDAO) {
         this.projectDAO = projectDAO;
     }
 
     @Override
-    public List<ProjectVO> listByStudentId(String stu_id) throws SQLException {
-        return projectDAO.selectProjectListByStuId(stu_id);
+    public List<ProjectVO> selectProjectList(String mem_id) throws SQLException {
+        return projectDAO.selectProjectList(mem_id);
     }
 
     @Override
-    public int countOngoingByStudentId(String stu_id) throws SQLException {
-        return projectDAO.selectOngoingProjectCountByStuId(stu_id);
+    public List<MemberVO> selectTeamMemberList() throws SQLException {
+        return projectDAO.selectTeamMemberList();
     }
 
     @Override
-    public ProjectVO detail(String project_id) throws SQLException {
-        return projectDAO.selectProjectById(project_id);
+    public List<MemberVO> selectProfessorList() throws SQLException {
+        return projectDAO.selectProfessorList();
     }
 
     @Override
-    public void regist(ProjectVO project) throws SQLException {
+    public MemberVO selectMemberListById(String mem_id) throws SQLException {
+        return projectDAO.selectMemberListById(mem_id);
+    }
+
+    @Override
+    public void insertTeamMemberList(TeamMemberVO teamMember) throws SQLException {
+        projectDAO.insertTeamMemberList(teamMember);
+    }
+
+    @Override
+    public void insertProject(ProjectVO project) throws SQLException {
         projectDAO.insertProject(project);
     }
 
     @Override
-    public void modify(ProjectVO project) throws SQLException {
-        projectDAO.updateProject(project);
+    public void insertTeamLeader(TeamVO team) throws SQLException {
+        projectDAO.insertTeamLeader(team);
     }
 
     @Override
-    public void remove(String project_id) throws SQLException {
-        projectDAO.deleteProject(project_id);
+    public String selectProjectSeqNext() throws SQLException {
+        return projectDAO.selectProjectSeqNext();
     }
 
+    @Override
+    public String selectTeamSeqNext() throws SQLException {
+        return projectDAO.selectTeamSeqNext();
+    }
+
+	@Override
+	public List<ProjectListVO> searchProjectList(PageMaker pageMaker, String mem_id) throws SQLException {
+		List<ProjectListVO> projectlist = projectDAO.selectsearchProjectList(pageMaker, mem_id);
+		
+		int totalCount = projectDAO.selectsearchProjectListCount(pageMaker, mem_id);
+		pageMaker.setTotalCount(totalCount);
+		return projectlist;
+	}
+
+	@Override
+	public List<ProjectListVO> searchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException {
+List<ProjectListVO> projectlist = projectDAO.selectsearchProjectList(pageMaker, mem_id);
+		
+		int totalCount = projectDAO.selectsearchProjectListCount(pageMaker, mem_id);
+		pageMaker.setTotalCount(totalCount);
+		return projectlist;
+	}
 }
-
-

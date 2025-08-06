@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><decorator:title default="Kim's System"/></title>
+<title><decorator:title default="Camp Us"/></title>
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jsgrid/jsgrid.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/jsgrid/jsgrid-theme.min.css">
 <!-- Google Font: Source Sans Pro -->
@@ -287,7 +287,17 @@ textarea:focus {
   overflow-x: hidden;
 }
 </style>
+<!-- jQuery -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Summernote -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- 공통 -->
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+
 <decorator:head />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

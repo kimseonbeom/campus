@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.camp_us.dto.LecClassVO;
 import com.camp_us.dto.StuLecVO;
 import com.camp_us.dto.UnsubmitHomeworkVO;
+import com.camp_us.service.LecClassService;
 import com.camp_us.service.StuLecService;
 import com.camp_us.service.UnsubmitHomeworkService;
 
@@ -24,7 +26,6 @@ public class LecClassController {
     
     @Autowired
     private StuLecService stuLecService;
-    
     @Autowired
     private UnsubmitHomeworkService unsubmitHomeworkService;
     @GetMapping("/main")

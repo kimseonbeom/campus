@@ -2,72 +2,105 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="Project-Mapper">
-
-  <!-- 프로젝트 목록 검색 -->
-  <select id="selectProjectList" resultType="project">
-    SELECT *
-    FROM PROJECT
-    ORDER BY PROJECT_ID DESC
-  </select>
-  <!-- 특정 학생의 진행 중 프로젝트 수 조회 -->
-  <select id="selectOngoingProjectCountByStuId" parameterType="string" resultType="int">
-    SELECT COUNT(*)
-    FROM PROJECT P
-    JOIN STU_PROJ SP ON P.PROJECT_ID = SP.PROJECT_ID
-    WHERE SP.STU_ID = #{stu_id}
-      AND P.PROJECT_PROC = '진행중'
-  </select>
-  <select id="selectProjectListByStuId" parameterType="string" resultType="project">
-  SELECT P.*
-  FROM PROJECT P
-  JOIN TEAM T ON P.PROJECT_ID = T.PROJECT_ID
-  JOIN TEAM_MEMBER TM ON T.TEAM_ID = TM.TEAM_ID
-  WHERE TM.STU_ID = #{stu_id}
-  ORDER BY P.PROJECT_ID DESC
+<sql id="search">
+		<if test="searchType == 's'.toString()">
+			and samester like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'n'.toString()">
+			and project_name like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'sn'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+		<if test="startDate != null and endDate != null">
+  		and project_date between #{startDate} and #{endDate}
+		</if>
+	</sql>
+	<select id="selectsearchProjectList" parameterType="pageMaker" resultType="projectlist">
+	select *
+	from stu_project
+	WHERE mem_id = #{mem_id}
+	</select>
+	<select id="selectsearchProjectListCount" parameterType="pageMaker" resultType="int">
+	select 
+	count (*)
+	from stu_project
+	where mem_id = #{mem_id}
+	<include refid="search" />
+	</select>
+		<select id="selectsearchProjectListpro" parameterType="pageMaker" resultType="projectlist">
+	select *
+	from pro_project
+	WHERE mem_id = #{mem_id}
+	</select>
+	<select id="selectsearchProjectListCountpro" parameterType="pageMaker" resultType="int">
+	select 
+	count (*)
+	from pro_project
+	where mem_id = #{mem_id}
+	<include refid="search" />
+	</select>
+<select id="selectProjectList" resultType="project">
+	select p.*
+	from project p
+	join team_member tm on p.team_id = tm.team_id
+	join account a on tm.team_member = a.mem_id
+	where mem_id = #{mem_id}
 </select>
-  <!-- 프로젝트 상세 조회 -->
-  <select id="selectProjectById" parameterType="string" resultType="project">
-    SELECT *
-    FROM PROJECT
-    WHERE PROJECT_ID = #{project_id}
+
+<!-- 교수 조회 -->
+<select id="selectProfessorList" resultType="account">
+    SELECT mem_id, mem_name, picture
+    FROM account
+    WHERE mem_auth = 2
+</select>
+<!-- 학생 조회 -->
+<select id="selectTeamMemberList" resultType="account">
+   SELECT mem_id, mem_name, picture
+  FROM account
+  WHERE mem_auth = 1
+</select>
+<select id="selectMemberListById" parameterType="str" resultType="account">
+	select mem_id, mem_name, picture
+	from account
+	where mem_id=#{mem_id}
+
+</select>
+<insert id="insertTeamMemberList" parameterType="str">
+  insert into team_member(
+  team_id, team_member)
+  values
+  (#{team_id},#{team_member})
+</insert>
+<insert id="insertTeamLeader" parameterType="str">
+	insert into team(
+	team_id, team_leader)
+	values
+	(#{team_id},#{team_leader})	
+</insert>
+<insert id="insertProject">
+	insert into project(
+	project_id,project_name,project_desc,project_stdate,project_endate,profes_id,team_id,samester)
+	values(
+	#{project_id},#{project_name},#{project_desc},#{project_stdate, jdbcType=TIMESTAMP},#{project_endate, jdbcType=TIMESTAMP},
+	#{profes_id},#{team_id},#{samester}
+	) 
+</insert>
+  <!-- 프로젝트 ID 생성 (시퀀스) -->
+  <select id="selectProjectSeqNext" resultType="str">
+    SELECT 'P' || LPAD(project_seq.NEXTVAL, 5, '0') FROM dual
   </select>
 
-  <!-- 프로젝트 등록 -->
-  <insert id="insertProject" parameterType="project">
-    INSERT INTO PROJECT (
-      PROJECT_ID, PROJECT_NAME, PROJECT_DESC, PROJECT_PROC,
-      SCHE_NAME, SCHE_START, SCHE_END, PJSUMIT_EVAL,
-      PROFES_ID, EDIT_REQ_STATUS, EDIT_ACCEPT_YN
-    ) VALUES (
-      #{project_id}, #{project_name}, #{project_desc}, #{project_proc},
-      #{sche_name}, #{sche_start}, #{sche_end}, #{pjsumit_eval},
-      #{profes_id}, #{edit_req_status}, #{edit_accept_yn}
-    )
-  </insert>
+  <!-- 팀 ID 생성 (시퀀스) -->
+  <select id="selectTeamSeqNext" resultType="str">
+    SELECT 'T' || LPAD(team_seq.NEXTVAL, 5, '0') FROM dual
+  </select>
 
-  <!-- 프로젝트 수정 -->
-  <update id="updateProject" parameterType="project">
-    UPDATE PROJECT
-    SET
-      PROJECT_NAME = #{project_name},
-      PROJECT_DESC = #{project_desc},
-      PROJECT_PROC = #{project_proc},
-      SCHE_NAME = #{sche_name},
-      SCHE_START = #{sche_start},
-      SCHE_END = #{sche_end},
-      PJSUMIT_EVAL = #{pjsumit_eval},
-      PROFES_ID = #{profes_id},
-      EDIT_REQ_STATUS = #{edit_req_status},
-      EDIT_ACCEPT_YN = #{edit_accept_yn}
-    WHERE PROJECT_ID = #{project_id}
-  </update>
 
-  <!-- 프로젝트 삭제 -->
-  <delete id="deleteProject" parameterType="string">
-    DELETE FROM PROJECT
-    WHERE PROJECT_ID = #{project_id}
-  </delete>
 
 </mapper>

@@ -3,24 +3,37 @@ package com.camp_us.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.camp_us.command.PageMaker;
+import com.camp_us.dto.MemberVO;
+import com.camp_us.dto.ProjectListVO;
 import com.camp_us.dto.ProjectVO;
+import com.camp_us.dto.TeamMemberVO;
+import com.camp_us.dto.TeamVO;
 
 public interface ProjectDAO {
-    // 특정 학생이 속한 모든 프로젝트 목록 조회
-    List<ProjectVO> selectProjectListByStuId(String stu_id) throws SQLException;
-
-    // 특정 학생의 진행 중 프로젝트 수 (상태 = '진행중')
-    int selectOngoingProjectCountByStuId(String stu_id) throws SQLException;
-
-    // 프로젝트 ID로 상세 정보 조회
-    ProjectVO selectProjectById(String projectId) throws SQLException;
-
-    // 새 프로젝트 등록
+    List<ProjectListVO>selectsearchProjectList(PageMaker pageMaker, String mem_id) throws SQLException;
+	
+    int selectsearchProjectListCount(PageMaker pageMaker, String mem_id);
+	
+    List<ProjectListVO>selectsearchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException;
+	
+    int selectsearchProjectListCountpro(PageMaker pageMaker, String mem_id);
+    
+    List<ProjectVO>selectProjectList(String mem_id) throws SQLException;
+    // 팀 선택 학생 리스트 조회
+    List<MemberVO> selectTeamMemberList() throws SQLException;
+    // 담당 교수 선택 조회
+    List<MemberVO> selectProfessorList() throws SQLException;
+    
+    MemberVO selectMemberListById(String mem_id) throws SQLException;
+    
+    void insertTeamMemberList(TeamMemberVO teamMember) throws SQLException;
+    
     void insertProject(ProjectVO project) throws SQLException;
-
-    // 프로젝트 수정
-    void updateProject(ProjectVO project) throws SQLException;
-
-    // 프로젝트 삭제
-    void deleteProject(String projectId) throws SQLException;
+    
+    void insertTeamLeader(TeamVO team) throws SQLException;
+    
+    String selectProjectSeqNext() throws SQLException;
+    
+    String selectTeamSeqNext() throws SQLException;
 }

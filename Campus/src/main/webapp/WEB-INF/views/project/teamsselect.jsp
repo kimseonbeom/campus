@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="modal fade" id="studentSelectModalMembers" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -12,7 +13,16 @@
         <input type="text" id="membersSearchInput" placeholder="학생 이름 검색" class="form-control mb-3">
         <!-- 학생 리스트 (체크박스 여러 개 가능) -->
         <ul id="membersStudentList" class="list-group" style="max-height:300px; overflow-y:auto;">
-          <!-- 동적으로 학생 리스트를 뿌려주세요 -->
+           <c:forEach var="student" items="${studentList}">
+    <li class="list-group-item member-student-item" 
+        data-stu-picture="${student.picture }"
+        data-stu-id="${student.mem_id}" 
+        data-stu-name="${student.mem_name}"
+        style="cursor:pointer;">
+        <img src="<%=request.getContextPath() %>/member/getPicture?id=${student.mem_id}" class="img-circle img-md" alt="User Image" style="width:45px; height:45px; object-fit:cover;">
+      ${student.mem_name} (${student.mem_id})
+    </li>
+  </c:forEach>
         </ul>
       </div>
       <div class="modal-footer">
@@ -23,3 +33,31 @@
     </div>
   </div>
 </div>
+<script>
+$(document).on('click', '#membersStudentList .member-student-item', function() {
+    $(this).toggleClass('active');
+
+    const selectedCount = $('#membersStudentList .member-student-item.active').length;
+    $('#selectMembersBtn').prop('disabled', selectedCount === 0);
+});
+
+$('#selectMembersBtn').on('click', function() {
+    const selectedItems = $('#membersStudentList .member-student-item.active');
+    const selectedMembers = [];
+
+    selectedItems.each(function() {
+        selectedMembers.push({
+            stu_id: $(this).data('stu-id'),
+            mem_name: $(this).data('stu-name')
+        });
+    });
+
+    setTeamMembers(selectedMembers);
+
+    $('#studentSelectModalMembers').modal('hide');
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open');
+    selectedItems.removeClass('active');
+    $('#selectMembersBtn').prop('disabled', true);
+});
+</script>

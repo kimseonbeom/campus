@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-<body style="width:100%;">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+  }
+</style>
+<body>
+<div class="wrap" style="height:100vh;">
 		<div class="card-header" style="border-bottom: none;">
-  <h3 class="card-title ml-2 mt-2" style="font-size: 30px; font-weight: bold;">팀 목록</h3>
+  <h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">팀 목록</h3>
   <div class="card-tools">
-    <a href="teamRegister.jsp" class="btn btn-primary btn-lg mt-2 mr-3" style="background-color:#2ec4b6; border:none;">
-  <span style="color: #ffffff;">팀 등록</span>
+   <a class="btn btn-primary btn-lg mt-2 mr-3 d-flex align-items-center justify-content-center"  href="<%=request.getContextPath() %>/project/regist"
+   style="background-color:#2ec4b6; border:none; width:100px; height:40px;">
+  <span style="color: #ffffff; font-size:18px;">팀 등록</span>
 </a>
   </div>
 </div>
@@ -49,8 +58,8 @@
   </div>
 </div>
 </div>
-<div class= "d-flex" style="width:100%; height:100%;">
-<div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px; box-shadow: none; border-radius: 0 !important;">
+<div class= "d-flex" style="width:100%;">
+<div class="card card-primary" style="max-height:530px; min-width: 20%; width:30%; margin:30px 19px 10px 26px; box-shadow: none; border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
               style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
                 
@@ -65,7 +74,8 @@
                 </div>
               </div>
               <!-- /.card-body -->
-            <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px;border: 1px solid #e7e7e7;  box-shadow: none;  border-radius: 0 !important;">
+            <div class="card card-primary" 
+            style="min-width: 20%;max-height:530px; width:30%; margin:30px 19px 10px 26px;border: 1px solid #e7e7e7;  box-shadow: none;  border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
               style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none;border-radius: 0 !important;">
                 
@@ -148,7 +158,7 @@
 				</div>
               </div>
               </div>
-                        <div class="card card-primary" style="min-width: 20%; width:30%; margin:30px 19px 50px 26px; box-shadow: none;border: 2px solid #E7E7E7;  border-radius: 0 !important;">
+                        <div class="card card-primary" style="max-height:530px;min-width: 20%; width:30%; margin:30px 19px 10px 26px; box-shadow: none;border: 2px solid #E7E7E7;  border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
               style="background-color:#f5f5f5; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
                 
@@ -229,11 +239,10 @@
 				</div>
               </div>
               </div>
- 
             </div>
-                         <div class="row">
+   <div class="row">
   <div class="col-12">
-    <ul class="pagination justify-content-center mb-0">	
+    <ul class="pagination justify-content-center" >	
       <li class="page-item"><a class="page-link" href="#">«</a></li>
       <li class="page-item"><a class="page-link" href="#">1</a></li>
       <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -241,6 +250,7 @@
       <li class="page-item"><a class="page-link" href="#">»</a></li>
     </ul>
   </div>
+</div>
 </div>
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/moment/moment.min.js"></script>

@@ -123,7 +123,7 @@
 
           <div class="row mt-2">
             <div class="col-12 d-flex justify-content-center">
-              <textarea class="form-control custom-textarea" rows="3" placeholder="Enter ..." style="width:710px; height:130px; resize: none;"></textarea>
+              <textarea class="form-control custom-textarea" rows="3" placeholder="수정 사유를 입력해주세요." style="width:710px; height:130px; resize: none;"></textarea>
             </div>
           </div>
 

@@ -14,6 +14,12 @@
 		<typeAlias type="com.camp_us.dto.UnsubmitHomeworkVO" alias="unsubmithw"/>
 		<typeAlias type="com.camp_us.dto.ProjectVO" alias="project"/>
 		<typeAlias type="com.camp_us.dto.StuLecVO" alias="stuLec"/>
+		<typeAlias type="com.camp_us.dto.TeamVO" alias="team"/>
+		<typeAlias type="com.camp_us.dto.TeamMemberVO" alias="teamMember"/>
+		<typeAlias type="com.camp_us.dto.ProfessorVO" alias="professor"/>
+		<typeAlias type="com.camp_us.dto.ProLecVO" alias="prolec"/>
+		<typeAlias type="com.camp_us.dto.ProjectListVO" alias="projectlist"/>
+		<typeAlias type="com.camp_us.command.PageMaker" alias="pageMaker"/>
 	</typeAliases>
 </configuration>
 

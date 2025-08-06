@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="modal fade" id="studentSelectModalLeader" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -12,8 +13,17 @@
         <input type="text" id="leaderSearchInput" placeholder="학생 이름 검색" class="form-control mb-3">
         <!-- 학생 리스트 (예: 체크박스 없이 클릭 선택) -->
         <ul id="leaderStudentList" class="list-group" style="max-height:300px; overflow-y:auto;">
-          <!-- 동적으로 학생 리스트를 뿌려주세요 -->
-        </ul>
+  <c:forEach var="student" items="${studentList}">
+    <li class="list-group-item leader-student-item" 
+        data-stu-picture="${student.picture }"
+        data-stu-id="${student.mem_id}" 
+        data-stu-name="${student.mem_name}"
+        style="cursor:pointer;">
+        <img src="<%=request.getContextPath() %>/member/getPicture?id=${student.mem_id}" class="img-circle img-md" alt="User Image" style="width:45px; height:45px; object-fit:cover;">
+      ${student.mem_name} (${student.mem_id})
+    </li>
+  </c:forEach>
+</ul>
       </div>
       <div class="modal-footer">
         <button type="button" id="selectLeaderBtn" class="btn btn-primary"
@@ -23,3 +33,42 @@
     </div>
   </div>
 </div>
+<script>
+$(document).ready(function() {
+    // 리스트 항목 클릭 시 선택 동작
+    $(document).on('click', '.leader-student-item', function () {
+        // 이전 선택 해제
+        $('.leader-student-item').removeClass('active');
+
+        // 현재 항목 선택 표시
+        $(this).addClass('active');
+
+        // 선택된 학생 정보 추출
+        const stuId = $(this).data('stu-id');
+        const stuName = $(this).data('stu-name');
+
+        // 버튼 활성화
+        $('#selectLeaderBtn').prop('disabled', false);
+
+        // 버튼에 선택 정보 저장 (또는 외부 input에 set)
+        $('#selectLeaderBtn').data('selected-id', stuId);
+        $('#selectLeaderBtn').data('selected-name', stuName);
+    });
+
+    // "선택 완료" 버튼 클릭 시 폼에 반영
+    $('#selectLeaderBtn').on('click', function () {
+        const stuId = $(this).data('selected-id');
+        const stuName = $(this).data('selected-name');
+
+        if (stuId && stuName) {
+            $('input[name="team_leader"]').val(stuId);
+            // id가 teamLeaderName인 input에 값 넣기
+            $('#teamLeaderName').val(stuName);
+        }
+
+        $('#studentSelectModalLeader').modal('hide');
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+    });
+});
+</script>

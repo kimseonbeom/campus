@@ -13,4 +13,9 @@ select *
 from lec_class
 where lec_id=#{lec_id}
 </select>
+<select id="selectLecClassByProfessorId" parameterType="str" resultType="prolec">
+select *
+from pro_lec
+where mem_id=#{mem_id}
+</select>
 </mapper>

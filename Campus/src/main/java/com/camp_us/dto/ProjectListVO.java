@@ -1,6 +1,7 @@
 package com.camp_us.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProjectListVO {
 	private String project_id;
@@ -14,12 +15,12 @@ public class ProjectListVO {
 	private String team_id;
 	private String samester;
 	private String team_leader;
+	private String leader_name;
 	private String team_member;
 	private String rm_status;
 	private String eval_status;
 	private String mem_id;
-	private String mem_name;
-	
+	private List<String> mem_name;
 	
 	public String getProfes_name() {
 		return profes_name;
@@ -33,10 +34,16 @@ public class ProjectListVO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public String getMem_name() {
+	public String getLeader_name() {
+		return leader_name;
+	}
+	public void setLeader_name(String leader_name) {
+		this.leader_name = leader_name;
+	}
+	public List<String> getMem_name() {
 		return mem_name;
 	}
-	public void setMem_name(String mem_name) {
+	public void setMem_name(List<String> mem_name) {
 		this.mem_name = mem_name;
 	}
 	public String getProject_id() {

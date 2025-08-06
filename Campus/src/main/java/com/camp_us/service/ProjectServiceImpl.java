@@ -80,10 +80,25 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<ProjectListVO> searchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException {
-List<ProjectListVO> projectlist = projectDAO.selectsearchProjectList(pageMaker, mem_id);
+		List<ProjectListVO> projectlist = projectDAO.selectsearchProjectList(pageMaker, mem_id);
 		
 		int totalCount = projectDAO.selectsearchProjectListCount(pageMaker, mem_id);
 		pageMaker.setTotalCount(totalCount);
 		return projectlist;
+	}
+
+	@Override
+	public List<ProjectListVO> selectTeamProfessor(String project_id) throws SQLException {
+		return projectDAO.selectTeamProfessor(project_id);
+	}
+
+	@Override
+	public List<String> selectTeamMembers(String project_id) throws SQLException {
+		return projectDAO.selectTeamMembers(project_id);
+	}
+
+	@Override
+	public List<ProjectListVO> selectTeamLeader(String project_id) throws SQLException {
+		return projectDAO.selectTeamProfessor(project_id);
 	}
 }

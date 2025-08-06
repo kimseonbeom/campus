@@ -12,19 +12,17 @@
 		</if>
 		<if test="searchType == 'sn'.toString()">
 			and (
-			title like '%'||#{keyword}||'%'
+			samester like '%'||#{keyword}||'%'
 			or
-			content like '%'||#{keyword}||'%'						
+			project_name like '%'||#{keyword}||'%'						
 			)			
-		</if>
-		<if test="startDate != null and endDate != null">
-  		and project_date between #{startDate} and #{endDate}
 		</if>
 	</sql>
 	<select id="selectsearchProjectList" parameterType="pageMaker" resultType="projectlist">
 	select *
 	from stu_project
 	WHERE mem_id = #{mem_id}
+	<include refid="search" />
 	</select>
 	<select id="selectsearchProjectListCount" parameterType="pageMaker" resultType="int">
 	select 
@@ -37,6 +35,7 @@
 	select *
 	from pro_project
 	WHERE mem_id = #{mem_id}
+	<include refid="search" />
 	</select>
 	<select id="selectsearchProjectListCountpro" parameterType="pageMaker" resultType="int">
 	select 
@@ -100,7 +99,20 @@
   <select id="selectTeamSeqNext" resultType="str">
     SELECT 'T' || LPAD(team_seq.NEXTVAL, 5, '0') FROM dual
   </select>
-
-
+  	<select id="selectTeamProfessor" resultType="projectlist">
+	select project_id, profes_id, profes_name
+	from pro_project
+	where project_id = #{project_id}
+	</select>
+	<select id="selectTeamMembers" resultType="str">
+	select member_name
+	from pro_project
+	where project_id = #{project_id}
+	</select>
+	<select id="selectTeamleader" resultType="projectlist">
+	select DISTINCT project_id, team_leader, leader_name
+	from pro_project
+    where project_id = #{project_id};
+	</select>
 
 </mapper>

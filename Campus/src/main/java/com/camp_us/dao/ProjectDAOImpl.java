@@ -82,10 +82,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		int offset = pageMaker.getStartRow()-1;
 		int limit = pageMaker.getPerPageNum();
 		RowBounds bounds = new RowBounds(offset,limit);
-		Map<String, Object> dashMap = new HashMap<String, Object>();
-		dashMap.put("pageMaker", pageMaker);
-	    dashMap.put("mem_id", mem_id);
-		List<ProjectListVO> projectlist = session.selectList("Project-Mapper.selectsearchProjectList",dashMap,bounds);
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		dataMap.put("keyword", pageMaker.getKeyword());
+		dataMap.put("searchType",pageMaker.getSearchType());
+		dataMap.put("mem_id", mem_id);
+		List<ProjectListVO> projectlist = session.selectList("Project-Mapper.selectsearchProjectList",dataMap,bounds);
 		
 		return projectlist;
 	}
@@ -94,6 +95,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public int selectsearchProjectListCount(PageMaker pageMaker, String mem_id) {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
+		dataMap.put("searchType",pageMaker.getSearchType());
 		dataMap.put("mem_id", mem_id);
 		
 		int count = session.selectOne("Project-Mapper.selectsearchProjectListCount",dataMap);
@@ -121,6 +123,21 @@ public class ProjectDAOImpl implements ProjectDAO {
 		
 		int count = session.selectOne("Project-Mapper.selectsearchProjectListCountpro",dataMap);
 		return count;
+	}
+
+	@Override
+	public List<String> selectTeamMembers(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectTeamMembers",project_id);
+	}
+
+	@Override
+	public List<ProjectListVO> selectselectTeamleader(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectselectTeamleader",project_id);
+	}
+
+	@Override
+	public List<ProjectListVO> selectTeamProfessor(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectTeamProfessor",project_id);
 	}
 
     

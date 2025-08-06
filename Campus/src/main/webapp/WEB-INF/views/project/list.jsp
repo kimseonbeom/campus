@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
   html, body {
     margin: 0;
@@ -10,6 +12,7 @@
   }
 </style>
 <body>
+<p>프로젝트 개수: ${fn:length(projectList)}</p>
 <div class="wrap" style="height:100vh;">
 		<div class="card-header" style="border-bottom: none;">
   <h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">팀 목록</h3>
@@ -24,8 +27,8 @@
 <div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%;">
 <div class="d-flex align-items-center" style="width: auto;">
   <span class="ml-3 mr-3">학기</span>
-  <select style="width: 110px; font-size: 13px; padding: 2px 4px; border-radius:5px; border: 1px solid #ced4da;">
-    <option>학기 선택</option>
+  <select name="searchType"style="width: 110px; font-size: 13px; padding: 2px 4px; border-radius:5px; border: 1px solid #ced4da;">
+    <option value="n">학기 선택</option>
     <option>1학기</option>
     <option>2학기</option>
   </select>
@@ -59,30 +62,22 @@
 </div>
 </div>
 <div class= "d-flex" style="width:100%;">
-<div class="card card-primary" style="max-height:530px; min-width: 20%; width:30%; margin:30px 19px 10px 26px; box-shadow: none; border-radius: 0 !important;">
-              <div class="card-header d-flex align-items-center justify-content-between" 
-              style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
-                
-                <h3 class="card-title" style="font-size:18px; width:120px;">2025-2학기</h3>
-
-                <div class="card-tools d-flex justify-content-end align-items-center" style="width:300px;">
-                <span style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>	
-                </div>
-              </div>
-              <div class="card-body" style="width: 100%; height:450px;;border: 1px solid #ced4da;">
-				
-                </div>
-              </div>
+				   <c:if test="${empty projectList }">
+				   	   <tr>
+				   	   		<td colspan="5" class="text-center" >해당 내용이 없습니다.</td>
+				   	   </tr>
+				   </c:if>	
+			<c:forEach items="${projectList}" var="stulist">
               <!-- /.card-body -->
             <div class="card card-primary" 
             style="min-width: 20%;max-height:530px; width:30%; margin:30px 19px 10px 26px;border: 1px solid #e7e7e7;  box-shadow: none;  border-radius: 0 !important;">
               <div class="card-header d-flex align-items-center justify-content-between" 
               style="background-color:#2ec4b6; height:60px;border:none;box-shadow: none;border-radius: 0 !important;">
                 
-                <h3 class="card-title" style="font-size:18px; width:120px;">2025-2학기</h3>
+                <h3 class="card-title" style="font-size:18px; width:120px;">2025-${stulist.samester }</h3>
 
                 <div class="card-tools d-flex justify-content-end align-items-center" style="width:300px;">
-                <span style="font-weight:bold; color:#ffffff;">Global Impact Studio</span>	
+                <span style="font-weight:bold; color:#ffffff;">${stulist.project_name }</span>	
                 </div>
               </div>
               <div class="card-body p-0" style="width: 100%; height:450px; ;border: 1px solid #e7e7e7; color:#707070;">
@@ -96,10 +91,10 @@
 				</div>
 				<div class="row text-center">
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025-03-18</span>
+				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${stulist.project_stdate }" pattern="yyyy-MM-dd"/></span>
 				</div>
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">2025-03-18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span style="font-size:18px; color:#707070;"><fmt:formatDate value="${stulist.project_endate }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</div>
 				</div>
 				<div class="row">
@@ -116,13 +111,13 @@
 				<div class="col-6 pl-5">
 				<span style="color:#707070;">&nbsp;로드맵</span></div>
 				<div class="col-5 d-flex justify-content-end">
-				<span class=""style="font-weight:bold; color:#2ec4b6;">제출완료</span></div>
+				<span class=""style="font-weight:bold; color:#2ec4b6;">${stulist.rm_status }</span></div>
 				</div>
 				<div class="row p-1">
 				<div class="col-6 pl-5">
 				<span style="color:#707070;">&nbsp;피드백</span></div>
 				<div class="col-5 d-flex justify-content-end">
-				<span class="" style="font-weight:bold; color:#a6a6a6;">미등록</span></div></div>
+				<span class="" style="font-weight:bold; color:#a6a6a6;">${eval_status }</span></div></div>
 				
 				<div class="row mx-0">
 				<div class="col-12 px-0">
@@ -133,19 +128,23 @@
 				<div class="col-6 pl-5">
 				<h3 style="font-size:16px; font-weight:bold; color:#707070;">담당 교수</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">김형민</div>
+				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.profes_name }</div>
 				</div>
 				<div class="row pb-1 pl-1">
 				<div class="col-6 pl-5">
 				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀장</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">김원희</div>
+				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.leader_name }</div>
 				</div>
 				<div class="row pl-1 pb-3">
 				<div class="col-5 pl-5">
 				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀원</h3>
 				</div>
-				<div class="col-7 pr-5 text-right" style="color:#707070;">권오규 김민주 김선범<br>박종원 윤용선</div>
+				<div class="col-7 pr-5 text-right" style="color:#707070;">
+  <c:forEach var="member" items="${projectTeamMembersMap[stulist.project_id]}">
+    ${member}&nbsp;
+  </c:forEach>
+</div>
 				</div>
 				<div class="row pt-2">
 				<div class="col-1"></div>
@@ -158,98 +157,15 @@
 				</div>
               </div>
               </div>
-                        <div class="card card-primary" style="max-height:530px;min-width: 20%; width:30%; margin:30px 19px 10px 26px; box-shadow: none;border: 2px solid #E7E7E7;  border-radius: 0 !important;">
-              <div class="card-header d-flex align-items-center justify-content-between" 
-              style="background-color:#f5f5f5; height:60px;border:none;box-shadow: none; border-radius: 0 !important;">
-                
-                <h3 class="card-title" style="font-size:18px; width:120px;color:#707070;">2025-2학기</h3>
-
-                <div class="card-tools d-flex justify-content-end align-items-center" style="width:300px;">
-                <span style="font-weight:bold; color:#707070;">Global Impact Studio</span>	
-                </div>
-              </div>
-              <div class="card-body p-0" style="width: 100%; height:450px;color:#707070;">
-				<div class="row text-center p-2 mt-2">
-				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
-				</div>
-				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-				</div>
-				</div>
-				<div class="row text-center">
-				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025-03-18</span>
-				</div>
-				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">2025-03-18&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				</div>
-				</div>
-				<div class="row">
-				<div class="col-10 mx-auto">
-  <hr>
-</div>
-				</div>
-				<div class="row p-2">
-				<div class="col-12 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">금주 제출현황</h3>
-				</div>
-				</div>
-				<div class="row p-1">
-				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;로드맵</span></div>
-				<div class="col-5 d-flex justify-content-end">
-				<span class=""style="font-weight:bold; color:#2ec4b6;">제출완료</span></div>
-				</div>
-				<div class="row p-1">
-				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;피드백</span></div>
-				<div class="col-5 d-flex justify-content-end">
-				<span class="" style="font-weight:bold; color:#a6a6a6;">등록완료</span></div></div>
-				
-				<div class="row mx-0">
-				<div class="col-12 px-0">
-					<hr style="height: 1px; background-color: #E7E7E7; border: none; width: 100%;">
-					</div>
-					</div>
-				<div class="row pb-1 pl-1">
-				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">담당 교수</h3>
-				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">김형민</div>
-				</div>
-				<div class="row pb-1 pl-1">
-				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀장</h3>
-				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">김원희</div>
-				</div>
-				<div class="row pl-1 pb-3">
-				<div class="col-5 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀원</h3>
-				</div>
-				<div class="col-7 pr-5 text-right" style="color:#707070;">권오규 김민주 김선범<br>박종원 윤용선</div>
-				</div>
-				<div class="row pt-2">
-				<div class="col-1"></div>
-				<div class="col-10">
-				<button type="button" class="btn btn-block btn-secondary btn-flat" style="background-color: #e7e7e7; color:#707070; font-weight:bold;">로드맵</button>
-				</div>
-				<div class="col-1"></div>
-				</div>
-              </div>
-              </div>
+              </c:forEach>
+                       
             </div>
    <div class="row">
-  <div class="col-12">
-    <ul class="pagination justify-content-center" >	
-      <li class="page-item"><a class="page-link" href="#">«</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">»</a></li>
-    </ul>
-  </div>
+   <!--페이지  -->
+<c:if test="${not empty projectList}">
+  <%@ include file="/WEB-INF/views/module/pagination.jsp" %>
+</c:if>
+
 </div>
 </div>
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>

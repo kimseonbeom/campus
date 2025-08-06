@@ -19,6 +19,12 @@ public interface ProjectDAO {
 	
     int selectsearchProjectListCountpro(PageMaker pageMaker, String mem_id);
     
+    List<String>selectTeamMembers(String project_id)throws SQLException;
+    
+    List<ProjectListVO>selectselectTeamleader(String project_id)throws SQLException;
+    
+    List<ProjectListVO>selectTeamProfessor(String project_id)throws SQLException;
+    
     List<ProjectVO>selectProjectList(String mem_id) throws SQLException;
     // 팀 선택 학생 리스트 조회
     List<MemberVO> selectTeamMemberList() throws SQLException;

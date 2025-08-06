@@ -1,6 +1,8 @@
 package com.camp_us.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,9 +41,27 @@ public class ProjectController {
             throw new IllegalStateException("로그인 정보가 없습니다.");
         }
         model.addAttribute("member",member);
-        String member_id = member.getMem_id();
-    	List<ProjectListVO> projectList = projectService.searchProjectList(pageMaker, member_id);
+        String mem_id = member.getMem_id();
+        List<ProjectListVO> projectList = projectService.searchProjectList(pageMaker, mem_id);
+        List<ProjectListVO> projectListpro = projectService.searchProjectListpro(pageMaker, mem_id);
+
+        Map<String, List<String>> projectTeamMembersMap = new HashMap<>();
+        
+        for (ProjectListVO project : projectList) {
+            String project_id = project.getProject_id();
+            List<String> members = projectService.selectTeamMembers(project_id);
+            projectTeamMembersMap.put(project_id, members);
+        }
+
+        for (ProjectListVO project : projectListpro) {
+            String project_id = project.getProject_id();
+            List<String> members = projectService.selectTeamMembers(project_id);
+            projectTeamMembersMap.put(project_id, members);
+        }
+
         model.addAttribute("projectList", projectList);
+        model.addAttribute("projectListpro", projectListpro);
+        model.addAttribute("projectTeamMembersMap", projectTeamMembersMap);
     }
 
     @GetMapping("/detail")

@@ -20,6 +20,12 @@ public interface ProjectService {
     List<MemberVO> selectTeamMemberList() throws SQLException;
 
     List<MemberVO> selectProfessorList() throws SQLException;
+    
+    List<ProjectListVO> selectTeamProfessor(String project_id)throws SQLException;
+    
+    List<String> selectTeamMembers(String project_id)throws SQLException;
+    
+    List<ProjectListVO> selectTeamLeader(String project_id)throws SQLException;
 
     MemberVO selectMemberListById(String mem_id) throws SQLException;
 

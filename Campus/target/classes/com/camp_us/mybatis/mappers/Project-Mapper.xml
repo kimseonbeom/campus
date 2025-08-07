@@ -4,27 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project-Mapper">
 <sql id="search">
-		<if test="searchType == 's'.toString()">
-			and samester like '%'||#{keyword}||'%'			
-		</if>
-		<if test="searchType == 'n'.toString()">
-			and project_name like '%'||#{keyword}||'%'			
-		</if>
-		<if test="searchType == 'sn'.toString()">
-			and (
-			samester like '%'||#{keyword}||'%'
-			or
-			project_name like '%'||#{keyword}||'%'						
-			)			
-		</if>
-	</sql>
-	<select id="selectsearchProjectList" parameterType="pageMaker" resultType="projectlist">
+  <if test="searchType != null and searchType.equals('samester') and keyword != null and keyword != ''">
+    AND samester = #{keyword}
+  </if>
+<if test="project_stdate != null and project_stdate != ''">
+  AND project_stdate &gt;= #{project_stdate}
+</if>
+<if test="project_endate != null and project_endate != ''">
+  AND project_endate &lt;= #{project_endate}
+</if>
+
+  <if test="searchType != null and searchType.equals('n') and keyword != null and keyword != ''">
+    AND project_name LIKE '%' || #{keyword} || '%'
+  </if>
+</sql>
+	<select id="selectsearchProjectList" resultType="projectlist">
 	select *
 	from stu_project
 	WHERE mem_id = #{mem_id}
 	<include refid="search" />
+	order by reg_date desc
 	</select>
-	<select id="selectsearchProjectListCount" parameterType="pageMaker" resultType="int">
+	<select id="selectsearchProjectListCount" resultType="int">
 	select 
 	count (*)
 	from stu_project
@@ -36,13 +37,14 @@
 	from pro_project
 	WHERE mem_id = #{mem_id}
 	<include refid="search" />
+	order by regdate desc
 	</select>
 	<select id="selectsearchProjectListCountpro" parameterType="pageMaker" resultType="int">
 	select 
 	count (*)
 	from pro_project
 	where mem_id = #{mem_id}
-	<include refid="search" />
+<!-- 	<include refid="search" /> -->
 	</select>
 <select id="selectProjectList" resultType="project">
 	select p.*

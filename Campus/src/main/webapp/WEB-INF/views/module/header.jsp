@@ -286,6 +286,25 @@ textarea:focus {
   width: 100vw;
   overflow-x: hidden;
 }
+.page-item.active .page-link {
+  background-color: #2ec4b6;  /* 원하는 색상 */
+  border-color: #2ec4b6;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.page-link {
+  color: #707070;
+  border-radius: 8px;
+  margin: 0 4px;
+  transition: background-color 0.3s ease;
+}
+
+.page-link:hover {
+  background-color: #22a99c;
+  text-decoration: none;
+}
 </style>
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>

@@ -1,10 +1,14 @@
 package com.camp_us.command;
 
-public class PageMaker {
 
+
+
+public class PageMaker {
 	private String searchType = "";
 	private String keyword = "";
-	
+	private String startDate;
+	private String endDate;
+
 	private int page = 1; // 페이지 번호
 	private int perPageNum = 3; // 리스트 개수
 	private int totalCount; // 전체 행의 개수
@@ -17,6 +21,18 @@ public class PageMaker {
 	private boolean next; // 다음페이지 버튼 유무
 
 	
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	public int getPage() {
 		return page;
 	}

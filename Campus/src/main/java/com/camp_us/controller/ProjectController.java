@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,34 +35,65 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/list")
-    public void list(HttpSession session, Model model, PageMaker pageMaker) throws Exception {
+    @GetMapping("/list/stu")
+    public String listStudent(HttpSession session, Model model,@RequestParam(value = "samester", required = false) String samester,@RequestParam(value = "startDate", required = false) String startDate,
+            @RequestParam(value = "endDate", required = false) String endDate,
+    		@ModelAttribute PageMaker pageMaker) throws Exception {
+    	String url="/project/list";
+    	
         MemberVO member = (MemberVO) session.getAttribute("loginUser");
         if (member == null) {
             throw new IllegalStateException("로그인 정보가 없습니다.");
         }
         model.addAttribute("member",member);
         String mem_id = member.getMem_id();
+        pageMaker.setSearchType("samester");
+        pageMaker.setKeyword(samester);
+        pageMaker.setStartDate(startDate);    // 새 필드 추가 가정
+        pageMaker.setEndDate(endDate);
         List<ProjectListVO> projectList = projectService.searchProjectList(pageMaker, mem_id);
-        List<ProjectListVO> projectListpro = projectService.searchProjectListpro(pageMaker, mem_id);
 
-        Map<String, List<String>> projectTeamMembersMap = new HashMap<>();
         
+        Map<String, List<String>> projectTeamMembersMap = new HashMap<>();
         for (ProjectListVO project : projectList) {
             String project_id = project.getProject_id();
             List<String> members = projectService.selectTeamMembers(project_id);
             projectTeamMembersMap.put(project_id, members);
         }
 
+        model.addAttribute("selectedSamester", samester); 
+        model.addAttribute("projectList", projectList);
+        model.addAttribute("projectTeamMembersMap", projectTeamMembersMap);
+      
+        return url;
+    }
+    @GetMapping("/list/pro")
+    public String listPro(HttpSession session, Model model,@ModelAttribute PageMaker pageMaker) throws Exception {
+    	String url = "/project/list";
+    	
+        MemberVO member = (MemberVO) session.getAttribute("loginUser");
+        if (member == null) {
+            throw new IllegalStateException("로그인 정보가 없습니다.");
+        }
+        model.addAttribute("member",member);
+        String mem_id = member.getMem_id();
+        List<ProjectListVO> projectListpro = projectService.searchProjectListpro(pageMaker, mem_id);
+
+        
+        Map<String, List<String>> projectTeamMembersMap = new HashMap<>();
+        Map<String, List<String>> projectProfessorMap = new HashMap<>();
+
         for (ProjectListVO project : projectListpro) {
             String project_id = project.getProject_id();
-            List<String> members = projectService.selectTeamMembers(project_id);
-            projectTeamMembersMap.put(project_id, members);
+            List<String> professor = projectService.selectTeamProfessor(project_id);
+            projectProfessorMap.put(project_id, professor);
         }
 
-        model.addAttribute("projectList", projectList);
         model.addAttribute("projectListpro", projectListpro);
         model.addAttribute("projectTeamMembersMap", projectTeamMembersMap);
+        model.addAttribute("projectProfessorMap",projectProfessorMap);
+        
+        return url;
     }
 
     @GetMapping("/detail")
@@ -73,7 +105,8 @@ public class ProjectController {
     // ✅ 프로젝트 등록 폼 (교수/학생 리스트 조회)
     @GetMapping("/regist")
     public void registForm(Model model) throws Exception {
-        List<MemberVO> professorList = projectService.selectProfessorList();
+    	System.out.println("[ProjectController] registForm() 호출됨");
+    	List<MemberVO> professorList = projectService.selectProfessorList();
         List<MemberVO> studentList = projectService.selectTeamMemberList();
         model.addAttribute("professorList", professorList);
         model.addAttribute("studentList", studentList);

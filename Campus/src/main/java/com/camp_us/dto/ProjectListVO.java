@@ -10,7 +10,7 @@ public class ProjectListVO {
 	private Date project_endate; 
 	private String profes_id;
 	private String profes_name;
-	private String reg_date;
+	private Date reg_date;
 	private String update_date;
 	private String team_id;
 	private String samester;
@@ -76,10 +76,10 @@ public class ProjectListVO {
 	public void setProfes_id(String profes_id) {
 		this.profes_id = profes_id;
 	}
-	public String getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(String reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 	public String getUpdate_date() {

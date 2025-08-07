@@ -21,9 +21,9 @@ public interface ProjectDAO {
     
     List<String>selectTeamMembers(String project_id)throws SQLException;
     
-    List<ProjectListVO>selectselectTeamleader(String project_id)throws SQLException;
+    List<ProjectListVO>selectTeamleader(String project_id)throws SQLException;
     
-    List<ProjectListVO>selectTeamProfessor(String project_id)throws SQLException;
+    List<String> selectTeamProfessor(String project_id)throws SQLException;
     
     List<ProjectVO>selectProjectList(String mem_id) throws SQLException;
     // 팀 선택 학생 리스트 조회

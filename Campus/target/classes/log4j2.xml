@@ -40,6 +40,9 @@
 			<AppenderRef ref="console" />
 			<AppenderRef ref="async_log" />
 		</logger>
+		<Logger name="jdbc.resultset" level="debug" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
 		<!-- 
 		<Logger name="jdbc.connection" level="info" additivity="false">
 			<AppenderRef ref="async_log" />

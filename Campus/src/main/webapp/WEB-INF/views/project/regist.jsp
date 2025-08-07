@@ -109,7 +109,7 @@
 		<div class="col-6"></div>
 		<div class="col-2"></div>
 		<div class="col-2">
-			<button type="button" class="btn btn-info" onclick="history.back();"
+			<button type="button" class="btn btn-info" onclick="if(confirm('등록을 취소하시겠습니까?')) history.back();"
               style="background-color:#aaaaaa; border-radius:5px; width:150px; height:40px; border:none; margin-right:-20px; font-weight:bold; margin-left:40px;">
               <span style="color:#ffffff; font-size:20px;">취 소</span>
             </button>

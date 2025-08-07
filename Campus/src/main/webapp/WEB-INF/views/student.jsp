@@ -231,13 +231,13 @@
                       </div>
                       </div>
               <li class="nav-item">
-                <a href="#" class="nav-link" onclick="goSyllabus(); return false;">
+                <a href="" class="nav-link" onclick="goSyllabus(); return false;">
                   <i class="far fas nav-icon" ></i>
                   <p>&nbsp;&nbsp;&nbsp;강의계획서</p>
                 </a>
               </li>
               <li class="nav-item menu" data-url="" onclick="goSyllabus(); return false;">
-                <a href="#" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;공지사항</p>
                 </a>
@@ -286,8 +286,13 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list?mem_id=${loginUser.mem_id }">
-                <a href="#" class="nav-link">
+            <sec:authorize access="hasRole('ROLE_1')">
+              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list/stu?mem_id=${loginUser.mem_id }">
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_2')">
+              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list/pro?mem_id=${loginUser.mem_id }">
+            </sec:authorize>
+                <a href="javascript:void(0)" class="nav-link">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>
                 </a>

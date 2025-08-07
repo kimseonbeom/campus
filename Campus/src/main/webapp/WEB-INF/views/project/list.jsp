@@ -25,22 +25,25 @@
   </div>
 </div>
 
-<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%;">
 <form action="${pageContext.request.contextPath}/project/list/stu" method="get">
-  <label>학기</label>
-  <select name="samester">
+<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%;">
+<div style="display: flex; align-items: center; height: 50px;width:40px; margin-left:20px;">
+  <label style="margin: 0;">학기</label>
+</div>
+<div style="width:80px;">
+  <select name="samester" style="width:70px; border: 1px solid #ced4da;">
     <option value="" ${selectedSamester == null ? "selected" : ""}>전체</option>
     <option value="1학기" ${selectedSamester == '1학기' ? "selected" : ""}>1학기</option>
     <option value="2학기" ${selectedSamester == '2학기' ? "selected" : ""}>2학기</option>
   </select>
-  <button type="submit">적용</button>
-</form>
+ </div>
+  <button type="submit" style="width:50px; background-color:#ffffff; border:2px solid #2ec4b6;border-radius:5px; color:#2ec4b6; font-weight:bold;">적용</button>
 <div class="ml-3">
-<span>기간</span>
+<label style="margin: 0;">기간</label>
 </div>
 <div class="input-group date mt-2 mb-2 ml-3" id="datetimepicker1" data-target-input="nearest" style="width: 130px;">
   <input type="text" name="project_stdate" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-         style="width: 90px; height: 26px; font-size: 13px; padding: 4px 6px;">
+         style="width: 90px; height: 26px; font-size: 13px; padding: 4px 6px;" value="${project_stdate != null ? project_stdate : ''}">
   <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
     <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-minical"></i></div>
   </div>
@@ -48,23 +51,22 @@
 <span class="ml-3"> ~ </span>
 <div class="input-group date mt-2 mb-2 ml-3" id="datetimepicker2" data-target-input="nearest" style="width: 130px;">
   <input type="text" name="project_endate" class="form-control datetimepicker-input" data-target="#datetimepicker2"
-         style="width: 90px;height: 26px; font-size: 13px; padding: 4px 6px;">
+         style="width: 90px;height: 26px; font-size: 13px; padding: 4px 6px;" value="${project_endate != null ? project_stdate : ''}">
   <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
     <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-minical"></i></div>
   </div>
   
 </div>
- <button class="btn btn-navbar" type="submit" style="padding: 2px 10px;">
-                <i class="fas fa-cpsearch ml-1"></i>
-              </button>
+<button type="submit" style="margin-left:20px;width:50px; background-color:#ffffff; border:2px solid #2ec4b6;border-radius:5px; color:#2ec4b6; font-weight:bold;">적용</button>
 
 <div class="input-group input-group-sm ml-auto" style="max-width:300px; width:auto;">
-  <input id="keyword"class="form-control" type="search" placeholder="검색어를 입력해주세요." aria-label="Search"
+  <input id="keyword" name="project_name" class="form-control" type="search" placeholder="프로젝트명을 입력해주세요." aria-label="Search"
          style="height: 35px; font-size: 13px; padding: 4px 6px; line-height: 1.2;">
   <div class="input-group-append">
     <button class="btn btn-navbar" type="submit" style="padding: 2px 10px;">
                 <i class="fas fa-cpsearch ml-1"></i>
               </button>
+              </form>
   </div>
 </div>
 </div>
@@ -89,21 +91,21 @@
                 <span style="font-weight:bold; color:#707070;">${stulist.project_name }</span>	
                 </div>
               </div>
-              <div class="card-body p-0" style="width: 100%; height:450px;color:#707070;">
+              <div class="card-body p-0" style="width: 100%; height:450px;">
 				<div class="row text-center p-2 mt-2">
 				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
+				<h2 style="font-size:16px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
 				</div>
 				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+				<h2 style="font-size:16px; font-weight:bold;">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
 				</div>
 				</div>
 				<div class="row text-center">
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${stulist.project_stdate }" pattern="yyyy-MM-dd"/></span>
+				<span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${stulist.project_stdate }" pattern="yyyy-MM-dd"/></span>
 				</div>
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;"><fmt:formatDate value="${stulist.project_endate }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span style="font-size:18px;"><fmt:formatDate value="${stulist.project_endate }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</div>
 				</div>
 				<div class="row">
@@ -113,18 +115,18 @@
 				</div>
 				<div class="row p-2">
 				<div class="col-12 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">금주 제출현황</h3>
+				<h3 style="font-size:16px; font-weight:bold;">금주 제출현황</h3>
 				</div>
 				</div>
 				<div class="row p-1">
 				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;로드맵</span></div>
+				<span>&nbsp;로드맵</span></div>
 				<div class="col-5 d-flex justify-content-end">
 				<span class=""style="font-weight:bold; color:#2ec4b6;">${empty stulist.rm_status ? "미제출" : stulist.rm_status}</span></div>
 				</div>
 				<div class="row p-1">
 				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;피드백</span></div>
+				<span>&nbsp;피드백</span></div>
 				<div class="col-5 d-flex justify-content-end">
 				<span class="" style="font-weight:bold; color:#a6a6a6;"> ${empty eval_status ? "미등록" : eval_status}</span></div></div>
 				
@@ -135,21 +137,21 @@
 					</div>
 				<div class="row pb-1 pl-1">
 				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">담당 교수</h3>
+				<h3 style="font-size:16px; font-weight:bold; ">담당 교수</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.profes_name }</div>
+				<div class="col-6 pr-5 text-right">${stulist.profes_name }</div>
 				</div>
 				<div class="row pb-1 pl-1">
 				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀장</h3>
+				<h3 style="font-size:16px; font-weight:bold;">팀장</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.leader_name }</div>
+				<div class="col-6 pr-5 text-right" >${stulist.leader_name }</div>
 				</div>
 				<div class="row pl-1 pb-3">
 				<div class="col-5 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀원</h3>
+				<h3 style="font-size:16px; font-weight:bold;">팀원</h3>
 				</div>
-				<div class="col-7 pr-5 text-right" style="color:#707070;">  
+				<div class="col-7 pr-5 text-right">  
 					<c:forEach var="member" items="${projectTeamMembersMap[stulist.project_id]}">
    					 ${member}&nbsp;
   					</c:forEach>
@@ -177,21 +179,21 @@
                 <span style="font-weight:bold; color:#ffffff;">${stulist.project_name }</span>	
                 </div>
               </div>
-              <div class="card-body p-0" style="width: 100%; height:450px; ;border: 1px solid #e7e7e7; color:#707070;">
+              <div class="card-body p-0" style="width: 100%; height:450px; ;border: 1px solid #e7e7e7;">
 				<div class="row text-center p-2 mt-2">
 				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
+				<h2 style="font-size:16px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시작기한</h2>
 				</div>
 				<div class="col-6">
-				<h2 style="font-size:16px; font-weight:bold; color:#707070;">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+				<h2 style="font-size:16px; font-weight:bold; ">마감기한&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
 				</div>
 				</div>
 				<div class="row text-center">
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${stulist.project_stdate }" pattern="yyyy-MM-dd"/></span>
+				<span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${stulist.project_stdate }" pattern="yyyy-MM-dd"/></span>
 				</div>
 				<div class="col-6">
-				<span style="font-size:18px; color:#707070;"><fmt:formatDate value="${stulist.project_endate }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<span style="font-size:18px;"><fmt:formatDate value="${stulist.project_endate }" pattern="yyyy-MM-dd"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</div>
 				</div>
 				<div class="row">
@@ -201,12 +203,12 @@
 				</div>
 				<div class="row p-2">
 				<div class="col-12 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">금주 제출현황</h3>
+				<h3 style="font-size:16px; font-weight:bold;">금주 제출현황</h3>
 				</div>
 				</div>
 				<div class="row p-1">
 				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;로드맵</span></div>
+				<span>&nbsp;로드맵</span></div>
 				<div class="col-5 d-flex justify-content-end">
 				<span class="" style="font-weight:bold; color:#2ec4b6;">
   				${empty stulist.rm_status ? "미제출" : stulist.rm_status}
@@ -214,7 +216,7 @@
 				</div>
 				<div class="row p-1">
 				<div class="col-6 pl-5">
-				<span style="color:#707070;">&nbsp;피드백</span></div>
+				<span>&nbsp;피드백</span></div>
 				<div class="col-5 d-flex justify-content-end">
 				<span class="" style="font-weight:bold; color:#a6a6a6;">
  				 ${empty eval_status ? "미등록" : eval_status}
@@ -227,21 +229,21 @@
 					</div>
 				<div class="row pb-1 pl-1">
 				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">담당 교수</h3>
+				<h3 style="font-size:16px; font-weight:bold;">담당 교수</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.profes_name }</div>
+				<div class="col-6 pr-5 text-right">${stulist.profes_name }</div>
 				</div>
 				<div class="row pb-1 pl-1">
 				<div class="col-6 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀장</h3>
+				<h3 style="font-size:16px; font-weight:bold;">팀장</h3>
 				</div>
-				<div class="col-6 pr-5 text-right" style="color:#707070;">${stulist.leader_name }</div>
+				<div class="col-6 pr-5 text-right">${stulist.leader_name }</div>
 				</div>
 				<div class="row pl-1 pb-3">
 				<div class="col-5 pl-5">
-				<h3 style="font-size:16px; font-weight:bold; color:#707070;">팀원</h3>
+				<h3 style="font-size:16px; font-weight:bold;">팀원</h3>
 				</div>
-				<div class="col-7 pr-5 text-right" style="color:#707070;">
+				<div class="col-7 pr-5 text-right">
   <c:forEach var="member" items="${projectTeamMembersMap[stulist.project_id]}">
     ${member}&nbsp;
   </c:forEach>
@@ -282,10 +284,10 @@
   <script>
     $(function () {
       $('#datetimepicker1').datetimepicker({
-        format: 'L' // 날짜만 (MM/DD/YYYY 형식)
+        format: 'YYYY-MM-DD' // 날짜만 (MM/DD/YYYY 형식)
       });
     $('#datetimepicker2').datetimepicker({
-        format: 'L'
+        format: 'YYYY-MM-DD'
       });
     });
     </script>

@@ -6,8 +6,8 @@ package com.camp_us.command;
 public class PageMaker {
 	private String searchType = "";
 	private String keyword = "";
-	private String startDate;
-	private String endDate;
+	private String project_stdate;
+	private String project_endate;
 
 	private int page = 1; // 페이지 번호
 	private int perPageNum = 3; // 리스트 개수
@@ -21,17 +21,18 @@ public class PageMaker {
 	private boolean next; // 다음페이지 버튼 유무
 
 	
-	public String getStartDate() {
-		return startDate;
+
+	public String getProject_stdate() {
+		return project_stdate;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setProject_stdate(String project_stdate) {
+		this.project_stdate = project_stdate;
 	}
-	public String getEndDate() {
-		return endDate;
+	public String getProject_endate() {
+		return project_endate;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setProject_endate(String project_endate) {
+		this.project_endate = project_endate;
 	}
 	public int getPage() {
 		return page;

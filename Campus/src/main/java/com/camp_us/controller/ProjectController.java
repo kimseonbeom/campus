@@ -28,7 +28,7 @@ import com.camp_us.service.ProjectService;
 @RequestMapping("/project")
 public class ProjectController {
 
-    private final ProjectService projectService;
+    private ProjectService projectService;
 
     @Autowired
     public ProjectController(ProjectService projectService) {
@@ -36,21 +36,18 @@ public class ProjectController {
     }
 
     @GetMapping("/list/stu")
-    public String listStudent(HttpSession session, Model model,@RequestParam(value = "samester", required = false) String samester,@RequestParam(value = "startDate", required = false) String startDate,
-            @RequestParam(value = "endDate", required = false) String endDate,
+    public String listStudent(HttpSession session, Model model,@RequestParam(value = "samester", required = false) String samester,
     		@ModelAttribute PageMaker pageMaker) throws Exception {
     	String url="/project/list";
-    	
         MemberVO member = (MemberVO) session.getAttribute("loginUser");
         if (member == null) {
             throw new IllegalStateException("로그인 정보가 없습니다.");
         }
         model.addAttribute("member",member);
         String mem_id = member.getMem_id();
-        pageMaker.setSearchType("samester");
+        pageMaker.setSearchType("multi");
         pageMaker.setKeyword(samester);
-        pageMaker.setStartDate(startDate);    // 새 필드 추가 가정
-        pageMaker.setEndDate(endDate);
+        
         List<ProjectListVO> projectList = projectService.searchProjectList(pageMaker, mem_id);
 
         
@@ -64,6 +61,10 @@ public class ProjectController {
         model.addAttribute("selectedSamester", samester); 
         model.addAttribute("projectList", projectList);
         model.addAttribute("projectTeamMembersMap", projectTeamMembersMap);
+        System.out.println("project_stdate: " + pageMaker.getProject_stdate());
+        System.out.println("project_endate: " + pageMaker.getProject_endate());
+        model.addAttribute("project_stdate",pageMaker.getProject_stdate());
+        model.addAttribute("project_endate",pageMaker.getProject_endate());
       
         return url;
     }

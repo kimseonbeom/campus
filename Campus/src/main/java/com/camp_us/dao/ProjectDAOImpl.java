@@ -86,6 +86,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType",pageMaker.getSearchType());
 		dataMap.put("mem_id", mem_id);
+		dataMap.put("project_stdate", pageMaker.getProject_stdate());
+		dataMap.put("project_endate", pageMaker.getProject_endate());
 		List<ProjectListVO> projectlist = session.selectList("Project-Mapper.selectsearchProjectList",dataMap,bounds);
 		
 		return projectlist;
@@ -97,7 +99,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType",pageMaker.getSearchType());
 		dataMap.put("mem_id", mem_id);
-		
+		dataMap.put("project_stdate", pageMaker.getProject_stdate());
+		dataMap.put("project_endate", pageMaker.getProject_endate());
 		int count = session.selectOne("Project-Mapper.selectsearchProjectListCount",dataMap);
 		return count;
 	}
@@ -111,6 +114,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 		dataMap.put("pageMaker", pageMaker);
 		dataMap.put("searchType", pageMaker.getSearchType());
 		dataMap.put("mem_id", mem_id);
+		dataMap.put("project_stdate", pageMaker.getProject_stdate());
+		dataMap.put("project_endate", pageMaker.getProject_endate());
 		List<ProjectListVO> projectlist = session.selectList("Project-Mapper.selectsearchProjectListpro",dataMap,bounds);
 		
 		return projectlist;
@@ -121,6 +126,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType", pageMaker.getSearchType());
+		dataMap.put("project_stdate", pageMaker.getProject_stdate());
+		dataMap.put("project_endate", pageMaker.getProject_endate());
 		dataMap.put("mem_id", mem_id);
 		
 		int count = session.selectOne("Project-Mapper.selectsearchProjectListCountpro",dataMap);

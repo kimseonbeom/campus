@@ -3,27 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Project-Mapper">
-<sql id="search">
-  <if test="searchType != null and searchType.equals('samester') and keyword != null and keyword != ''">
-    AND samester = #{keyword}
-  </if>
-<if test="project_stdate != null and project_stdate != ''">
-  AND project_stdate &gt;= #{project_stdate}
-</if>
-<if test="project_endate != null and project_endate != ''">
-  AND project_endate &lt;= #{project_endate}
-</if>
 
-  <if test="searchType != null and searchType.equals('n') and keyword != null and keyword != ''">
-    AND project_name LIKE '%' || #{keyword} || '%'
-  </if>
+<sql id="search">
+    <if test="keyword != null and keyword != ''">
+        AND samester LIKE '%' || #{keyword} || '%'
+    </if>
+    <if test="project_stdate != null and project_stdate != '' and project_endate != null and project_endate != ''">
+        AND project_stdate &lt;= TO_DATE(#{project_endate}, 'YYYY-MM-DD')
+        AND project_endate &gt;= TO_DATE(#{project_stdate}, 'YYYY-MM-DD')
+    </if>
+    <if test="(project_stdate != null and project_stdate != '') and (project_endate == null or project_endate == '')">
+        AND project_endate &gt;= TO_DATE(#{project_stdate}, 'YYYY-MM-DD')
+    </if>
+    <if test="(project_endate != null and project_endate != '') and (project_stdate == null or project_stdate == '')">
+        AND project_stdate &lt;= TO_DATE(#{project_endate}, 'YYYY-MM-DD')
+    </if>
 </sql>
 	<select id="selectsearchProjectList" resultType="projectlist">
 	select *
 	from stu_project
 	WHERE mem_id = #{mem_id}
 	<include refid="search" />
-	order by reg_date desc
+	order by project_endate desc
 	</select>
 	<select id="selectsearchProjectListCount" resultType="int">
 	select 
@@ -44,7 +45,7 @@
 	count (*)
 	from pro_project
 	where mem_id = #{mem_id}
-<!-- 	<include refid="search" /> -->
+	<include refid="search" />
 	</select>
 <select id="selectProjectList" resultType="project">
 	select p.*

@@ -9,6 +9,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerPro;
+import com.camp_us.dto.EditBfProjectVO;
 import com.camp_us.dto.MemberVO;
 import com.camp_us.dto.ProjectListVO;
 import com.camp_us.dto.ProjectVO;
@@ -85,6 +87,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType",pageMaker.getSearchType());
+		dataMap.put("project_name",pageMaker.getProject_name());
 		dataMap.put("mem_id", mem_id);
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
@@ -98,6 +101,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType",pageMaker.getSearchType());
+		dataMap.put("project_name",pageMaker.getProject_name());
 		dataMap.put("mem_id", mem_id);
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
@@ -106,13 +110,14 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public List<ProjectListVO> selectsearchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException {
+	public List<ProjectListVO> selectsearchProjectListpro(PageMakerPro pageMaker, String mem_id) throws SQLException {
 		int offset = pageMaker.getStartRow()-1;
 		int limit = pageMaker.getPerPageNum();
 		RowBounds bounds = new RowBounds(offset,limit);
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("pageMaker", pageMaker);
+		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType", pageMaker.getSearchType());
+		dataMap.put("project_name",pageMaker.getProject_name());
 		dataMap.put("mem_id", mem_id);
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
@@ -122,10 +127,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public int selectsearchProjectListCountpro(PageMaker pageMaker, String mem_id) {
+	public int selectsearchProjectListCountpro(PageMakerPro pageMaker, String mem_id) {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType", pageMaker.getSearchType());
+		dataMap.put("project_name",pageMaker.getProject_name());
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
 		dataMap.put("mem_id", mem_id);
@@ -149,5 +155,31 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return session.selectList("Project-Mapper.selectTeamProfessor",project_id);
 	}
 
+	@Override
+	public List<ProjectListVO> selectProjectByProjectId(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectProjectByProjectId",project_id);
+	}
+
+	@Override
+	public List<EditBfProjectVO> insertEditBeforeProject(EditBfProjectVO editBfProject) throws SQLException {
+		return session.selectList("Project-Mapper.insertEditBeforeProject",editBfProject);
+	}
+
+	@Override
+	public String selectEditBeforeSeqNext() throws SQLException {
+		String before_id = session.selectOne("Project-Mapper.selectEditBeforeSeqNext");
+		return before_id;
+	}
+
+	@Override
+	public List<String> selectEditStatusByProjectid(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectEditStatusByProjectid",project_id);
+	}
+
+	@Override
+	public List<EditBfProjectVO> selectEditProjectByProjectId(String project_id) throws SQLException {
+		return session.selectList("Project-Mapper.selectEditProjectByProjectId",project_id);
+	}
+	
     
 }

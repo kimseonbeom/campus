@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerPro;
+import com.camp_us.dto.EditBfProjectVO;
 import com.camp_us.dto.MemberVO;
 import com.camp_us.dto.ProjectListVO;
 import com.camp_us.dto.ProjectVO;
@@ -15,9 +17,9 @@ public interface ProjectDAO {
 	
     int selectsearchProjectListCount(PageMaker pageMaker, String mem_id);
 	
-    List<ProjectListVO>selectsearchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException;
+    List<ProjectListVO>selectsearchProjectListpro(PageMakerPro pageMaker, String mem_id) throws SQLException;
 	
-    int selectsearchProjectListCountpro(PageMaker pageMaker, String mem_id);
+    int selectsearchProjectListCountpro(PageMakerPro pageMaker, String mem_id);
     
     List<String>selectTeamMembers(String project_id)throws SQLException;
     
@@ -31,6 +33,8 @@ public interface ProjectDAO {
     // 담당 교수 선택 조회
     List<MemberVO> selectProfessorList() throws SQLException;
     
+    List<ProjectListVO>selectProjectByProjectId(String project_id) throws SQLException;
+    
     MemberVO selectMemberListById(String mem_id) throws SQLException;
     
     void insertTeamMemberList(TeamMemberVO teamMember) throws SQLException;
@@ -41,5 +45,13 @@ public interface ProjectDAO {
     
     String selectProjectSeqNext() throws SQLException;
     
+    List<String> selectEditStatusByProjectid(String project_id) throws SQLException;
+    
+    List<EditBfProjectVO>selectEditProjectByProjectId(String project_id) throws SQLException;
+    
+    String selectEditBeforeSeqNext() throws SQLException;
+    
     String selectTeamSeqNext() throws SQLException;
+    
+    List<EditBfProjectVO>insertEditBeforeProject(EditBfProjectVO editBfProjectVO) throws SQLException;
 }

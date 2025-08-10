@@ -3,14 +3,14 @@ package com.camp_us.command;
 
 
 
-public class PageMaker {
+public class PageMakerPro {
 	private String searchType = "";
 	private String keyword = "";
 	private String project_stdate;
 	private String project_endate;
 	private String project_name;
 	private int page = 1; // 페이지 번호
-	private int perPageNum = 3; // 리스트 개수
+	private int perPageNum = 7; // 리스트 개수
 	private int totalCount; // 전체 행의 개수
 	private int displayPageNum = 10; // 한 페이지에 보여줄 페이지번호 개수
 	

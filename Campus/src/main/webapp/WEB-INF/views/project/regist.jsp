@@ -127,8 +127,8 @@
 <script>
   $(function () {
     // 달력 초기화
-    $('#datetimepicker1').datetimepicker({ format: 'L' });
-    $('#datetimepicker2').datetimepicker({ format: 'L' });
+    $('#datetimepicker1').datetimepicker({ format: 'YYYY-MM-DD' });
+    $('#datetimepicker2').datetimepicker({ format: 'YYYY-MM-DD' });
 
     // 썸머노트 초기화
     $('#content').summernote({
@@ -264,4 +264,4 @@
 
 <jsp:include page="profselect.jsp" />
 <jsp:include page="teamselect.jsp" />
-<jsp:include page="teamsselect.jsp" />
+<jsp:include page="membersSelect.jsp" />

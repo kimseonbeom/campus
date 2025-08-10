@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerPro;
 import com.camp_us.dao.ProjectDAO;
+import com.camp_us.dto.EditBfProjectVO;
 import com.camp_us.dto.MemberVO;
 import com.camp_us.dto.ProjectListVO;
 import com.camp_us.dto.ProjectVO;
@@ -79,7 +81,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<ProjectListVO> searchProjectListpro(PageMaker pageMaker, String mem_id) throws SQLException {
+	public List<ProjectListVO> searchProjectListpro(PageMakerPro pageMaker, String mem_id) throws SQLException {
 		List<ProjectListVO> projectlist = projectDAO.selectsearchProjectListpro(pageMaker, mem_id);
 		
 		int totalCount = projectDAO.selectsearchProjectListCountpro(pageMaker, mem_id);
@@ -102,4 +104,31 @@ public class ProjectServiceImpl implements ProjectService {
 	public  List<ProjectListVO>selectTeamLeader(String project_id) throws SQLException {
 		return projectDAO.selectTeamleader(project_id);
 	}
+
+	@Override
+	public List<EditBfProjectVO> insertEditBeforeProject(EditBfProjectVO editBfProjectVO) throws SQLException {
+			return projectDAO.insertEditBeforeProject(editBfProjectVO);
+	}
+
+	@Override
+	public List<ProjectListVO> selectProjectByProjectId(String project_id) throws SQLException {
+		return projectDAO.selectProjectByProjectId(project_id);
+	}
+
+	@Override
+	public String selectEditBeforeSeqNext() throws SQLException {
+		return projectDAO.selectEditBeforeSeqNext();
+	}
+
+	@Override
+	public List<String> selectEditStatusByProjectid(String project_id) throws SQLException {
+		return projectDAO.selectEditStatusByProjectid(project_id);
+	}
+
+	@Override
+	public List<EditBfProjectVO> selectEditProjectByProjectId(String project_id) throws SQLException {
+		return projectDAO.selectEditProjectByProjectId(project_id);
+	}
+	
+	
 }

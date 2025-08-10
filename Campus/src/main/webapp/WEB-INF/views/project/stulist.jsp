@@ -26,7 +26,7 @@
 </div>
 
 <form action="${pageContext.request.contextPath}/project/list/stu" method="get">
-<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%;">
+<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%; border-top: 2px solid #2ec4b6;">
 <div style="display: flex; align-items: center; height: 50px;width:40px; margin-left:20px;">
   <label style="margin: 0;">학기</label>
 </div>
@@ -51,16 +51,16 @@
 <span class="ml-3"> ~ </span>
 <div class="input-group date mt-2 mb-2 ml-3" id="datetimepicker2" data-target-input="nearest" style="width: 130px;">
   <input type="text" name="project_endate" class="form-control datetimepicker-input" data-target="#datetimepicker2"
-         style="width: 90px;height: 26px; font-size: 13px; padding: 4px 6px;" value="${project_endate != null ? project_stdate : ''}">
+         style="width: 90px;height: 26px; font-size: 13px; padding: 4px 6px;" value="${project_endate != null ? project_endate : ''}">
   <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
     <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-minical"></i></div>
   </div>
-  
+
 </div>
 <button type="submit" style="margin-left:20px;width:50px; background-color:#ffffff; border:2px solid #2ec4b6;border-radius:5px; color:#2ec4b6; font-weight:bold;">적용</button>
 
 <div class="input-group input-group-sm ml-auto" style="max-width:300px; width:auto;">
-  <input id="keyword" name="project_name" class="form-control" type="search" placeholder="프로젝트명을 입력해주세요." aria-label="Search"
+  <input id="project_name" name="project_name" class="form-control" type="search" value="${project_name }" placeholder="프로젝트명을 입력해주세요." aria-label="Search"
          style="height: 35px; font-size: 13px; padding: 4px 6px; line-height: 1.2;">
   <div class="input-group-append">
     <button class="btn btn-navbar" type="submit" style="padding: 2px 10px;">
@@ -72,9 +72,14 @@
 </div>
 <div class= "d-flex" style="width:100%;">
 				   <c:if test="${empty projectList }">
-				   	   <tr>
-				   	   		<td colspan="5" class="text-center" >해당 내용이 없습니다.</td>
-				   	   </tr>
+				   	   <div class="row">
+				   	   <div class="col-4"></div>
+				   	   <div class="col-4" style="width:1600px; margin-top:150px; text-aline:center;">
+				   	   		<span style="font-size:25px; font-weight:bold; color:#e0e0e0;">해당 내용이 없습니다.</span>
+				   	   		</div>
+				   	   		<div class="col-4"></div>
+				   	   </div>
+				   	 
 				   </c:if>	
 		<c:forEach items="${projectList}" var="stulist">
   <fmt:formatDate var="endDateStr" value="${stulist.project_endate}" pattern="yyyy-MM-dd" />
@@ -252,9 +257,17 @@
 				<div class="row pt-2">
 				<div class="col-1"></div>
 				<div class="col-10">
-				<button type="button" class="btn btn-block custom-btn" data-toggle="modal" data-target="#modifyModal">
-  수정 요청
-</button>
+<c:choose>
+  <c:when test="${fn:contains(projectEditStatusMap[stulist.project_id], '요청중')}">
+    <button type="button" class="btn btn-block btn-warning" disabled>요청중</button>
+  </c:when>
+  <c:otherwise>
+    <button type="button" class="btn btn-block custom-btn"
+      onclick="OpenWindow('${pageContext.request.contextPath}/project/modify/stu?project_id=${stulist.project_id}','수정 요청',700,800)">
+      수정 요청
+    </button>
+  </c:otherwise>
+</c:choose>
 				</div>
 				<div class="col-1"></div>
 				</div>
@@ -291,7 +304,7 @@
       });
     });
     </script>
-    <jsp:include page="modify.jsp" />
+<%--     <jsp:include page="modify.jsp" /> --%>
 <script>
 $(document).on('show.bs.modal', '.modal', function () {
 	  $('body').css('padding-right', '0px');

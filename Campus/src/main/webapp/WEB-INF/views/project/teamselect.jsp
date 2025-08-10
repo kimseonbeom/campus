@@ -54,7 +54,10 @@ $(document).ready(function() {
         $('#selectLeaderBtn').data('selected-id', stuId);
         $('#selectLeaderBtn').data('selected-name', stuName);
     });
-
+    $('#studentSelectModalLeader').on('hidden.bs.modal', function () {
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+    });
     // "선택 완료" 버튼 클릭 시 폼에 반영
     $('#selectLeaderBtn').on('click', function () {
         const stuId = $(this).data('selected-id');
@@ -70,5 +73,40 @@ $(document).ready(function() {
         $('.modal-backdrop').remove();
         $('body').removeClass('modal-open');
     });
+    
+    $('#leaderSearchInput').on('keyup', function() {
+        const search = $(this).val().toLowerCase();
+        let hasMatch = false;
+
+        $('#leaderStudentList .leader-student-item').each(function() {
+            const name = $(this).data('stu-name').toLowerCase();
+            const isVisible = name.includes(search);
+            $(this).toggle(isVisible);
+            if (isVisible) hasMatch = true;
+        });
+
+        // 기존 메시지 제거
+        $('#noResultMessage').remove();
+
+        // 결과 없을 경우 메시지 추가
+        if (!hasMatch) {
+            $('#leaderStudentList').append(
+                `<li class="list-group-item text-center text-muted" id="noResultMessage">
+                    일치하는 팀장이 없습니다.
+                </li>`
+            );
+        }
+    });
+});
+$('#selectLeaderBtn').on('click', function () {
+    const stuId = $(this).data('selected-id');
+    const stuName = $(this).data('selected-name');
+
+    if (stuId && stuName) {
+        if (window.setTeamLeader) {
+            window.setTeamLeader(stuId, stuName); // 수정폼에 바로 값 전달
+        }
+    }
+    $('#studentSelectModalLeader').modal('hide');
 });
 </script>

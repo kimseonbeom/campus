@@ -14,7 +14,7 @@
         <!-- 학생 리스트 (예: 체크박스 없이 클릭 선택) -->
         <ul id="professorList" class="list-group" style="max-height:300px; overflow-y:auto;">
            <c:forEach var="professor" items="${professorList}">
-    <li class="list-group-item leader-student-item" 
+    <li class="list-group-item professor-item" 
     	data-pro-picture="${professor.picture }"
         data-pro-id="${professor.mem_id}" 
         data-pro-name="${professor.mem_name}"
@@ -36,44 +36,54 @@
 <script>
 $(document).ready(function() {
     // 교수 리스트 클릭 시 (단일 선택)
-    $(document).on('click', '#professorList .leader-student-item', function() {
-        // 기존 선택 해제
-        $('#professorList .leader-student-item').removeClass('active');
-
-        // 현재 항목 선택
+    $(document).on('click', '#professorList .professor-item', function() {
+        $('#professorList .professor-item').removeClass('active');
         $(this).addClass('active');
-
-        // 버튼 활성화
         $('#selectprofessorBtn').prop('disabled', false);
     });
 
     // 선택 완료 버튼 클릭 시
     $('#selectprofessorBtn').on('click', function() {
-        const selectedItem = $('#professorList .leader-student-item.active');
+        const selectedItem = $('#professorList .professor-item.active');
         const professorId = selectedItem.data('pro-id');
         const professorName = selectedItem.data('pro-name');
 
-        // 부모 화면에 표시
         $('#professorName').val(professorName);
         $('#professorId').val(professorId);
 
-        // 모달 닫기
         $('#professorSelectModal').modal('hide');
-        $('.modal-backdrop').remove();
-        $('body').removeClass('modal-open');
-
-        // 초기화
+//         $('.modal-backdrop').remove();
+//         $('body').removeClass('modal-open');
         selectedItem.removeClass('active');
         $('#selectprofessorBtn').prop('disabled', true);
     });
-
-    // 검색 기능
+    $('#professorSelectModal').on('hidden.bs.modal', function () {
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+    });
+    // 검색 기능 (실시간 필터링 + 결과 없음 표시)
     $('#professorSearchInput').on('keyup', function() {
         const search = $(this).val().toLowerCase();
-        $('#professorList .leader-student-item').each(function() {
+        let hasMatch = false;
+
+        $('#professorList .professor-item').each(function() {
             const name = $(this).data('pro-name').toLowerCase();
-            $(this).toggle(name.includes(search));
+            const isVisible = name.includes(search);
+            $(this).toggle(isVisible);
+            if (isVisible) hasMatch = true;
         });
+
+        // 기존 메시지 제거
+        $('#noResultMessage').remove();
+
+        // 결과 없을 경우 메시지 추가
+        if (!hasMatch) {
+            $('#professorList').append(
+                `<li class="list-group-item text-center text-muted" id="noResultMessage">
+                    일치하는 교수가 없습니다.
+                </li>`
+            );
+        }
     });
 });
 </script>

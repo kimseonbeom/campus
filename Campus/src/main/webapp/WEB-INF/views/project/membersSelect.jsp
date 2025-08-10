@@ -42,17 +42,17 @@ $(document).on('click', '#membersStudentList .member-student-item', function() {
 });
 
 $('#selectMembersBtn').on('click', function() {
-	  const selectedItems = $('#membersStudentList .member-student-item.active');
-	  let selectedMembers = [];
+    const selectedItems = $('#membersStudentList .member-student-item.active');
+    const selectedMembers = [];
 
-	  selectedItems.each(function() {
-	    selectedMembers.push({
-	      stu_id: $(this).data('stu-id'),
-	      mem_name: $(this).data('stu-name')
-	    });
-	  });
+    selectedItems.each(function() {
+        selectedMembers.push({
+            stu_id: $(this).data('stu-id'),
+            mem_name: $(this).data('stu-name')
+        });
+    });
 
-	  setTeamMembers(selectedMembers);
+    setTeamMembers(selectedMembers);
 
     $('#studentSelectModalMembers').modal('hide');
     $('.modal-backdrop').remove();
@@ -60,36 +60,4 @@ $('#selectMembersBtn').on('click', function() {
     selectedItems.removeClass('active');
     $('#selectMembersBtn').prop('disabled', true);
 });
-    $('#membersSearchInput').on('keyup', function() {
-        const search = $(this).val().toLowerCase();
-        let hasMatch = false;
-
-        $('#membersStudentList .member-student-item').each(function() {
-            const name = $(this).data('stu-name').toLowerCase();
-            const isVisible = name.includes(search);
-            $(this).toggle(isVisible);
-            if (isVisible) hasMatch = true;
-        });
-
-        // 기존 메시지 제거
-        $('#noResultMessage').remove();
-
-        // 결과 없을 경우 메시지 추가
-        if (!hasMatch) {
-            $('#membersStudentList').append(
-                `<li class="list-group-item text-center text-muted" id="noResultMessage">
-                    일치하는 학생이 없습니다.
-                </li>`
-            );
-        }
-    });
-</script>
-<script>
-function setTeamMembers(selectedMembers) {
-  const ids = selectedMembers.map(m => m.stu_id);
-  const names = selectedMembers.map(m => m.mem_name);
-
-  $('#teamMembersIdInput').val(ids.join(' '));
-  $('#teamMembersInput').val(names.join(' '));
-}
 </script>

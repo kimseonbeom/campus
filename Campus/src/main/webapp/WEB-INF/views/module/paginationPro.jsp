@@ -39,7 +39,7 @@
 
 <form id="jobForm" style="display:none;">
   <input type='hidden' name="page" value="1" />
-  <input type='hidden' name="perPageNum" value="3" />
+  <input type='hidden' name="perPageNum" value="7" />
   <input type='hidden' name="samester" value="" />
   <input type='hidden' name="project_name" value="" />
   <input type='hidden' name="project_stdate" value="" />

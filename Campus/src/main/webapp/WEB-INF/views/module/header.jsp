@@ -305,6 +305,83 @@ textarea:focus {
   background-color: #22a99c;
   text-decoration: none;
 }
+.leader-student-item.active {
+    background-color: #EAF5F4; /* 원하는 배경색 */
+    color:#212121;
+    border: 1px solid #EAF5F4;           /* 원하는 글자색 */
+}
+.member-student-item.active {
+    background-color: #EAF5F4; /* 원하는 배경색 */
+    color:#212121;
+    border: 1px solid #EAF5F4;           /* 원하는 글자색 */
+}
+.professor-item.active {
+    background-color: #EAF5F4; /* 원하는 배경색 */
+    color:#212121;
+    border: 1px solid #EAF5F4;           /* 원하는 글자색 */
+}
+.btn-warning:disabled {
+  cursor: default;  /* 기본 화살표 커서로 변경 */
+  opacity: 1;       /* 투명도 유지 */
+}
+.custom-checkbox {
+  position: relative;
+  display: flex;         /* inline-block 대신 flex */
+  align-items: center;   /* 세로 가운데 정렬 */
+  cursor: pointer;
+  padding-left: 30px;
+  user-select: none;
+  font-size: 16px;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0; 
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 50%;              /* 세로 중앙 맞춤을 위해 */
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border:1px solid #202020;
+  border-radius: 4px;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #2ec4b6;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* 체크 표시 스타일 (하얀색) */
+.custom-checkbox .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
 </style>
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>

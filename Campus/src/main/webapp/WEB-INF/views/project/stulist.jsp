@@ -259,7 +259,7 @@
 				<div class="col-10">
 <c:choose>
   <c:when test="${fn:contains(projectEditStatusMap[stulist.project_id], '요청중')}">
-    <button type="button" class="btn btn-block btn-warning" disabled>요청중</button>
+    <button type="button" class="btn btn-block btn-warning" style="background-color:#9FCEC9; border:1px solid #9fcec9; font-weight:bold; color:#ffffff;" disabled>요청중</button>
   </c:when>
   <c:otherwise>
     <button type="button" class="btn btn-block custom-btn"

@@ -41,13 +41,6 @@
 	from stu_project
 	where project_id = #{project_id}
 	</select>
-		<update id="updateProject" parameterType="project">
-		update 
-		project
-		set 
-		title=#{title}, content=#{content}, updatedate=sysdate 
-		where bno=#{bno}
-	</update>
 <select id="selectsearchProjectListpro" resultType="projectlist">
   SELECT * FROM (
     SELECT
@@ -57,8 +50,36 @@
     WHERE profes_id = #{mem_id}
     <include refid="search" />
   )
+  
   WHERE rn = 1
   ORDER BY project_endate DESC
+</select>
+<select id="selectModifyRequestProjectList" resultType="projectlist" parameterType="str">
+  SELECT * FROM (
+    SELECT
+      p.*,
+      ROW_NUMBER() OVER (PARTITION BY project_id ORDER BY project_endate DESC) rn
+    FROM pro_project p
+    WHERE profes_id = #{mem_id}
+      AND EXISTS (
+        SELECT 1 FROM edit_before eb
+        WHERE eb.project_id = p.project_id
+          AND eb.edit_status = '요청중'
+      )
+  )
+  WHERE rn = 1
+  ORDER BY project_endate DESC
+</select>
+
+<select id="selectModifyRequestProjectListCount" resultType="int" parameterType="str">
+  SELECT COUNT(DISTINCT p.project_id)
+  FROM pro_project p
+  WHERE profes_id = #{mem_id}
+    AND EXISTS (
+      SELECT 1 FROM edit_before eb
+      WHERE eb.project_id = p.project_id
+        AND eb.edit_status = '요청중'
+    )
 </select>
 	<select id="selectsearchProjectListCountpro" resultType="int">
   select count(distinct project_id)
@@ -199,4 +220,33 @@
   WHERE project_id = #{project_id, jdbcType=VARCHAR }
     AND edit_status = '요청중'
 </select>
+<delete id="deleteByTeamMemberId" parameterType="str">
+    DELETE FROM team_member
+    WHERE team_id = #{team_id}
+</delete>
+<update id="updateTeamLeader" parameterType="team">
+    UPDATE team
+    SET team_leader = #{team_leader}
+    WHERE team_id = #{team_id}
+</update>
+<insert id="insertTeamMember" parameterType="teamMember">
+    INSERT INTO team_member (team_id, team_member)
+    VALUES (#{team_id}, #{team_member})
+</insert>
+
+<update id="updateProject" parameterType="projectlist">
+    UPDATE project
+    SET 
+    project_name = #{project_name},
+    project_stdate = #{project_stdate},
+    project_endate = #{project_endate},
+    samester = #{samester}
+    WHERE project_id = #{project_id}
+</update>
+<delete id="deleteEditBefore" parameterType="str">
+  DELETE FROM edit_before WHERE before_id = #{before_id}
+</delete>
+<delete id="deleteTeamByTeamId" parameterType="str">
+delete from team where team_id = #{team_id}
+</delete>
 </mapper>

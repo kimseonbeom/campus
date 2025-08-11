@@ -18,6 +18,10 @@ public interface ProjectDAO {
     int selectsearchProjectListCount(PageMaker pageMaker, String mem_id);
 	
     List<ProjectListVO>selectsearchProjectListpro(PageMakerPro pageMaker, String mem_id) throws SQLException;
+    
+    List<ProjectListVO>selectModifyRequestProjectList(PageMakerPro pageMaker, String mem_id)throws SQLException;
+    
+    int selectModifyRequestProjectListCount(PageMakerPro pageMaker, String mem_id)throws SQLException;
 	
     int selectsearchProjectListCountpro(PageMakerPro pageMaker, String mem_id);
     
@@ -54,4 +58,17 @@ public interface ProjectDAO {
     String selectTeamSeqNext() throws SQLException;
     
     List<EditBfProjectVO>insertEditBeforeProject(EditBfProjectVO editBfProjectVO) throws SQLException;
+    
+    void deleteByTeamMemberId(String team_id)throws SQLException;
+    
+    void updateTeamLeader(TeamVO team)throws SQLException;
+    
+    void insertTeamMember(TeamMemberVO teamMember)throws SQLException;
+    
+    void updateProject(ProjectListVO projectList)throws SQLException;
+    
+    void deleteEditBefore(String before_id)throws SQLException;
+    
+    void deleteTeamByTeamId(String team_id)throws SQLException;
+    
 }

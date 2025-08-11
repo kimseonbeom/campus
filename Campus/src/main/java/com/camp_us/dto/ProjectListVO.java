@@ -21,7 +21,7 @@ public class ProjectListVO {
 	private String eval_status;
 	private String mem_id;
 	private List<String> mem_name;
-	
+	private String project_desc;
 	public String getProfes_name() {
 		return profes_name;
 	}
@@ -123,6 +123,12 @@ public class ProjectListVO {
 	}
 	public void setEval_status(String eval_status) {
 		this.eval_status = eval_status;
+	}
+	public String getProject_desc() {
+		return project_desc;
+	}
+	public void setProject_desc(String project_desc) {
+		this.project_desc = project_desc;
 	}
 	
 	

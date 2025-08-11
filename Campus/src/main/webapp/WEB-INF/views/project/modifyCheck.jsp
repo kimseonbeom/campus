@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="modal-body">
-  <form id="modifyForm" action="${pageContext.request.contextPath}/project/modify" method="post">
+  <form id="modifyForm" action="${pageContext.request.contextPath}/project/modify/pro" method="post">
     <c:set var="project" value="${projectList[0]}" />
     <c:set var="edit" value="${editList[0]}" />
-
+	
     <!-- 날짜 문자열 변수 미리 생성 -->
     <fmt:formatDate value="${edit.project_stdate}" pattern="yyyyMMdd" var="editStDateStr" />
     <fmt:formatDate value="${project.project_stdate}" pattern="yyyyMMdd" var="projectStDateStr" />
@@ -17,6 +17,8 @@
 
     <!-- 팀원 이름들 문자열 생성 (쉼표 구분) -->
     <c:set var="projectTeamMembersNames" value="" />
+    <div id="teamMembersHiddenInputs"></div>
+    <input type="hidden" name="beforeId" value="${edit.before_id}" />
     <c:forEach var="name" items="${projectList[0].mem_name}">
       <c:set var="projectTeamMembersNames" value="${fn:trim(projectTeamMembersNames)}${projectTeamMembersNames != '' ? ',' : ''}${name}" />
     </c:forEach>
@@ -25,20 +27,21 @@
       <c:set var="editTeamMembersNames" value="${fn:trim(editTeamMembersNames)}${editTeamMembersNames != '' ? ',' : ''}${name}" />
     </c:forEach>
 
-    <div class="row d-flex justify-content-between align-items-center mb-4">
+    <div class="row d-flex align-items-center mb-4">
       <div class="col-4 ml-3">
         <h5 id="modifyModalLabel" style="font-size:25px; font-weight:bold; margin-left:7px;">수정 요청서</h5>
       </div>
+      <div class="col-3"></div>
       <div class="col-1">
-        <button type="button" class="btn btn-info" data-dismiss="modal"
-          style="background-color:#aaaaaa; border-radius:5px; width:150px; height:40px; border:none;margin-right:-20px; font-weight:bold;">
-          <span style="color:#ffffff; font-size:20px;">반려</span>
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="reject();"
+          style="background-color:#aaaaaa; border-radius:5px; width:120px; height:40px; border:none;margin-right:-20px; font-weight:bold;">
+          <span style="color:#ffffff; font-size:20px;">거부</span>
         </button>
       </div>
-      <div class="col-3">
+      <div class="col-2" style="margin-left:73px;">
         <button type="submit" class="btn btn-info"
-          style="background-color:#2ec4b6; border-radius:5px; width:150px; height:40px; border:none; font-weight:bold;">
-          <span style="color:#ffffff; font-size:20px;">승낙</span>
+          style="background-color:#2ec4b6; border-radius:5px; width:120px; height:40px; border:none; font-weight:bold;">
+          <span style="color:#ffffff; font-size:20px;">승인</span>
         </button>
       </div>
     </div>
@@ -47,25 +50,23 @@
     <input type="hidden" name="samester" value="${edit.samester}" />
 
     <!-- 학기 -->
-    <div class="row mt-4 ml-2">
+    <div class="row mt-4 ml-4">
       <div class="col-2">
         <h3 style="font-size:20px; font-weight:bold; margin-top:4px; color:black;">
           학기
         </h3>
       </div>
-      <div class="col-10">
+      <div class="col-10" style="line-height:35px;">
         <c:choose>
           <c:when test="${edit.samester ne project.samester}">
-            <div style="color:red; text-decoration: line-through;">
-              이전: ${project.samester}
-            </div>
-            <div>
-              현재: ${edit.samester}
+            <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2"style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;"> ${project.samester}</span>
+              <span class="ml-3">${edit.samester}</span>
             </div>
           </c:when>
           <c:otherwise>
-            <div>
-              현재: ${edit.samester}
+            <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-3">${edit.samester}</span>
             </div>
           </c:otherwise>
         </c:choose>
@@ -79,18 +80,18 @@
           프로젝트명
         </h3>
       </div>
-      <div class="col-10">
+      <div class="col-10" style="line-height:35px;">
         <c:choose>
           <c:when test="${edit.project_name ne project.project_name}">
-            <div style="color:red; text-decoration: line-through;">
-              이전: ${project.project_name}
-            </div>
-            <input name="project_name" class="form-control" type="text" placeholder="프로젝트명을 입력해주세요."
-              value="${edit.project_name}" style="width:527px; color:red;" readonly />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;">${project.project_name}</span>
+             <span class="ml-3">${edit.project_name}</span>
+          </div>
           </c:when>
           <c:otherwise>
-            <input name="project_name" class="form-control" type="text" placeholder="프로젝트명을 입력해주세요."
-              value="${edit.project_name}" style="width:527px;" readonly />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-3">${edit.project_name}</span>
+            </div>
           </c:otherwise>
         </c:choose>
       </div>
@@ -103,20 +104,20 @@
           시작일
         </h3>
       </div>
-      <div class="col-10">
+      <div class="col-10" style="line-height:35px;">
         <c:choose>
           <c:when test="${editStDateStr ne projectStDateStr}">
-            <div style="color:red; text-decoration: line-through;">
-              이전: <fmt:formatDate value="${project.project_stdate}" pattern="yyyy-MM-dd" />
-            </div>
-            <input name="project_stdate" type="text" class="form-control datetimepicker-input"
-              style="width: 90px; height:38px; font-size: 13px; color:red;"
-              value="<fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />" readonly />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;">
+              <fmt:formatDate value="${project.project_stdate}" pattern="yyyy-MM-dd" />
+            </span>
+            <span class="ml-3">
+            <fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />
+            </span>
+              </div>
           </c:when>
           <c:otherwise>
-            <input name="project_stdate" type="text" class="form-control datetimepicker-input"
-              style="width: 90px; height:38px; font-size: 13px;"
-              value="<fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />" readonly />
+            <span class="ml-2"><fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' /></span>
           </c:otherwise>
         </c:choose>
       </div>
@@ -129,20 +130,20 @@
           마감일
         </h3>
       </div>
-      <div class="col-10">
+      <div class="col-10" style="line-height:35px;">
         <c:choose>
           <c:when test="${editEndDateStr ne projectEndDateStr}">
-            <div style="color:red; text-decoration: line-through;">
-              이전: <fmt:formatDate value="${project.project_endate}" pattern="yyyy-MM-dd" />
-            </div>
-            <input name="project_endate" type="text" class="form-control datetimepicker-input"
-              style="width: 90px; height:38px; font-size: 13px; color:red;"
-              value="<fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' />" readonly />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;">
+              <fmt:formatDate value="${project.project_endate}" pattern="yyyy-MM-dd" /></span>
+            
+            <span class="ml-3"><fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' /></span>
+              </div>
           </c:when>
           <c:otherwise>
-            <input name="project_endate" type="text" class="form-control datetimepicker-input"
-              style="width: 90px; height:38px; font-size: 13px;"
-              value="<fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' />" readonly />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span><fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' /></span>
+              </div>
           </c:otherwise>
         </c:choose>
       </div>
@@ -170,24 +171,24 @@
           팀장
         </h3>
       </div>
-      <div class="col-10 d-flex align-items-center">
+      <div class="col-10 d-flex align-items-center" style="line-height:35px;">
         <c:choose>
           <c:when test="${edit.leader_name ne project.leader_name}">
-            <div style="color:red; text-decoration: line-through; margin-right:10px;">
-              이전: ${project.leader_name}
-            </div>
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; margin-right:10px; text-decoration-color:#B7B7B7;">
+             	${project.leader_name}
+            </span>
             <input type="hidden" name="team_leader" id="teamLeaderIdInput" value="${edit.team_leader }" />
             <input type="hidden" name="leader_name" value="${edit.leader_name}" />
-            <input type="text" class="form-control" id="teamLeaderInput" placeholder="팀장을 입력해주세요" readonly
-              style="width: 465px; color:red;"
-              value="${edit.leader_name}" />
+            <span class="ml-3">${edit.leader_name}</span>
+              </div>
           </c:when>
           <c:otherwise>
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
             <input type="hidden" name="team_leader" id="teamLeaderIdInput" value="${edit.team_leader }" />
             <input type="hidden" name="leader_name" value="${edit.leader_name}" />
-            <input type="text" class="form-control" id="teamLeaderInput" placeholder="팀장을 입력해주세요" readonly
-              style="width: 465px;"
-              value="${edit.leader_name}" />
+            <span class="ml-2">${edit.leader_name}</span>
+              </div>
           </c:otherwise>
         </c:choose>
       </div>
@@ -198,17 +199,17 @@
       <div class="col-2">
         <h3 style="font-size:20px; font-weight:bold; margin-top:4px; line-height:50px;">팀원</h3>
       </div>
-      <div class="col-10 d-flex align-items-center">
+      <div class="col-10 d-flex align-items-center" style="line-height:35px;">
         <c:choose>
           <c:when test="${editTeamMembersNames ne projectTeamMembersNames}">
-            <div style="color:red; text-decoration: line-through; margin-right:10px;">
-              이전: ${projectTeamMembersNames}
-            </div>
-            <input type="hidden" id="teamMembersIdInput" name="team_member_ids" value="${editList[0].mem_id}" />
-            <input type="text" class="form-control" id="teamMembersInput" placeholder="팀원을 입력해주세요" readonly
-              style="width: 465px; color:red;"
-              value="${editTeamMembersNames}" />
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
+            <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; margin-right:10px; text-decoration-color:#B7B7B7;">
+              ${projectTeamMembersNames}
+            </span>
+            <input type="hidden" id="teamMembersIdInput" name="team_member_ids" value="${editList[0].team_member_ids}" />
+            <span class="ml-3">${editTeamMembersNames}</span>
             <input type="hidden" name="team_member_names" id="teamMemberNamesInput" value="${editTeamMembersNames}" />
+            </div>
           </c:when>
           <c:otherwise>
             <input type="hidden" id="teamMembersIdInput" name="team_member_ids" value="${editList[0].team_member_ids}" />
@@ -231,14 +232,14 @@
     <div class="row mt-2">
       <div class="col-12 d-flex">
         <textarea name="edit_content" class="form-control custom-textarea" rows="3" placeholder="수정 사유를 입력해주세요."
-          style="width:1200px; height:130px; resize: none; margin-left:30px;">${edit.edit_content}</textarea>
+          style="width:1200px; height:130px; resize: none; margin-left:30px;" disabled>${edit.edit_content}</textarea>
       </div>
     </div>
 
     <!-- 숨겨진 필드로 프로젝트ID 등 꼭 넣기 -->
     <input type="hidden" name="project_id" value="${edit.project_id}" />
     <input type="hidden" name="team_id" value="${edit.team_id}" />
-    <input type="hidden" name="before_id" value="${project.project_id}" />
+    <input type="hidden" name="before_id" value="${edit.before_id}" />
 
   </form>
 </div>
@@ -352,9 +353,25 @@
       e.preventDefault();
       return false;
     }
+    const teamMemberIdsStr = $('#teamMembersIdInput').val();
+    const teamMemberIds = teamMemberIdsStr.trim().split(/\s+/);
+    
+    $('#teamMembersHiddenInputs').empty();
+    teamMemberIds.forEach(id => {
+        const input = $('<input>').attr({
+          type: 'hidden',
+          name: 'memberIds',  // 컨트롤러 파라미터명에 맞춤
+          value: id
+        });
+        $('#teamMembersHiddenInputs').append(input);
+      });
   });
 </script>
-
+<script>
+function reject(){
+	location.href="reject?before_id=${edit.before_id}";
+}
+</script>
 <!-- 여기서 teamselect.jsp 와 teamsselect.jsp 포함 -->
 <jsp:include page="teamselect.jsp" />
 <jsp:include page="teamsselect.jsp" />

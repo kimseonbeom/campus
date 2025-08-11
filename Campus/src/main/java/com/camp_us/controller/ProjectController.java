@@ -1,10 +1,12 @@
 package com.camp_us.controller;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +33,7 @@ import com.camp_us.dto.ProjectVO;
 import com.camp_us.dto.TeamMemberVO;
 import com.camp_us.dto.TeamVO;
 import com.camp_us.service.ProjectService;
+import com.josephoconnell.html.HTMLInputFilter;
 
 @Controller
 @RequestMapping("/project")
@@ -101,7 +104,7 @@ public class ProjectController {
     
     @GetMapping("/list/pro")
     public String listPro(HttpSession session, Model model,@RequestParam(value = "samester", required = false) String samester,@RequestParam(value = "project_name", required = false) String project_name,
-    		@ModelAttribute PageMakerPro pageMaker) throws Exception {
+    		@RequestParam(value = "modifyRequest", required = false, defaultValue = "false") boolean modifyRequest,@ModelAttribute PageMakerPro pageMaker) throws Exception {
     	String url = "/project/prolist";
     	
         MemberVO member = (MemberVO) session.getAttribute("loginUser");
@@ -112,7 +115,13 @@ public class ProjectController {
         pageMaker.setKeyword(samester);
         pageMaker.setProject_name(project_name);
         String mem_id = member.getMem_id();
-        List<ProjectListVO> projectListpro = projectService.searchProjectListpro(pageMaker, mem_id);
+        List<ProjectListVO> projectListpro;
+        if (modifyRequest) {
+            projectListpro = projectService.selectModifyRequestProjectList(pageMaker, mem_id);
+        } else {
+            projectListpro = projectService.searchProjectListpro(pageMaker, mem_id);
+            // searchProjectListpro도 서비스에서 totalCount 세팅하는 구조여야 함
+        }
 
         
         Map<String, List<String>> projectTeamMembersMap = new HashMap<>();
@@ -190,9 +199,26 @@ public class ProjectController {
         return url;
     }
     @GetMapping("/detail")
-    public void detail(@RequestParam("project_id") String project_id, Model model) throws Exception {
-        // 추후 구현 필요: projectService.selectProjectById(project_id)
+    public String detail(@RequestParam("project_id") String project_id, Model model) throws Exception {
+        String url = "/project/detail";
+        List<ProjectListVO> projectList = projectService.selectProjectByProjectId(project_id);
+        List<MemberVO> professorList = projectService.selectProfessorList();
+        List<MemberVO> studentList = projectService.selectTeamMemberList();
+
+        if (!projectList.isEmpty()) {
+            // 2. 해당 프로젝트 팀원명 리스트 조회
+            List<String> teamMemberNames = projectService.selectTeamMembers(project_id);
+
+            // 3. 첫번째 객체에 팀원 리스트 세팅
+            projectList.get(0).setMem_name(teamMemberNames);
+        }
+        
+        
+        model.addAttribute("professorList", professorList);	
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("projectList", projectList);
         model.addAttribute("project_id", project_id);
+        return url;
     }
 
     // ✅ 프로젝트 등록 폼 (교수/학생 리스트 조회)
@@ -201,6 +227,7 @@ public class ProjectController {
     	System.out.println("[ProjectController] registForm() 호출됨");
     	List<MemberVO> professorList = projectService.selectProfessorList();
         List<MemberVO> studentList = projectService.selectTeamMemberList();
+        
         model.addAttribute("professorList", professorList);
         model.addAttribute("studentList", studentList);
     }
@@ -227,6 +254,28 @@ public class ProjectController {
 
         return url;
     }
+    @PostMapping("/modify/pro")
+    public String modifyCheckPost(ProjectListVO project,
+                                  TeamVO team,
+                                  @RequestParam List<String> memberIds,
+                                  @RequestParam("before_id") String beforeId
+    																) throws SQLException {
+
+        // TeamMemberVO 리스트로 변환
+        List<TeamMemberVO> teamMember = memberIds.stream()
+            .map(team_member -> {
+                TeamMemberVO tm = new TeamMemberVO();
+                tm.setTeam_member(team_member);
+                // team_id는 나중에 서비스 메서드에서 세팅
+                return tm;
+            })
+            .collect(Collectors.toList());
+
+        // 서비스 호출
+        projectService.updateProjectTeamAndMembers(project, team, teamMember);
+        projectService.deleteEditBefore(beforeId);
+        return "/project/modifyCheck_success";
+    }
     // ✅ 프로젝트 등록 처리
     @PostMapping("/regist")
     public String registPost(ProjectRegistCommand command) throws Exception {
@@ -237,9 +286,9 @@ public class ProjectController {
 
         // 2) 커맨드를 DTO로 변환
         ProjectVO project = command.toProjectVO(project_id, team_id);
+        project.setProject_name(HTMLInputFilter.htmlSpecialChars(project.getProject_name()));
         TeamVO team = command.toTeamVO(team_id);
         List<TeamMemberVO> memberList = command.toTeamMemberVOList(team_id);
-
         // 3) DB insert (순차적으로 처리)
         projectService.insertTeamLeader(team);
         projectService.insertProject(project);
@@ -250,4 +299,20 @@ public class ProjectController {
 
         return url;
     }
+    @GetMapping("/modify/reject")
+    public String reject(@RequestParam("before_id") String before_id)throws Exception{
+    	String url="/project/reject_success";
+    	
+    	projectService.deleteEditBefore(before_id);
+    	return url;
+    }
+    
+    @GetMapping("/remove")
+	public String remove(@RequestParam("team_id") String team_id)throws Exception{
+		String url="/project/remove_success";		
+		
+		projectService.deleteTeamByTeamId(team_id);
+	
+		return url;
+	}
 }

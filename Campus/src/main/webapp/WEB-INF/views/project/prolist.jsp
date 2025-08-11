@@ -66,7 +66,6 @@
     <button class="btn btn-navbar" type="submit" style="padding: 2px 10px;">
                 <i class="fas fa-cpsearch ml-1"></i>
               </button>
-              </form>
   </div>
 </div>
 </div>
@@ -75,11 +74,12 @@
   <div style="width:130px;">
     <label class="custom-checkbox">
    수정 요청
-  <input type="checkbox" />
+  <input type="checkbox" name="modifyRequest" value="true" ${param.modifyRequest == 'true' ? 'checked' : ''}/>
   <span class="checkmark"></span>
 </label>
   </div>
 </div>
+              </form>
 	<div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px;  width:96%;  background-color:#f5f5f5;">
 	<div class="row d-flex p-2 align-items-center" style="width:100%; margin-left:1px;">
 	<div class="col-1 text-center" style="font-weight:bold;">학기</div>
@@ -108,7 +108,7 @@
   <fmt:formatDate var="todayStr" value="${today}" pattern="yyyy-MM-dd" />
   <c:choose>
   <c:when test="${endDateStr lt todayStr}">
-	<div class="row p-2 align-items-center" style="width:1232px; background-color:#f5f5f5; margin-left:1px;">
+	<div class="row p-2 align-items-center" style="cursor:pointer; width:1232px; background-color:#f5f5f5; margin-left:1px;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail/pro?project_id=${prolist.project_id}','상세 정보',700,800)">
 	<div class="col-1 text-center">2025-${prolist.samester }</div>
 	<div class="col-3 text-center">${prolist.project_name }</div>
 	<div class="col-1 text-center">${prolist.leader_name }</div>
@@ -118,12 +118,12 @@
 	</div>
 	</c:when>
 	 <c:otherwise>
-	<div class="row p-2 align-items-center" style="width:100%;  margin-left:1px;">
-	<div class="col-1 text-center">2025-${prolist.samester }</div>
-	<div class="col-3 text-center">${prolist.project_name }</div>
-	<div class="col-1 text-center">${prolist.leader_name }</div>
-	<div class="col-3 text-center"><fmt:formatDate value="${prolist.project_stdate }" pattern="yyyy-MM-dd"/></div>
-	<div class="col-3 text-center"><fmt:formatDate value="${prolist.project_endate }" pattern="yyyy-MM-dd"/></div>
+	<div class="row p-2 align-items-center" style="width:100%;  margin-left:1px; ">
+	<div class="col-1 text-center" style="cursor:pointer;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail?project_id=${prolist.project_id}','상세 정보',700,800)">2025-${prolist.samester }</div>
+	<div class="col-3 text-center" style="cursor:pointer;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail?project_id=${prolist.project_id}','상세 정보',700,800)">${prolist.project_name }</div>
+	<div class="col-1 text-center" style="cursor:pointer;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail?project_id=${prolist.project_id}','상세 정보',700,800)">${prolist.leader_name }</div>
+	<div class="col-3 text-center" style="cursor:pointer;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail?project_id=${prolist.project_id}','상세 정보',700,800)"><fmt:formatDate value="${prolist.project_stdate }" pattern="yyyy-MM-dd"/></div>
+	<div class="col-3 text-center" style="cursor:pointer;" onclick="OpenWindow('${pageContext.request.contextPath}/project/detail?project_id=${prolist.project_id}','상세 정보',700,800)"><fmt:formatDate value="${prolist.project_endate }" pattern="yyyy-MM-dd"/></div>
 	<div class="col-1 text-center">
 	<c:choose>
   <c:when test="${fn:contains(projectEditStatusMap[prolist.project_id], '요청중')}">
@@ -157,6 +157,14 @@
   semesterSelect.addEventListener('change', () => {
     keywordInput.value = semesterSelect.value; // 선택한 학기를 keyword에 넣음
   });
+</script>
+<script>
+const checkbox = document.querySelector('input[name="modifyRequest"]');
+const form = document.querySelector('form');
+
+checkbox.addEventListener('change', () => {
+  form.submit(); // 체크박스가 변경될 때마다 폼 자동 제출
+});
 </script>
 </body>		   
 				   

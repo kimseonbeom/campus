@@ -129,6 +129,44 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<EditBfProjectVO> selectEditProjectByProjectId(String project_id) throws SQLException {
 		return projectDAO.selectEditProjectByProjectId(project_id);
 	}
+
+	@Override
+	public void updateProjectTeamAndMembers(ProjectListVO project, TeamVO team, List<TeamMemberVO> teamMember)
+			throws SQLException {
+		 projectDAO.deleteByTeamMemberId(team.getTeam_id());
+
+		    for (TeamMemberVO member : teamMember) {
+		        member.setTeam_id(team.getTeam_id());
+		        projectDAO.insertTeamMember(member);
+		    }
+
+		    projectDAO.updateTeamLeader(team);
+		    projectDAO.updateProject(project);
+		
+		
+	}
+
+	@Override
+	public void deleteEditBefore(String before_id) throws SQLException {
+	 projectDAO.deleteEditBefore(before_id);		
+	}
+
+	@Override
+	public List<ProjectListVO> selectModifyRequestProjectList(PageMakerPro pageMaker, String mem_id)
+			throws SQLException {
+		List<ProjectListVO> projectlist = projectDAO.selectModifyRequestProjectList(pageMaker, mem_id);
+		
+		int totalCount = projectDAO.selectModifyRequestProjectListCount(pageMaker, mem_id);
+		pageMaker.setTotalCount(totalCount);
+		return projectlist;
+	}
+
+	@Override
+	public void deleteTeamByTeamId(String team_id) throws SQLException {
+		projectDAO.deleteTeamByTeamId(team_id);
+		
+	}
+	
 	
 	
 }

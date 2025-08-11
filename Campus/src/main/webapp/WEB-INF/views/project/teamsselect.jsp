@@ -86,10 +86,11 @@ $('#selectMembersBtn').on('click', function() {
 </script>
 <script>
 function setTeamMembers(selectedMembers) {
-  const ids = selectedMembers.map(m => m.stu_id);
-  const names = selectedMembers.map(m => m.mem_name);
+	  const ids = selectedMembers.map(m => m.stu_id);
+	  const names = selectedMembers.map(m => m.mem_name);
 
-  $('#teamMembersIdInput').val(ids.join(' '));
-  $('#teamMembersInput').val(names.join(' '));
-}
+	  $('#teamMembersIdInput').val(ids.join(','));
+	  $('#teamMembersInput').val(names.join(', ')); // 화면 표시용
+	  $('#teamMemberNamesInput').val(names.join(',')); // 서버 전송용 hidden input
+	}
 </script>

@@ -17,6 +17,8 @@ public interface ProjectService {
 	
 	List<ProjectListVO> searchProjectListpro(PageMakerPro pagemaker, String mem_id) throws SQLException;
 	
+	List<ProjectListVO>selectModifyRequestProjectList(PageMakerPro pageMaker, String mem_id)throws SQLException;
+	
     List<ProjectVO> selectProjectList(String mem_id) throws SQLException;
 
     List<MemberVO> selectTeamMemberList() throws SQLException;
@@ -26,7 +28,7 @@ public interface ProjectService {
     List<String> selectTeamProfessor(String project_id)throws SQLException;
     
     List<String> selectTeamMembers(String project_id)throws SQLException;
-    
+
     List<ProjectListVO> selectTeamLeader(String project_id)throws SQLException;
 
     List<EditBfProjectVO>selectEditProjectByProjectId(String project_id)throws SQLException;
@@ -50,4 +52,10 @@ public interface ProjectService {
     List<EditBfProjectVO>insertEditBeforeProject(EditBfProjectVO editBfProjectVO) throws SQLException;
     
     List<ProjectListVO>selectProjectByProjectId(String project_id) throws SQLException;
+    
+    void updateProjectTeamAndMembers(ProjectListVO project, TeamVO team, List<TeamMemberVO> teamMember) throws SQLException;
+    
+    void deleteEditBefore(String before_id)throws SQLException;
+    
+    void deleteTeamByTeamId(String team_id)throws SQLException;
 }

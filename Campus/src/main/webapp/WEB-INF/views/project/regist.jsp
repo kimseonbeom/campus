@@ -43,7 +43,7 @@
 			<input class="form-control notNull" name="project_name" title="프로젝트명" type="text" placeholder="프로젝트명을 입력해주세요." style="width:300px;">
 		</div>
 		<div class="ml-3" style="width:260px;">
-			<select name="samester" class="form-control" style="width: 250px; font-size: 13px; border: 1px solid #2ec4b6; height:38px;">
+			<select name="samester" class="form-control" style="width: 250px; font-size: 16px; border: 1px solid #2ec4b6; height:38px;">
                 <option value="">학기 선택</option>
                 <option value="1학기">1학기</option>
                 <option value="2학기">2학기</option>
@@ -51,14 +51,14 @@
 		</div>
 		<div class="col-4 d-flex">
 			<div class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width: 150px; height:38px;">
-                <input name="project_stdate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" style="width: 90px; height:38px; font-size: 13px;" placeholder="시작일">
+                <input name="project_stdate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" style="width: 90px; height:38px; font-size: 16px;" placeholder="시작일">
                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                   <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-calendar-alt"></i></div>
                 </div>
             </div>
             <span style="line-height:38px;">&nbsp;&nbsp;&nbsp;~</span>
             <div class="input-group date ml-3" id="datetimepicker2" data-target-input="nearest" style="width: 150px; height:38px;">
-                <input name="project_endate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" style="width: 90px; height:38px; font-size: 13px;" placeholder="종료일">
+                <input name="project_endate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" style="width: 90px; height:38px; font-size: 16px;" placeholder="종료일">
                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                   <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-calendar-alt"></i></div>
                 </div>

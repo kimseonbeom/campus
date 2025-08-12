@@ -286,19 +286,28 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            <sec:authorize access="hasRole('ROLE_1')">
-              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list/stu?mem_id=${loginUser.mem_id }">
-            </sec:authorize>
-            <sec:authorize access="hasRole('ROLE_2')">
-              <li class="nav-item" data-url="<%=request.getContextPath() %>/project/list/pro?mem_id=${loginUser.mem_id }">
-            </sec:authorize>
-                <a href="javascript:void(0)" class="nav-link">
+           	  <li class="nav-item" >
+	             <a href="javascript:return false;" class="nav-link"  
+		            <sec:authorize access="hasRole('ROLE_1')">
+		              data-url="<%=request.getContextPath() %>/project/list/stu?mem_id=${loginUser.mem_id }"
+		            </sec:authorize>
+		            <sec:authorize access="hasRole('ROLE_2')">
+		              data-url="<%=request.getContextPath() %>/project/list/pro?mem_id=${loginUser.mem_id }"
+		            </sec:authorize>
+	              >
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;팀 목록</p>
                 </a>
               </li>
-              <li class="nav-item" data-url="">
-                <a href="#" class="nav-link">
+              <li class="nav-item" >
+                <a href="javascript:return false;" class="nav-link"
+                  <sec:authorize access="hasRole('ROLE_1')">
+	                data-url="<%=request.getContextPath() %>/roadmap/projectlist/stu?mem_id=${loginUser.mem_id }"
+	              </sec:authorize>
+	              <sec:authorize access="hasRole('ROLE_2')">
+	                data-url="<%=request.getContextPath() %>/roadmap/projectlist/pro?mem_id=${loginUser.mem_id }"
+	              </sec:authorize>
+                >
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;로드맵</p>
                 </a>
@@ -447,8 +456,8 @@ $(".person-info").css({
 
 document.querySelectorAll('.nav-item > a').forEach(link => {
 	  link.addEventListener('click', function (e) {
-	    e.preventDefault();
-	    const url = this.closest('.nav-item').getAttribute('data-url');
+	    //e.preventDefault();
+	    const url = this.getAttribute('data-url');
 	    if (url) {
 	      location.hash = url;               // 주소창 해시(#) 변경
 	      document.getElementById('mainFrame').src = url;  // iframe src 변경

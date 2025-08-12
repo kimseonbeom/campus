@@ -24,8 +24,8 @@
 </a>
   </div>
 </div>
-
 <form action="${pageContext.request.contextPath}/project/list/stu" method="get">
+
 <div class="mx-auto d-flex p-2 align-items-center" style="border: 1px solid #ced4da; font-size: 15px; width:96%; border-top: 2px solid #2ec4b6;">
 <div style="display: flex; align-items: center; height: 50px;width:40px; margin-left:20px;">
   <label style="margin: 0;">학기</label>

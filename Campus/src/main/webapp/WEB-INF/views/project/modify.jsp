@@ -8,19 +8,20 @@
   <form id="modifyForm" action="${pageContext.request.contextPath}/project/modify/stu" method="post">
     <c:set var="project" value="${projectList[0]}" />
     
-    <div class="row d-flex justify-content-between align-items-center mb-4">
+    <div class="row d-flex align-items-center mb-4">
       <div class="col-4 ml-3">
         <h5 id="modifyModalLabel" style="font-size:25px; font-weight:bold; margin-left:7px;">수정 요청서</h5>
       </div>
+      <div class="col-3"></div>
       <div class="col-1">
-        <button type="button" class="btn btn-info" data-dismiss="modal"
-          style="background-color:#aaaaaa; border-radius:5px; width:150px; height:40px; border:none;margin-right:-20px; font-weight:bold;">
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="CloseWindow();"
+          style="background-color:#aaaaaa; border-radius:5px; width:120px; height:40px; border:none;margin-right:-20px; font-weight:bold;">
           <span style="color:#ffffff; font-size:20px;">취소</span>
         </button>
       </div>
-      <div class="col-3">
+      <div class="col-2" style="margin-left:73px;">
         <button type="submit" class="btn btn-info"
-          style="background-color:#2ec4b6; border-radius:5px; width:150px; height:40px; border:none; font-weight:bold;">
+          style="background-color:#2ec4b6; border-radius:5px; width:120px; height:40px; border:none; font-weight:bold;">
           <span style="color:#ffffff; font-size:20px;">요청</span>
         </button>
       </div>

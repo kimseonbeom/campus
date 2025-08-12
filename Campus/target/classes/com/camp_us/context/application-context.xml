@@ -45,6 +45,10 @@
 		  class="com.camp_us.dao.TeamMemberDAOImpl"
 		  c:session-ref="sqlSession"
 		  />
+	<bean id="roadMapDAO"
+		  class="com.camp_us.dao.RoadMapDAOImpl"
+		  c:session-ref="sqlSession"
+		  />
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -69,7 +73,10 @@
 		  class="com.camp_us.service.ProjectServiceImpl"
 		  c:projectDAO-ref="projectDAO"
 		  />
-		
+	<bean id="roadMapService"
+		  class="com.camp_us.service.RoadMapServiceImpl"
+		  c:roadMapDAO-ref="roadMapDAO"
+		  />
 </beans>
 
 

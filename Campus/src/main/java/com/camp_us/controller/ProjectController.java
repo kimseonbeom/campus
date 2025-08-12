@@ -257,12 +257,12 @@ public class ProjectController {
     @PostMapping("/modify/pro")
     public String modifyCheckPost(ProjectListVO project,
                                   TeamVO team,
-                                  @RequestParam List<String> memberIds,
+                                  @RequestParam List<String> team_member_ids,
                                   @RequestParam("before_id") String beforeId
     																) throws SQLException {
 
         // TeamMemberVO 리스트로 변환
-        List<TeamMemberVO> teamMember = memberIds.stream()
+        List<TeamMemberVO> teamMember = team_member_ids.stream()
             .map(team_member -> {
                 TeamMemberVO tm = new TeamMemberVO();
                 tm.setTeam_member(team_member);

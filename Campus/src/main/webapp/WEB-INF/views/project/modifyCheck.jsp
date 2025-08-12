@@ -86,11 +86,13 @@
           <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
             <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;">${project.project_name}</span>
              <span class="ml-3">${edit.project_name}</span>
+             <input type="hidden" name="project_name" value="${edit.project_name}"/>
           </div>
           </c:when>
           <c:otherwise>
           <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
             <span class="ml-3">${edit.project_name}</span>
+             <input type="hidden" name="project_name" value="${edit.project_name}"/>
             </div>
           </c:otherwise>
         </c:choose>
@@ -112,12 +114,16 @@
               <fmt:formatDate value="${project.project_stdate}" pattern="yyyy-MM-dd" />
             </span>
             <span class="ml-3">
-            <fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />
+            <fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />   
             </span>
               </div>
+            <input type="hidden" name="project_stdate" value="<fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />"/>
           </c:when>
           <c:otherwise>
+          <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
             <span class="ml-2"><fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' /></span>
+            <input type="hidden" name="project_stdate" value="<fmt:formatDate value='${edit.project_stdate}' pattern='yyyy-MM-dd' />"/>
+            </div>
           </c:otherwise>
         </c:choose>
       </div>
@@ -136,13 +142,15 @@
           <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
             <span class="ml-2" style="color:#B7B7B7; text-decoration: line-through; text-decoration-color:#B7B7B7;">
               <fmt:formatDate value="${project.project_endate}" pattern="yyyy-MM-dd" /></span>
-            
+            <input type="hidden" name="project_endate" value="<fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' />"/>
             <span class="ml-3"><fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' /></span>
+
               </div>
           </c:when>
           <c:otherwise>
           <div style=" width:527px; border:1px solid #CED4DA; height: 38px; border-radius:5px; background-color:#E9ECEF;">
-            <span><fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' /></span>
+            <span class="ml-2"><fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' /></span>
+            <input type="hidden" name="project_endate" value="<fmt:formatDate value='${edit.project_endate}' pattern='yyyy-MM-dd' />"/>
               </div>
           </c:otherwise>
         </c:choose>
@@ -159,7 +167,7 @@
       <div class="col-10">
         <!-- 담당교수는 변경 불가이므로 edit이 아닌 project 값만 보여줌 -->
         <input type="text" class="form-control" placeholder="담당교수의 변경은 불가능합니다." style="width:527px;"
-          value="${project.profes_name}" disabled />
+          value="${project.profes_name}" readonly />
         <input type="hidden" name="profes_id" value="${project.profes_id}" />
       </div>
     </div>
@@ -232,7 +240,7 @@
     <div class="row mt-2">
       <div class="col-12 d-flex">
         <textarea name="edit_content" class="form-control custom-textarea" rows="3" placeholder="수정 사유를 입력해주세요."
-          style="width:1200px; height:130px; resize: none; margin-left:30px;" disabled>${edit.edit_content}</textarea>
+          style="width:1200px; height:130px; resize: none; margin-left:30px;" readonly>${edit.edit_content}</textarea>
       </div>
     </div>
 

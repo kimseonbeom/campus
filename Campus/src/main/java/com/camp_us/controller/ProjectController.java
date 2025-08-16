@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerStu;
 import com.camp_us.command.PageMakerPro;
 import com.camp_us.command.ProjectModifyCommand;
 import com.camp_us.command.ProjectRegistCommand;
@@ -53,7 +53,7 @@ public class ProjectController {
     }
     @GetMapping("/list/stu")
     public String listStudent(HttpSession session, Model model,@RequestParam(value = "samester", required = false) String samester,@RequestParam(value = "project_name", required = false) String project_name,
-    		@ModelAttribute PageMaker pageMaker) throws Exception {
+    		@ModelAttribute PageMakerStu pageMaker) throws Exception {
     	String url="/project/stulist";
         MemberVO member = (MemberVO) session.getAttribute("loginUser");
         if (member == null) {

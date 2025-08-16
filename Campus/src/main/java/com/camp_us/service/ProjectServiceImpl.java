@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerStu;
 import com.camp_us.command.PageMakerPro;
 import com.camp_us.dao.ProjectDAO;
 import com.camp_us.dto.EditBfProjectVO;
@@ -72,7 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 	@Override
-	public List<ProjectListVO> searchProjectList(PageMaker pageMaker, String mem_id) throws SQLException {
+	public List<ProjectListVO> searchProjectList(PageMakerStu pageMaker, String mem_id) throws SQLException {
 		List<ProjectListVO> projectlist = projectDAO.selectsearchProjectList(pageMaker, mem_id);
 		
 		int totalCount = projectDAO.selectsearchProjectListCount(pageMaker, mem_id);

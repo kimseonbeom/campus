@@ -3,7 +3,7 @@ package com.camp_us.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerStu;
 import com.camp_us.command.PageMakerPro;
 import com.camp_us.dto.EditBfProjectVO;
 import com.camp_us.dto.MemberVO;
@@ -13,9 +13,9 @@ import com.camp_us.dto.TeamMemberVO;
 import com.camp_us.dto.TeamVO;
 
 public interface ProjectDAO {
-    List<ProjectListVO>selectsearchProjectList(PageMaker pageMaker, String mem_id) throws SQLException;
+    List<ProjectListVO>selectsearchProjectList(PageMakerStu pageMaker, String mem_id) throws SQLException;
 	
-    int selectsearchProjectListCount(PageMaker pageMaker, String mem_id);
+    int selectsearchProjectListCount(PageMakerStu pageMaker, String mem_id);
 	
     List<ProjectListVO>selectsearchProjectListpro(PageMakerPro pageMaker, String mem_id) throws SQLException;
     

@@ -3,7 +3,7 @@ package com.camp_us.command;
 
 
 
-public class PageMaker {
+public class PageMakerStu {
 	private String searchType = "";
 	private String keyword = "";
 	private String project_stdate;

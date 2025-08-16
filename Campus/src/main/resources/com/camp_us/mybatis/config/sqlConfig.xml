@@ -23,7 +23,7 @@
 		<typeAlias type="com.camp_us.dto.RoadMapVO" alias="roadmap"/>
 		<typeAlias type="com.camp_us.dto.EvaluationVO" alias="evaluation"/>
 		<typeAlias type="com.camp_us.dto.AttachVO" alias="attach"/>
-		<typeAlias type="com.camp_us.command.PageMaker" alias="pageMaker"/>
+		<typeAlias type="com.camp_us.command.PageMakerStu" alias="pageMakerStu"/>
 		<typeAlias type="com.camp_us.command.PageMakerPro" alias="pageMakerPro"/>
 	</typeAliases>
 </configuration>

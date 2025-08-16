@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
-import com.camp_us.command.PageMaker;
+import com.camp_us.command.PageMakerStu;
 import com.camp_us.command.PageMakerPro;
 import com.camp_us.dto.EditBfProjectVO;
 import com.camp_us.dto.MemberVO;
@@ -79,7 +79,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public List<ProjectListVO> selectsearchProjectList(PageMaker pageMaker, String mem_id) throws SQLException {
+	public List<ProjectListVO> selectsearchProjectList(PageMakerStu pageMaker, String mem_id) throws SQLException {
 		int offset = pageMaker.getStartRow()-1;
 		int limit = pageMaker.getPerPageNum();
 		RowBounds bounds = new RowBounds(offset,limit);
@@ -96,7 +96,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public int selectsearchProjectListCount(PageMaker pageMaker, String mem_id) {
+	public int selectsearchProjectListCount(PageMakerStu pageMaker, String mem_id) {
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		dataMap.put("keyword", pageMaker.getKeyword());
 		dataMap.put("searchType",pageMaker.getSearchType());

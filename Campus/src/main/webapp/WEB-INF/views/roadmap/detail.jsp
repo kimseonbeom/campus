@@ -12,16 +12,16 @@
 <body>
 	<div class="wrap" style="height:100vh;">
 			<div class="card-header" style="border-bottom: none;">
-  	<h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">로드맵:<span>${project_name }</span></h3>
+  	<h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">로드맵 : <span>${projectList[0].project_name }</span></h3>
   	</div>
   	<div class="row" style="margin-top:40px;">
   		<div class="col-8" style="margin-left:40px;">
-  			<h3>Camp_us 프로젝트 최종 제출</h3>
+  			<h3>${roadMap.rm_name }</h3>
   		</div>
   	</div>
   	<div class="row mb-2" style="margin-left:40px; line-height:30px;">
   		<div class="col-10 mt-1">
-  			<span>최종 결과물 | 작성자 : 김선범 | 2025-07-30 10:36</span>
+  			<span>${roadMap.rm_category } | 작성자 : writer | 2025-07-30 10:36</span>
   		</div>
   		<div class="col-1 mb-1 mt-1">
   		<button type="button"

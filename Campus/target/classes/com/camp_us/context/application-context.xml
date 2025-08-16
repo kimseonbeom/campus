@@ -8,6 +8,10 @@
 	      class="java.lang.String"
 	      c:value="${savePath.summernote.image}"
 	      />
+	<bean id="roadMapSavedFilePath"
+	      class="java.lang.String"
+	      c:value="${savePath.roadMap.files}"
+	      />	
 	<!-- member.picture -->
 	<bean id="picturePath" 
 		  class="java.lang.String"
@@ -49,6 +53,10 @@
 		  class="com.camp_us.dao.RoadMapDAOImpl"
 		  c:session-ref="sqlSession"
 		  />
+	<bean id="attachDAO"
+		  class="com.camp_us.dao.AttachDAOImpl"
+		  c:session-ref="sqlSession"
+		  />
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -76,6 +84,8 @@
 	<bean id="roadMapService"
 		  class="com.camp_us.service.RoadMapServiceImpl"
 		  c:roadMapDAO-ref="roadMapDAO"
+		  c:summernotePath-ref="summernotePath"
+		  c:attachDAO-ref="attachDAO"
 		  />
 </beans>
 

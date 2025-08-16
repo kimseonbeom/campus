@@ -1,6 +1,9 @@
 package com.camp_us.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import com.camp_us.dto.AttachVO;
 
 public class RoadMapVO {
 	private String rm_id;
@@ -12,6 +15,52 @@ public class RoadMapVO {
 	private String rm_content;
 	private String rm_status;
 	private Date rm_update;
+	private String eval_id;
+	private String eval_status; 
+	private String writer;
+	private Date rm_endate;
+	private Date rm_stdate;
+	private String project_name;
+	private String mem_name;
+	private List<AttachVO> attachList;
+	
+	
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+	public String getProject_name() {
+		return project_name;
+	}
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
+	}
+	public Date getRm_endate() {
+		return rm_endate;
+	}
+	public void setRm_endate(Date rm_endate) {
+		this.rm_endate = rm_endate;
+	}
+	public Date getRm_stdate() {
+		return rm_stdate;
+	}
+	public void setRm_stdate(Date rm_stdate) {
+		this.rm_stdate = rm_stdate;
+	}
+	public String getEval_id() {
+		return eval_id;
+	}
+	public void setEval_id(String eval_id) {
+		this.eval_id = eval_id;
+	}
+	public String getEval_status() {
+		return eval_status;
+	}
+	public void setEval_status(String eval_status) {
+		this.eval_status = eval_status;
+	}
 	public String getRm_id() {
 		return rm_id;
 	}
@@ -66,7 +115,19 @@ public class RoadMapVO {
 	public void setRm_update(Date rm_update) {
 		this.rm_update = rm_update;
 	}
-	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public List<AttachVO> getAttachList() {
+		return attachList;
+	}
+
+	public void setAttachList(List<AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	
 	
 	

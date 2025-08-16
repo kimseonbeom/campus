@@ -16,13 +16,7 @@
 <fmt:formatDate var="todayFormatted" value="${today}" pattern="yyyy-MM-dd" />
 <div class="wrap" style="height:100vh;">
 		<div class="card-header" style="border-bottom: none;">
-  <h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">프로젝트 목록</h3>
-  <div class="card-tools">
-   <a class="btn btn-primary btn-lg mt-2 mr-3 d-flex align-items-center justify-content-center"  href="<%=request.getContextPath() %>/project/regist"
-   style="background-color:#2ec4b6; border:none; width:100px; height:40px;">
-  <span style="color: #ffffff; font-size:18px;">팀 등록</span>
-</a>
-  </div>
+  <h3 class="card-title ml-2 mt-2 mb-2" style="font-size: 25px; font-weight: bold;">프로젝트 목록</h3>
 </div>
 
 <form action="${pageContext.request.contextPath}/roadmap/projectlist/stu" method="get">

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
   <!-- ✅ jQuery (모든 것의 기반) -->
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
@@ -20,51 +22,56 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
 </head>	
+<form enctype="multipart/form-data"  role="form" method="post" action="regist" name="registForm">
 <div class="wrap" style="height:100%;">
-<form role="form" method="post" action="regist" name="registForm">
+<c:set var="project" value="${projectList[0]}" />
+    <fmt:formatDate value="${project.project_stdate}" pattern="yyyyMMdd" var="projectStDateStr" />
+    <fmt:formatDate value="${project.project_endate}" pattern="yyyyMMdd" var="projectEndDateStr" />
+    <c:set var="projectTeamMembersNames" value="" />
+    <div id="teamMembersHiddenInputs"></div>
+    <input type="hidden" name="beforeId" value="${edit.before_id}" />
+    <c:set var="projectTeamMembersNames" value="" />
+<c:forEach var="name" items="${teamMembersList}">
+  <c:set var="projectTeamMembersNames" 
+         value="${fn:trim(projectTeamMembersNames)}${projectTeamMembersNames != '' ? ',' : ''}${name}" />
+</c:forEach>
+<input type="hidden" id="writer" name="writer" value="${loginUser.mem_id }"/>
+<input type="hidden" name="project_id" value="${project.project_id}" />
+<input type="hidden" name="team_id" value="${project.team_id}" />
+<input type="hidden" name="eval_status" value="0" />
+
 	<div class="row">
 		<div class="col-12">
 			<h3 style="font-size: 25px; font-weight: bold; margin: 15px 0 0 30px; ">자료 제출</h3>
 		</div>
 	</div>
 	<div class="row ml-5 mt-3">
-		<div class="col-2">
+		<div class="col-3">
 			<span style="font-weight:bold;">프로젝트명</span>
 		</div>
-		<div class="col-2" style="margin-left:112px;">
-			<span style="font-weight:bold;">구분</span>
-		</div>
-		<div class="col-3" style="margin-left:60px;">
+		<div class="col-3">
 			<span style="font-weight:bold;">기한</span>
 		</div>
 	</div>
 	<div class="row ml-5">
 		<div class="col-3">
-			<input class="form-control notNull" name="project_name" title="프로젝트명" type="text" placeholder="프로젝트명을 입력해주세요." style="width:300px;">
+			<input class="form-control notNull" name="project_name" title="프로젝트명" type="text" placeholder="프로젝트명을 입력해주세요." style="width:300px;" value="${project.project_name }" readonly>
 		</div>
-		<div class="ml-3" style="width:260px;">
-			<select name="samester" class="form-control" style="width: 250px; font-size: 16px; border: 1px solid #2ec4b6; height:38px;">
-                <option value="">카테고리</option>
-                <option value="1학기">회의록</option>
-                <option value="2학기">업무일지</option>
-                <option value="1학기">산출물</option>
-                <option value="1학기">최종결과물</option>
-            </select>
-		</div>
+		
 		<div class="col-4 d-flex">
-			<div class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width: 150px; height:38px;">
-                <input name="project_stdate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" style="width: 90px; height:38px; font-size: 16px;" placeholder="시작일">
-                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                  <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-calendar-alt"></i></div>
+			<div class="input-group date"  style="width: 150px; height:38px;">
+                <input name="project_stdate" type="text" class="form-control" style="width: 90px; height:38px; font-size: 16px;" placeholder="시작" value="<fmt:formatDate value="${project.project_stdate}" pattern="yyyy-MM-dd" />" readonly>
+                
+            </div>
+            <span style="line-height:38px;">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;</span>
+            <div class="input-group date"  style="width: 150px; height:38px;">
+                <input name="project_endate" type="text" class="form-control"style="width: 90px; height:38px; font-size: 16px;" placeholder="시작" value="<fmt:formatDate value="${project.project_endate}" pattern="yyyy-MM-dd" />" readonly>
+                
+            </div>
+            
                 </div>
             </div>
-            <span style="line-height:38px;">&nbsp;&nbsp;&nbsp;~</span>
-            <div class="input-group date ml-3" id="datetimepicker2" data-target-input="nearest" style="width: 150px; height:38px;">
-                <input name="project_endate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" style="width: 90px; height:38px; font-size: 16px;" placeholder="종료일">
-                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                  <div class="input-group-text" style="padding: 4px 6px;"><i class="far fa-calendar-alt"></i></div>
-                </div>
-            </div>
+
 		</div>
 	</div>
 	<div class="row ml-5 mt-3">
@@ -80,20 +87,21 @@
 	</div>
 	<div class="row ml-5">
 		<div class="col-3 d-flex">
-			<input id="professorName" class="form-control notNull" type="text" title="담당교수" placeholder="담당교수를 등록해주세요."  readonly style="width:80%;">
-			<input type="hidden" id="professorId" name="profes_id">
-			<button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#professorSelectModal" style="width:70px; height:38px; color:#fff; background-color:#2ec4b6; border:none;">검색</button>
+			<input id="professorName" class="form-control notNull" type="text" title="담당교수" placeholder="담당교수를 등록해주세요."  readonly style="width:80%;"  value="${project.profes_name}" >
+			
 		</div>
 		<div class="col-3 d-flex" style="margin-left:8px;">
 			<!-- 팀장 이름 표시용 -->
-			<input id="teamLeaderName" class="form-control" type="text" placeholder="팀장을 등록해주세요." readonly style="width:80%;">
+			<input id="teamLeaderName" class="form-control" type="text" placeholder="팀장을 등록해주세요." readonly style="width:80%;"value="${project.leader_name}" >
 			<!-- 실제 팀장 stu_id 전송용 -->
 			<input type="hidden" name="team_leader" id="teamLeaderId">
 			<button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#studentSelectModalLeader" style="width:70px; height:38px; color:#fff; background-color:#2ec4b6; border:none;">검색</button>
 		</div>
 		<div class="col-4 d-flex">
 			<!-- 팀원 이름 표시용 (콤마로 구분된 문자열) -->
-			<input id="teamMembersName" name="team_member"class="form-control" type="text" placeholder="팀원을 등록해주세요." readonly style="width:80%;">
+			<input id="teamMembersName" name="team_member" class="form-control" type="text" 
+       placeholder="팀원을 등록해주세요." readonly 
+       value="${teammembers}">
 			<!-- 팀원 stu_id_list 전송용 히든 input 여러개 삽입될 영역 -->
 			<div id="teamMembersHiddenInputs"></div>
 			<button type="button" class="btn btn-secondary ml-2" data-toggle="modal" data-target="#studentSelectModalMembers" style="width:70px; height:38px; color:#fff; background-color:#2ec4b6; border:none;">검색</button>
@@ -101,10 +109,22 @@
 	</div>
 	<div style="margin-left:55px; margin-top:15px;">
 	<div class="row">
-	<div class="col-12">
+		<div class="col-2">
+			<span style="font-weight:bold;">구분</span>
+		</div>
+	<div class="col-8">
 	<span style="font-weight:bold;">제목</span></div>
 	</div>
 	<div class="row">
+	<div class="col-2">
+			<select name="rm_category" class="form-control" style="font-size: 16px; border: 1px solid #2ec4b6; height:38px;">
+                <option value="">카테고리</option>
+                <option value="회의록">회의록</option>
+                <option value="업무일지">업무일지</option>
+                <option value="산출물">산출물</option>
+                <option value="최종결과물">최종결과물</option>
+            </select>
+            </div>
 	<div class="col-10">
 	<input id="rm_name" name="rm_name" class="form-control" type="text" placeholder="제목을 입력해주세요." style="width:80%;">
 	</div>
@@ -113,8 +133,8 @@
 	<div class="row">
 		<div class="col-11" style="margin-left:55px; margin-top:15px;">
 			<div class="form-group">
-				<label for="content"><span style="font-weight:bold;">내용</span></label>
-				<textarea class="form-control" name="project_desc" id="content" rows="5"  placeholder="1000자 내외로 작성하세요." ></textarea>
+				<label for="rm_content"><span style="font-weight:bold;">내용</span></label>
+				<textarea class="form-control" name="rm_content" id="rm_content" rows="5"  placeholder="1000자 내외로 작성하세요." ></textarea>
 			</div>
 		</div>
 	</div>
@@ -124,7 +144,7 @@
 			<div class="card-footer fileInput">
 			</div>
 					<div class="ml-auto"><button class="btn btn-primary"
-					onclick="addFile_go();"	type="button" id="addFileBtn" style="background-color:#2ec4b6; color:#ffffff; border:1px solid #2ec4b6">파일 선택</button></div>
+					onclick="addFile_go();"	type="button" id="addFileBtn" style="background-color:#2ec4b6; color:#ffffff; border:1px solid #2ec4b6">파일 추가</button></div>
 			</div>									
 	</div>
 	</div>
@@ -139,7 +159,7 @@
             </button>
           </div>
 		<div class="col-2">
-			<button type="button" class="btn btn-info" onclick="projectRegist_go();"
+			<button type="button" class="btn btn-info" onclick="roadMapRegist_go();"
               style="background-color:#2ec4b6; border-radius:5px; width:150px; height:40px; border:none; font-weight:bold;">
               <span style="color:#ffffff; font-size:20px;">등 록</span>
             </button>
@@ -150,17 +170,14 @@
 <!-- 초기화 스크립트 -->
 <script>
   $(function () {
-    // 달력 초기화
-    $('#datetimepicker1').datetimepicker({ format: 'YYYY-MM-DD' });
-    $('#datetimepicker2').datetimepicker({ format: 'YYYY-MM-DD' });
 
     // 썸머노트 초기화
-    $('#content').summernote({
+    $('#rm_content').summernote({
       height: 150,
       placeholder: '내용을 입력해주세요.'
     });
   });
-  function projectRegist_go() {
+  function roadMapRegist_go() {
 	    let form = document.forms["registForm"];
 
 	    // 필수 입력값 검사
@@ -174,37 +191,24 @@
 	    }
 
 	    // 학기 선택 확인
-	    if (!form.samester.value) {
-	      alert("학기를 선택해주세요.");
-	      form.samester.focus();
+	    if (!form.rm_category.value) {
+	      alert("카테고리를 선택해주세요.");
+	      form.rm_category.focus();
 	      return;
 	    }
-
-	    // 날짜 입력 확인
-	    if (!form.project_stdate.value || !form.project_endate.value) {
-	      alert("프로젝트 시작일과 종료일을 모두 입력해주세요.");
-	      return;
-	    }
-
 	    // 담당교수 확인
-	    if (!form.profes_id.value) {
-	      alert("담당교수를 선택해주세요.");
+	    if (!form.rm_name.value) {
+	      alert("제목을 입력해주세요.");
 	      return;
 	    }
-
-	    // 팀장 확인
-	    if (!form.team_leader.value) {
-	      alert("팀장을 선택해주세요.");
-	      return;
-	    }
-
-	    // 팀원 확인
-	    const teamMemberInputs = document.getElementsByName("stu_id_list");
-	    if (teamMemberInputs.length === 0) {
-	      alert("팀원을 1명 이상 등록해주세요.");
-	      return;
-	    }
-
+		if (!form.rm_content.value){
+			 alert("내용을 입력해주세요.");
+		      return;
+		    }
+		if($('input[name="uploadFile"]').length < 1){
+			alert("1개 이상의 첨부파일은 필수입니다.");
+			return;
+		}
 	    // 최종 제출
 	    form.action = "regist";
 	    form.method = "post";
@@ -212,78 +216,7 @@
 	  }
 
   // 팀장 모달에서 선택 완료 시 호출할 함수 (예시)
-  function setTeamLeader(stuId, stuName) {
-    document.getElementById("teamLeaderId").value = stuId;
-    document.getElementById("teamLeaderName").value = stuName;
-  }
-
-  // 팀원 모달에서 선택 완료 시 호출할 함수 (예시)
-  // selectedMembers: [{stu_id:'1', mem_name:'김학생'}, ...]
-  function setTeamMembers(selectedMembers) {
-    var names = selectedMembers.map(m => m.mem_name).join(", ");
-    document.getElementById("teamMembersName").value = names;
-
-    var container = document.getElementById("teamMembersHiddenInputs");
-    container.innerHTML = "";
-    selectedMembers.forEach(m => {
-      var input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "stu_id_list";
-      input.value = m.stu_id;
-      container.appendChild(input);
-    });
-  }
-  $('#selectLeaderBtn').on('click', function () {
-	    const stuId = $(this).data('selected-id');
-	    const stuName = $(this).data('selected-name');
-
-	    if (stuId && stuName) {
-	        setTeamLeader(stuId, stuName); // <<< 이 부분 꼭 있어야 합니다
-	    }
-
-	    $('#studentSelectModalLeader').modal('hide');
-	});
-//예시: 팀장 선택 후 Ajax로 팀 생성 요청
-  function selectTeamLeaderAndCreateTeam(stuId, stuName) {
-    $.ajax({
-      url: '/team/create',
-      method: 'POST',
-      data: { team_leader: stuId },
-      success: function(response) {
-        // response에 생성된 team_id 포함
-        document.getElementById("teamLeaderId").value = stuId;
-        document.getElementById("teamLeaderName").value = stuName;
-        // 숨겨진 팀 아이디 input에 저장
-        if(!document.getElementById('teamId')) {
-          var input = document.createElement("input");
-          input.type = "hidden";
-          input.name = "team_id";
-          input.id = "teamId";
-          input.value = response.team_id;
-          document.forms["registForm"].appendChild(input);
-        } else {
-          document.getElementById('teamId').value = response.team_id;
-        }
-      },
-      error: function() {
-        alert("팀 생성 실패");
-      }
-    });
-  }
-  function setTeamMembers(selectedMembers) {
-	    var names = selectedMembers.map(m => m.mem_name).join(", ");
-	    document.getElementById("teamMembersName").value = names;
-
-	    var container = document.getElementById("teamMembersHiddenInputs");
-	    container.innerHTML = "";
-	    selectedMembers.forEach(m => {
-	        var input = document.createElement("input");
-	        input.type = "hidden";
-	        input.name = "stu_id_list"; // 팀원 id를 여러개 받는 파라미터명
-	        input.value = m.stu_id;
-	        container.appendChild(input);
-	    });
-	}
+ 
 </script>
 <script>
 var dataNum=0;

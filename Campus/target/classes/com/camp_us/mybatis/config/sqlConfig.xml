@@ -21,6 +21,8 @@
 		<typeAlias type="com.camp_us.dto.ProjectListVO" alias="projectlist"/>
 		<typeAlias type="com.camp_us.dto.EditBfProjectVO" alias="editBfProject"/>
 		<typeAlias type="com.camp_us.dto.RoadMapVO" alias="roadmap"/>
+		<typeAlias type="com.camp_us.dto.EvaluationVO" alias="evaluation"/>
+		<typeAlias type="com.camp_us.dto.AttachVO" alias="attach"/>
 		<typeAlias type="com.camp_us.command.PageMaker" alias="pageMaker"/>
 		<typeAlias type="com.camp_us.command.PageMakerPro" alias="pageMakerPro"/>
 	</typeAliases>

@@ -20,12 +20,11 @@ import com.camp_us.dto.TeamVO;
 public class ProjectDAOImpl implements ProjectDAO {
 
     private SqlSession session;
-
+     
     public ProjectDAOImpl(SqlSession session) {
-        this.session = session;
-    }
-
-	@Override
+		this.session = session;
+	}
+   	@Override
 	public List<MemberVO> selectTeamMemberList() throws SQLException {
 		List<MemberVO> teamMemberList = session.selectList("Project-Mapper.selectTeamMemberList");
 		return teamMemberList;

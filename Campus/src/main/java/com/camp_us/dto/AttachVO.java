@@ -1,16 +1,16 @@
 package com.camp_us.dto;
 
 public class AttachVO {
-	private String ano; 			 //고유번호
+	private int ano; 			 //고유번호
 	private String uploadPath;	 //저장경로
 	private String fileName;  	 //파일명
 	private String fileType; 	 //파일형식
 	private String rm_id;          	 //로드맵 아이디(로드맵정보와 fk)
 	private String attacher; 	 //등록자 account(로그인정보와 fk)
-	public String getAno() {
+	public int getAno() {
 		return ano;
 	}
-	public void setAno(String ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 	public String getUploadPath() {

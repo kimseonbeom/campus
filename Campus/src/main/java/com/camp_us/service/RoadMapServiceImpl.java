@@ -64,24 +64,32 @@ public class RoadMapServiceImpl implements RoadMapService{
 	@Override
 	public void remove(String rm_id) throws SQLException {
 		
-		RoadMapVO roadMap = roadMapDAO.selectRoadMapByRm_id(rm_id);
-		
-		File dir = new File(summernotePath);
-		File[] files = dir.listFiles();
-		if(files!=null) for(File file : files) {
-			if(roadMap.getRm_content().contains(file.getName())) {
-				file.delete();
-			}
-		}
+		attachDAO.deletAllAttach(rm_id);
+		roadMapDAO.deleteRoadMap(rm_id);
 		
 	}
 	@Override
 	public RoadMapVO detail(String rm_id) throws SQLException {
-		return roadMapDAO.selectRoadMapByRm_id(rm_id);
+		RoadMapVO roadMap = roadMapDAO.selectRoadMapByRm_id(rm_id);
+		
+		List<AttachVO> attachList = attachDAO.selectAttachByPno(rm_id);
+		roadMap.setAttachList(attachList);
+		
+		return roadMap;
 	}
 	@Override
 	public List<String> evalStatus(String rm_id) throws SQLException {
 		return roadMapDAO.selectEvalStatusByRMid(rm_id);
+	}
+	@Override
+	public void updateEvalStatus(String rm_id) throws SQLException {
+		roadMapDAO.updateEvalStatus(rm_id);
+		
+	}
+	@Override
+	public void updateRoadMapStatus(String project_id) throws SQLException {
+		roadMapDAO.updateRoadMapStatus(project_id);
+		
 	}
 
 }

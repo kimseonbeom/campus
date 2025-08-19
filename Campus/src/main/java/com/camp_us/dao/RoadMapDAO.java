@@ -27,4 +27,8 @@ public interface RoadMapDAO {
 	RoadMapVO selectRoadMapByRm_id(String rm_id)throws SQLException;
 	
 	List<String> selectEvalStatusByRMid(String rm_id)throws SQLException;
+	
+	void updateEvalStatus(String rm_id)throws SQLException;
+	
+	void updateRoadMapStatus(String project_id)throws SQLException;
 }

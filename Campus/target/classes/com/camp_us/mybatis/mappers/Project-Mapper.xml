@@ -249,4 +249,9 @@
 <delete id="deleteTeamByTeamId" parameterType="str">
 delete from team where team_id = #{team_id}
 </delete>
+<update id="updateRoadMapStatus" parameterType="str">
+    UPDATE PROJECT
+    SET RM_STATUS = '1'
+    WHERE PROJECT_ID = #{PROJECT_ID}
+</update>
 </mapper>

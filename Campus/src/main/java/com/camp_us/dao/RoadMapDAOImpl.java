@@ -34,6 +34,7 @@ public class RoadMapDAOImpl implements RoadMapDAO{
 		dataMap.put("mem_id", mem_id);
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
+		dataMap.put("eval_status",pageMaker.getEval_status());
 		List<ProjectListVO> projectList = session.selectList("RoadMap-Mapper.selectsearchProjectListstu",dataMap,bounds);
 		
 		return projectList;
@@ -48,7 +49,8 @@ public class RoadMapDAOImpl implements RoadMapDAO{
 		dataMap.put("project_stdate", pageMaker.getProject_stdate());
 		dataMap.put("project_endate", pageMaker.getProject_endate());
 		dataMap.put("mem_id", mem_id);
-		
+		dataMap.put("rm_status",pageMaker.getRm_status());
+		dataMap.put("eval_status",pageMaker.getEval_status());
 		int count = session.selectOne("RoadMap-Mapper.selectsearchProjectListCountstu",dataMap);
 		return count;
 	}
@@ -101,6 +103,7 @@ public class RoadMapDAOImpl implements RoadMapDAO{
 		dataMap.put("project_id", project_id);
 		dataMap.put("eval_status", pageMaker.getEval_status());
 		
+		
 		int count = session.selectOne("RoadMap-Mapper.selectRoadMapByProject_idCount",dataMap);
 		return count;
 	}
@@ -114,5 +117,16 @@ public class RoadMapDAOImpl implements RoadMapDAO{
 	@Override
 	public List<String> selectEvalStatusByRMid(String rm_id) throws SQLException {
 		return session.selectList("RoadMap-Mapper.selectEvalStatusByRMid",rm_id);
+	}
+
+	@Override
+	public void updateEvalStatus(String rm_id) throws SQLException {
+		session.update("updateEvalStatus",rm_id);
+	}
+
+	@Override
+	public void updateRoadMapStatus(String project_id) throws SQLException {
+		session.update("updateRoadMapStatus",project_id);
+		
 	}
 }

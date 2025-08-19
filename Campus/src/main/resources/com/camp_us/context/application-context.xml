@@ -57,6 +57,11 @@
 		  class="com.camp_us.dao.AttachDAOImpl"
 		  c:session-ref="sqlSession"
 		  />
+	<bean id ="evaluationDAO"
+		  class="com.camp_us.dao.EvaluationDAOImpl"
+		  c:session-ref="sqlSession"
+		  />
+	
 	<bean id="memberService"
 	      class="com.camp_us.service.MemberServiceImpl"
 	      c:memberDAO-ref="memberDAO"
@@ -86,6 +91,10 @@
 		  c:roadMapDAO-ref="roadMapDAO"
 		  c:summernotePath-ref="summernotePath"
 		  c:attachDAO-ref="attachDAO"
+		  />
+	<bean id="evaluationService"
+		  class="com.camp_us.service.EvaluationServiceImpl"
+		  c:evaluationDAO-ref="evaluationDAO"
 		  />
 </beans>
 

@@ -130,9 +130,28 @@ i{}
   background-repeat: no-repeat;
   transition: background-image 0.3s;
 }
-
 .nav-link:hover .key-img-icon {
   background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/key_hv.png');
+}
+.file-icon{
+	display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/file.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s;
+  vertical-align: middle;
+}
+.file-select:hover .file-icon{
+	background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/fileCP.png');
+}
+.selectedfile{
+	display: inline-block;
+	line-height:14px;
+}
+div.file-select:hover span.selectedfile {
+    color: #2ec4b6;
 }
 .log-img-icon {
   display: inline-block;
@@ -393,7 +412,7 @@ textarea:focus {
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- 공통 -->
 <script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <decorator:head />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

@@ -9,10 +9,12 @@ public class PageMakerPro {
 	private String project_stdate;
 	private String project_endate;
 	private String project_name;
+	private String eval_status;
 	private int page = 1; // 페이지 번호
 	private int perPageNum = 7; // 리스트 개수
 	private int totalCount; // 전체 행의 개수
 	private int displayPageNum = 10; // 한 페이지에 보여줄 페이지번호 개수
+	private String rm_status;
 	
 	private int startPage = 1; // 시작 페이지 번호
 	private int endPage = 1; // 마지막 페이지 번호
@@ -21,7 +23,19 @@ public class PageMakerPro {
 	private boolean next; // 다음페이지 버튼 유무
 
 	
-
+	
+	public String getRm_status() {
+		return rm_status;
+	}
+	public void setRm_status(String rm_status) {
+		this.rm_status = rm_status;
+	}
+	public String getEval_status() {
+		return eval_status;
+	}
+	public void setEval_status(String eval_status) {
+		this.eval_status = eval_status;
+	}
 	public String getProject_name() {
 		return project_name;
 	}

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>	
 <style>
 html, body {
     margin: 0;
@@ -26,12 +26,14 @@ html, body {
     </h3>
 </c:if>
         <div class="card-tools">
+        <sec:authorize access='hasAnyRole("ROLE_1")'>
             <div class="btn btn-primary btn-lg mt-2 mr-3 d-flex align-items-center justify-content-center"
                  onclick="location.href='<%=request.getContextPath() %>/roadmap/regist?project_id=${project[0].project_id }'; 
                           window.parent.location.hash='<%=request.getContextPath() %>/roadmap/regist?project_id=${project[0].project_id }';"
                  style="background-color:#2ec4b6; border:none; width:100px; height:40px;">
                 <span style="color: #ffffff; font-size:17px; font-weight:bold;">자료 제출</span>
             </div>
+            </sec:authorize>
         </div>
     </div>
 
@@ -148,12 +150,12 @@ html, body {
                         <c:choose>
                             <c:when test="${rm.eval_status == 1}">
                                 <div class="col-1 text-center">
-                                    <button type="button" style="width:80px; background-color:#ffffff; border:2px solid #2ec4b6; border-radius:5px; color:#2ec4b6; font-weight:bold;">완료</button>
+                                    <button type="button" style="width: 80px; background-color: #2ec4b6; border: 2px solid #2ec4b6; border-radius: 5px; color: #ffffff; font-weight: bold;">완료</button>
                                 </div>
                             </c:when>
                             <c:otherwise>
                                 <div class="col-1 text-center">
-                                    <button type="button" style="width:80px; background-color:#2ec4b6; border:none; border-radius:5px; color:#ffffff; font-weight:bold;">미완료</button>
+                                    <button type="button" style="width: 80px; background-color: #ff7a7a; border: 2px solid #ff7a7a; border-radius: 5px; color: #ffffff; font-weight: bold;">미완료</button>
                                 </div>
                             </c:otherwise>
                         </c:choose>

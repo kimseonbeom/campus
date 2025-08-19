@@ -3,13 +3,12 @@ package com.camp_us.dto;
 import java.util.Date;
 
 public class EvaluationVO {
-	private String eval_id;
-    private String profes_id;
-    private String eval_content;
-    private int eval_score;
-    private Date eval_regdate;
-    private Date eval_update;
-    private int eval_status;
+	private String eval_id;  // 고유번호
+    private String profes_id; // 작성자
+    private String eval_content; // 평가내용
+    private int eval_score; //평가점수
+    private Date eval_regdate; // 등록일
+    private Date eval_update; //수정일
     private String rm_id;
     
     
@@ -21,9 +20,6 @@ public class EvaluationVO {
 	}
 	public void setEval_score(int eval_score) {
 		this.eval_score = eval_score;
-	}
-	public void setEval_status(int eval_status) {
-		this.eval_status = eval_status;
 	}
 	public String getEval_id() {
 		return eval_id;
@@ -57,9 +53,6 @@ public class EvaluationVO {
 	}
 	public int getEval_score() {
 		return eval_score;
-	}
-	public int getEval_status() {
-		return eval_status;
 	}
     
     

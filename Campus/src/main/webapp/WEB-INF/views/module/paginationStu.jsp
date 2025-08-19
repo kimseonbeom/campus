@@ -44,6 +44,7 @@
   <input type='hidden' name="project_name" value="" />
   <input type='hidden' name="project_stdate" value="" />
   <input type='hidden' name="project_endate" value="" />
+  
 </form>
 <script>
 function search_list(page){
@@ -52,6 +53,7 @@ function search_list(page){
 	  let project_name = document.querySelector('input[name="project_name"]').value;
 	  let project_stdate = document.querySelector('input[name="project_stdate"]').value;
 	  let project_endate = document.querySelector('input[name="project_endate"]').value;
+	
 	  let perPageNum = document.querySelector('input[name="perPageNum"]').value; // 이 부분
 
 	  let form = document.querySelector("#jobForm");
@@ -59,6 +61,7 @@ function search_list(page){
 	  form.project_name.value = project_name;
 	  form.project_stdate.value = project_stdate;
 	  form.project_endate.value = project_endate;
+	  
 	  form.perPageNum.value = perPageNum;  // 여기에 넣기
 	  form.page.value = page;
 

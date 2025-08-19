@@ -165,7 +165,9 @@
 				<div class="row pt-2">
 				<div class="col-1"></div>
 				<div class="col-10">
-				<button type="button" class="btn btn-block btn-secondary btn-flat" style="background-color: #e7e7e7; color:#707070; font-weight:bold;">로드맵</button>
+				<button type="button" class="btn btn-block btn-secondary btn-flat" style="background-color: #e7e7e7; color:#707070; font-weight:bold;" 
+				onclick="location.href='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${stulist.project_id }'; window.parent.location.hash='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${stulist.project_id }';"
+				>로드맵</button>
 				</div>
 				<div class="col-1"></div>
 				</div>
@@ -283,7 +285,7 @@
    <!--페이지  -->
    <div class="col-4">
 <c:if test="${not empty projectList}">
-  <%@ include file="/WEB-INF/views/module/pagination.jsp" %>
+  <%@ include file="/WEB-INF/views/module/paginationStu.jsp" %>
 </c:if></div>
 <div class="col-4"></div>
 </div>

@@ -117,10 +117,8 @@ public class PageMakerStu {
 	private void calcData() {
 		endPage = (int) (Math.ceil(page / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
-
 		realEndPage = (int) (Math.ceil(totalCount / (double) perPageNum));
-
-		if (startPage < 0) {
+		if (startPage <= 0) {
 			startPage = 1;
 		}
 		if (endPage > realEndPage) {

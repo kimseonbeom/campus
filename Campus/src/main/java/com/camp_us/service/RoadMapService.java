@@ -21,4 +21,8 @@ public interface RoadMapService {
 	void regist(RoadMapVO roadMap)throws SQLException;
 	
 	void remove(String rm_id)throws SQLException;
+	
+	void updateEvalStatus(String rm_id)throws SQLException;
+	
+	void updateRoadMapStatus(String rm_id)throws SQLException;
 }

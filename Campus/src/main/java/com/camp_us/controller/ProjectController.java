@@ -88,6 +88,7 @@ public class ProjectController {
                 projectEditStatusMap.put("unknown", List.of("수정 가능"));
             }
         }
+        model.addAttribute("pageMaker", pageMaker);
         model.addAttribute("projectEditStatusMap", projectEditStatusMap);
         model.addAttribute("selectedSamester", samester); 
         model.addAttribute("projectList", projectList);
@@ -315,4 +316,10 @@ public class ProjectController {
 	
 		return url;
 	}
+    @GetMapping("/main")
+    public String main() {
+    	String url="/project/main";
+    	return url;
+    }
+    
 }

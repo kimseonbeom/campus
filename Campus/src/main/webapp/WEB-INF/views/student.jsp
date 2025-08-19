@@ -133,7 +133,7 @@
 </li>
    <sec:authorize access='hasAnyRole("ROLE_1")'>
           <li class="nav-item" >            
-            <a href="#" class="nav-link" onclick='Iframe("<%=request.getContextPath()%>/lecture/main"); return false;'>
+            <a href="#" class="nav-link" data-url="<%=request.getContextPath() %>/project/main">
               <i class="nav-icon fas gang-img-icon"></i>
               <p class="fas" >&nbsp;
                 강의실
@@ -278,7 +278,7 @@
           </li>
           </sec:authorize>
           <li class="nav-item">            
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" data-url="<%=request.getContextPath() %>/project/main">
               <i class="nav-icon fas pro-img-icon"></i>
               <p class="fas">&nbsp;
                 프로젝트

@@ -42,7 +42,7 @@
 
 	<div class="row">
 		<div class="col-12">
-			<h3 style="font-size: 25px; font-weight: bold; margin: 15px 0 0 30px; ">자료 제출</h3>
+			<h3 style="font-size: 25px; font-weight: bold; margin: 15px 0 0 30px; ">평가 자료 제출</h3>
 		</div>
 	</div>
 	<div class="row ml-5 mt-3">

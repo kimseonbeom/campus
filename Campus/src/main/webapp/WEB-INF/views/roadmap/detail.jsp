@@ -15,7 +15,7 @@
 <div class="wrap" style="height:100vh;">
     <div class="card-header" style="border-bottom: none;">
         <h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">
-            로드맵 : <span>${projectList[0].project_name }</span>
+            결과물 : <span>${projectList[0].project_name }</span>
         </h3>
     </div>
     <div class="row" style="margin-top:40px;">
@@ -29,13 +29,12 @@
             <fmt:formatDate value="${roadMap.rm_regdate }" pattern="yyyy-MM-dd HH:mm:ss" /></span>
         </div>
         <div class="col-1 mb-1 mt-1">
-            <sec:authorize access='hasAnyRole("ROLE_2")'>
-                <button type="button" onclick="remove();"
-                        style="background-color:#aaaaaa; border-radius:5px; width:90px; height:35px; border:none;
-                               margin-left:44px;font-weight:bold; font-size:17px; color:#ffffff;">
-                    삭제
-                </button>
-            </sec:authorize>
+                <button type="button" 
+            onclick="location.href='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${projectList[0].project_id }'; 
+                     window.parent.location.hash='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${projectList[0].project_id }';"  
+            style="background-color:#2ec4b6; border-radius:5px; width:90px; height:35px; border:none; font-weight:bold; font-size:17px; color:#ffffff; margin-left:55px;">
+        목록
+    </button>
         </div>
     </div>
     <div class="row">
@@ -66,7 +65,7 @@
 <div class="row d-flex" style="border-top:3px solid #2ec4b6; width:1179px; margin-left:47px; align-items:center;">
     <c:if test="${not empty eval}">
         <c:forEach items="${eval}" var="e">
-            <div class="col-8 d-flex" style="width:80%; align-items:flex-start; gap:10px; margin-bottom:10px;">
+            <div class="col-3 d-flex" style="width:50%; align-items:flex-start; gap:10px; margin-bottom:10px;">
                 <img src="<%=request.getContextPath() %>/member/getPicture?id=${e.profes_id}" 
                      class="img-circle img-md" alt="User Image" 
                      style="width:45px; height:45px; object-fit:cover; margin-top:5px;"/>
@@ -80,7 +79,7 @@
                             <form action="${pageContext.request.contextPath}/roadmap/evaluation/remove" method="post" style="display:inline; margin-left:5px;">
                                 <input type="hidden" name="eval_id" value="${e.eval_id}">
                                 <input type="hidden" name="rm_id" value="${roadMap.rm_id}">
-                                <button type="submit" style="border:1px solid #d51515; width:15px; height:15px; background-color:#f84343; color:#ffffff; font-size:10px; text-align:center; padding:0;">X</button>
+                                
                             </form>
                         </c:if>
                     </div>
@@ -95,26 +94,36 @@
         </div>
     </c:if>
 
-    <div class="col-2">
-        <sec:authorize access='hasAnyRole("ROLE_2")'>
-            <button type="button" onclick="OpenWindow('${pageContext.request.contextPath}/roadmap/evaluation/regist?rm_id=${roadMap.rm_id }','평가',700,800)"
-                    style="background-color:#2ec4b6; border-radius:5px; width:90px; height:35px; border:none;margin-left:275px;font-weight:bold; font-size:17px; color:#ffffff;">
-                평가
-            </button>
-        </sec:authorize>
-    </div>
-</div>
+   <div class="d-flex ml-auto" style="width:auto;">
+    <sec:authorize access='hasAnyRole("ROLE_2")'>
+        <c:set var="myEvalExists" value="false" />
+<c:set var="myEvalId" value="" />
+<c:forEach items="${eval}" var="e">
+    <c:if test="${e.profes_id == loginUser.mem_id}">
+        <c:set var="myEvalExists" value="true" />
+        <c:set var="myEvalId" value="${e.eval_id}" />
+    </c:if>
+</c:forEach>
 
-    <div class="row">
-        <div class="col-10"></div>
-        <div class="col-1 mb-1 mt-2">
-            <button type="button" onclick="location.href='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${projectList[0].project_id }'; 
-                window.parent.location.hash='<%=request.getContextPath() %>/roadmap/list/stu?project_id=${projectList[0].project_id }';"  
-                    style="background-color:#2ec4b6; border-radius:5px; width:90px; height:35px; border:none;margin-left:44px;font-weight:bold; font-size:17px; color:#ffffff;">
-                목록
-            </button>
-        </div>
-    </div>
+<c:choose>
+    <c:when test="${myEvalExists and not empty myEvalId}">
+        <button type="button" 
+                onclick="OpenWindow('${pageContext.request.contextPath}/roadmap/evaluation/modify?rm_id=${roadMap.rm_id }&profes_id=${loginUser.mem_id}&eval_id=${myEvalId}','평가 수정',700,800)"
+                style="background-color:#2ec4b6; border-radius:5px; width:90px; height:35px; margin-right:20px; border:none; font-weight:bold; font-size:17px; color:#ffffff;">
+            수정
+        </button>
+    </c:when>
+    <c:otherwise>
+        <button type="button" 
+                onclick="OpenWindow('${pageContext.request.contextPath}/roadmap/evaluation/regist?rm_id=${roadMap.rm_id }','평가',700,800)"
+                style="background-color:#2ec4b6; border-radius:5px; width:90px; height:35px;  border:none; font-weight:bold; font-size:17px; color:#ffffff;">
+            평가
+        </button>
+    </c:otherwise>
+</c:choose>
+    </sec:authorize>
+</div>
+</div>
 </div>
 
 <script>

@@ -10,6 +10,8 @@ import com.camp_us.dto.EvaluationVO;
 public interface EvaluationService {
 	List<EvaluationVO> list(String rm_id, PageMakerRM pageMaker)throws SQLException;
 	
+	EvaluationVO selectEvaluationByEval_id(String eval_id)throws SQLException;
+	
 	//등록
 	void regist(EvaluationVO evaluation) throws SQLException;
 	

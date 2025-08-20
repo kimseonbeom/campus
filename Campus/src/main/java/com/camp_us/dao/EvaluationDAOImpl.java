@@ -51,4 +51,9 @@ public class EvaluationDAOImpl implements EvaluationDAO{
 		session.delete("Evaluation-Mapper.deleteEvaluation",eval_id);
 	}
 
+	@Override
+	public EvaluationVO selectEvaluationByEval_id(String eval_id) {
+		return session.selectOne("Evaluation-Mapper.selectEvaluationByEval_id",eval_id);
+	}
+
 }

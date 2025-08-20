@@ -162,7 +162,14 @@ div.file-select:hover span.selectedfile {
   background-repeat: no-repeat;
   transition: background-image 0.3s;
 }
-
+.search-btn-icon{
+	display: inline-block;
+  width: 18px;   /* 이미지 크기 조절 */
+  height: 18px;
+  background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/searchbtn.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .nav-link:hover .log-img-icon {
   background-image: url('<%=request.getContextPath() %>/resources/bootstrap/dist/img/log_hv.png');
 }

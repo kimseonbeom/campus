@@ -10,7 +10,11 @@
 		where rm_id=#{rm_id}
 		order by eval_regdate desc
 	</select>
-	
+	<select id="selectEvaluationByEval_id" resultType="evaluation">
+		select *
+		from evaluation
+		where eval_id=#{eval_id}	
+	</select>
 	<select id="countEvaluation" resultType="int">
 		select count(rm_id) 
 		from evaluation
@@ -28,8 +32,9 @@
 		update Evaluation 
 		set 
 		eval_content=#{eval_content},
-		eval_update=sysdate
-		where eval_id=#{eval_id}		
+		eval_update=sysdate,
+		eval_score=#{eval_score}
+		where eval_id=#{eval_id}	
 	</update>
 	
 	<delete id="deleteEvaluation" parameterType="evaluation">

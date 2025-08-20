@@ -90,7 +90,7 @@
        </li>
       <li>
       <div class="row ml-4 mr-4">
-      학번: ${loginUser.mem_id }
+      ID : ${loginUser.mem_id }
       </div>
       <div class="row ml-4 mr-4">
       이름: ${loginUser.mem_name }
@@ -277,8 +277,16 @@
             </ul>
           </li>
           </sec:authorize>
-          <li class="nav-item">            
-            <a href="#" class="nav-link" data-url="<%=request.getContextPath() %>/project/main">
+          <li class="nav-item">
+               
+            <a href="#" class="nav-link" 
+            <sec:authorize access="hasRole('ROLE_1')"> 
+            data-url="<%=request.getContextPath() %>/project/main/stu"
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_2')">
+            data-url="<%=request.getContextPath() %>/project/main/pro"
+            </sec:authorize>
+            >
               <i class="nav-icon fas pro-img-icon"></i>
               <p class="fas">&nbsp;
                 프로젝트
@@ -309,7 +317,7 @@
 	              </sec:authorize>
                 >
                   <i class="far fas nav-icon"></i>
-                  <p>&nbsp;&nbsp;&nbsp;로드맵</p>
+                  <p>&nbsp;&nbsp;&nbsp;결과물</p>
                 </a>
               </li>
             </ul>
@@ -322,37 +330,6 @@
                 게시판
               </p>
             </a>
-          </li>
-		    <li class="nav-item" data-url="">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas cal-img-icon"></i>
-              <p class="fas">&nbsp;
-                캘린더
-              </p>
-            </a>
-          </li>
-          <li class="nav-item" data-url="">            
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas mes-img-icon"></i>
-              <p class="fas">&nbsp;
-                커뮤니티
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" data-url="">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far nav-icon"></i>
-                  <p>&nbsp;&nbsp;&nbsp;공지사항</p>
-                </a>
-              </li>
-              <li class="nav-item" data-url="">
-                <a href="#" class="nav-link">
-                  <i class="far nav-icon"></i>
-                  <p>&nbsp;&nbsp;&nbsp;질의응답</p>
-                </a>
-              </li>
-            </ul>
           </li>
       </nav>
       <!-- /.sidebar-menu -->

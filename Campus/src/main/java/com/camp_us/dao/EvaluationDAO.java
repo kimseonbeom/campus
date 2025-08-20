@@ -11,7 +11,7 @@ import com.camp_us.dto.EvaluationVO;
 public interface EvaluationDAO {
 	List<EvaluationVO> selectEvaluationList(String rm_id,PageMakerRM pageMaker) throws SQLException;
 	int countEvaluation(String rm_id)throws SQLException;
-	
+	EvaluationVO selectEvaluationByEval_id(String eval_id);
 	String selectEvaluationSeqNextValue()throws SQLException;
 	
 	void insertEvaluation(EvaluationVO evaluation)throws SQLException;

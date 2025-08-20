@@ -356,6 +356,51 @@ public class RodeMapController {
 	    evaluationService.remove(eval_id); // DB 삭제
 	    return "redirect:/roadmap/detail?rm_id=" + rm_id; // 삭제 후 상세페이지로 리다이렉트
 	}
+	@GetMapping("/evaluation/modify")
+	public ModelAndView modifyEvaluation(@RequestParam String eval_id, String rm_id) throws Exception {
+	    ModelAndView mnv = new ModelAndView("/roadmap/evalmodify");
+
+	    EvaluationVO evaluation = evaluationService.selectEvaluationByEval_id(eval_id);
+	    if (evaluation == null) {
+	        throw new IllegalArgumentException("해당 평가를 찾을 수 없습니다. eval_id=" + eval_id);
+	    }
+
+	    RoadMapVO roadMap = roadMapService.detail(rm_id);
+	    String project_id = roadMap.getProject_id();
+	    List<ProjectListVO> projectList = projectService.selectProjectByProjectId(project_id);
+	    List<MemberVO> studentList = projectService.selectTeamMemberList();
+	    List<String> teammembers = projectService.selectTeamMembers(project_id);
+	    String teammembersStr = String.join(", ", teammembers);
+
+	    mnv.addObject("eval_id", eval_id); // ← 반드시 요청 파라미터 eval_id 사용
+	    mnv.addObject("evaluation", evaluation);
+	    mnv.addObject("rm_id", rm_id);
+	    mnv.addObject("teammembers", teammembersStr);
+	    mnv.addObject("studentList", studentList);
+	    mnv.addObject("projectList", projectList);
+
+	    return mnv;
+	}
+	@PostMapping(value = "/evaluation/modify", produces = "text/plain;charset=utf-8")
+	public ModelAndView modifyEvaluation(EvaluationRegistCommand regCommand, 
+	                                     @RequestParam String eval_id,
+	                                     @RequestParam String rm_id, 
+	                                     HttpSession session, 
+	                                     ModelAndView mnv) throws Exception {
+	    String url="/roadmap/evaluationmodify_success";
+	    EvaluationVO evaluation = regCommand.toEvaluationVO(eval_id, rm_id);
+	    evaluation.setEval_content(HTMLInputFilter.htmlSpecialChars(evaluation.getEval_content()));
+
+	    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+	    if(loginUser != null){
+	        evaluation.setProfes_id(loginUser.getMem_id());
+	    }
+
+	    evaluationService.modify(evaluation);
+	    roadMapService.updateEvalStatus(rm_id);
+	    mnv.setViewName(url);
+	    return mnv;
+	}
 	@javax.annotation.Resource(name="roadMapSavedFilePath")
 	private String fileUploadPath;
 

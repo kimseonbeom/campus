@@ -316,10 +316,14 @@ public class ProjectController {
 	
 		return url;
 	}
-    @GetMapping("/main")
+    @GetMapping("/main/stu")
     public String main() {
     	String url="/project/main";
     	return url;
     }
-    
+    @GetMapping("/main/pro")
+    public String mainPro() {
+    	String url ="/project/mainpro";
+    	return url;
+    }
 }

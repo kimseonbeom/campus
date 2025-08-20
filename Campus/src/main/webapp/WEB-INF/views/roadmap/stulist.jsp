@@ -22,7 +22,7 @@ html, body {
         <c:if test="${not empty project}">
     <c:set var="projectItem" value="${project[0]}" />
     <h3 class="card-title ml-2 mt-2" style="font-size: 25px; font-weight: bold;">
-        로드맵 : <span>${projectItem.project_name}</span>
+        결과물 : <span>${projectItem.project_name}</span>
     </h3>
 </c:if>
         <div class="card-tools">

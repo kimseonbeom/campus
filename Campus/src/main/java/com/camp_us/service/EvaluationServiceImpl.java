@@ -41,5 +41,9 @@ public class EvaluationServiceImpl implements EvaluationService{
 	public void remove(String eval_id) throws SQLException {
 		evaluationDAO.deleteEvaluation(eval_id);
 	}
+	@Override
+	public EvaluationVO selectEvaluationByEval_id(String eval_id) throws SQLException {
+		return evaluationDAO.selectEvaluationByEval_id(eval_id);
+	}
 
 }
